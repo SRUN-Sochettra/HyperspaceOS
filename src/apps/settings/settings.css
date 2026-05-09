@@ -1,0 +1,184 @@
+.settings-container {
+    padding: var(--sp-5);
+    overflow-y: auto;
+    height: 100%;
+}
+
+.settings-title {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-semibold);
+    margin-bottom: var(--sp-6);
+    letter-spacing: var(--ls-tight);
+}
+
+.settings-section {
+    margin-bottom: var(--sp-5);
+}
+
+.settings-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-2) 0;
+    font-size: var(--fs-sm);
+}
+
+/* ---- THEME GRID ---- */
+.settings-theme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    gap: 6px;
+}
+
+.settings-theme-option {
+    cursor: pointer;
+    border-radius: var(--r-md);
+    border: 2px solid transparent;
+    padding: 5px;
+    transition: all var(--t-fast) ease;
+    text-align: center;
+}
+
+.settings-theme-option:hover {
+    background: var(--surface-hover);
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.settings-theme-option.active {
+    border-color: var(--preview-color);
+}
+
+.settings-theme-preview {
+    width: 100%;
+    height: 44px;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    margin-bottom: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.stp-bar {
+    height: 7px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.stp-body {
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stp-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+}
+
+.settings-theme-name {
+    font-size: var(--fs-2xs);
+    color: var(--text-tertiary);
+    font-weight: var(--fw-medium);
+}
+
+.settings-theme-option.active .settings-theme-name {
+    color: var(--text-secondary);
+}
+
+/* ---- SHORTCUTS ---- */
+.settings-shortcuts {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.settings-shortcut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: var(--fs-xs);
+}
+
+.settings-shortcut kbd {
+    font-family: var(--font-mono);
+    font-size: var(--fs-2xs);
+    padding: 2px 5px;
+    border-radius: var(--r-xs);
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+    font-weight: var(--fw-medium);
+    letter-spacing: 0.02em;
+}
+
+.settings-shortcut span {
+    color: var(--text-secondary);
+}
+
+/* ---- ABOUT ---- */
+.settings-about {
+    display: flex;
+    gap: var(--sp-4);
+    align-items: flex-start;
+}
+
+.settings-about-logo {
+    font-size: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-lg);
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(var(--neon-cyan-rgb), 0.15);
+}
+
+.settings-about-name {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-semibold);
+    margin-bottom: 2px;
+}
+
+.settings-about-detail {
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+    line-height: var(--lh-relaxed);
+}
+
+.settings-about-info {
+    min-width: 0;
+}
+
+/* ---- COLOR SWATCHES (legacy compat) ---- */
+.settings-colors {
+    display: flex;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+}
+
+.settings-color-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--t-fast) ease;
+}
+
+.settings-color-swatch:hover {
+    transform: scale(1.1);
+}
+
+.settings-color-swatch.active {
+    border-color: white;
+}
+
+.settings-label {
+    font-size: var(--fs-sm);
+    color: var(--text-primary);
+    margin-bottom: var(--sp-2);
+}
