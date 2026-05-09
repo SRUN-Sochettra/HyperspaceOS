@@ -113,6 +113,12 @@ HyperspaceOS/
 └── index.html      # Main HTML entry
 ```
 
+## 🤝 Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
 ---
 
 ## 📄 License
