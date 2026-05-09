@@ -1,6 +1,6 @@
 # 🚀 HyperSpace OS v2.0
 
-![HyperSpace OS Banner](hyperspace_os_banner.png)
+<img width="1328" height="800" alt="hyperos" src="https://github.com/user-attachments/assets/79efeff5-e459-4007-8a41-803c6de5cea0" />
 
 > **Experience the future of the web.** HyperSpace OS is a high-performance, aesthetically premium, web-based operating system built with Vanilla JavaScript and Canvas.
 
