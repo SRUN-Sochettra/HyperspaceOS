@@ -11,6 +11,7 @@ async function registerApps() {
         import('../apps/weather/index.js'),
         import('../apps/files/index.js'),
         import('../apps/calculator/index.js'),
+        import('../apps/browser/index.js'),
         import('../apps/settings/index.js'),
         import('../apps/editor/index.js'),
         import('../apps/taskman/index.js'),
