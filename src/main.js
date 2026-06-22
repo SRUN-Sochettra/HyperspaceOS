@@ -18,6 +18,8 @@ import './apps/editor/editor.css'
 import './apps/taskman/taskman.css'
 import './apps/whiteboard/whiteboard.css'
 import './apps/ai/ai.css'
+import './apps/games/games.css'
+import './apps/calendar/calendar.css'
 
 // Boot
 import { boot } from './core/OS.js'

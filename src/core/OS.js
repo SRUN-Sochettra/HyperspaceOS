@@ -17,6 +17,8 @@ async function registerApps() {
         import('../apps/taskman/index.js'),
         import('../apps/whiteboard/index.js'),
         import('../apps/ai/index.js'),
+        import('../apps/games/index.js'),
+        import('../apps/calendar/index.js'),
     ])
     modules.forEach(mod => mod.default())
 }
