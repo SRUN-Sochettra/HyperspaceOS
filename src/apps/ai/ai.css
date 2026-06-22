@@ -1,157 +1,158 @@
 .ai-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .ai-chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: var(--sp-4);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-3);
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
 }
 
 .ai-msg {
-    max-width: 82%;
-    padding: 10px 14px;
-    border-radius: var(--r-xl);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-relaxed);
-    animation: fadeInUp var(--t-base) var(--ease-out);
-    word-wrap: break-word;
+  max-width: 82%;
+  padding: 10px 14px;
+  border-radius: var(--r-xl);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  animation: fadeInUp var(--t-base) var(--ease-out);
+  word-wrap: break-word;
 }
 
 .ai-msg.user {
-    align-self: flex-end;
-    background: var(--neon-cyan-dim);
-    border: 1px solid rgba(var(--neon-cyan-rgb), 0.1);
-    color: var(--text-primary);
-    border-bottom-right-radius: var(--r-xs);
+  align-self: flex-end;
+  background: var(--neon-cyan-dim);
+  border: 1px solid rgba(var(--neon-cyan-rgb), 0.1);
+  color: var(--text-primary);
+  border-bottom-right-radius: var(--r-xs);
 }
 
 .ai-msg.bot {
-    align-self: flex-start;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    color: var(--text-secondary);
-    border-bottom-left-radius: var(--r-xs);
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: var(--text-secondary);
+  border-bottom-left-radius: var(--r-xs);
 }
 
 .ai-msg strong {
-    color: var(--text-primary);
-    font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  font-weight: var(--fw-semibold);
 }
 
 .ai-msg code {
-    background: rgba(var(--neon-cyan-rgb), 0.06);
-    color: var(--neon-cyan);
-    padding: 1px 5px;
-    border-radius: 3px;
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
+  background: rgba(var(--neon-cyan-rgb), 0.06);
+  color: var(--neon-cyan);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
 }
 
 .ai-msg pre {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 8px 10px;
-    border-radius: var(--r-sm);
-    margin: 5px 0;
-    font-family: var(--font-mono);
-    font-size: var(--fs-2xs);
-    overflow-x: auto;
-    white-space: pre-wrap;
-    color: var(--text-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 8px 10px;
+  border-radius: var(--r-sm);
+  margin: 5px 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  overflow-x: auto;
+  white-space: pre-wrap;
+  color: var(--text-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 /* Typing indicator */
 .ai-msg.typing {
-    padding: 10px 18px;
+  padding: 10px 18px;
 }
 
 .ai-typing-dots span {
-    animation: typingBounce 1.4s infinite;
-    display: inline-block;
-    font-size: 16px;
-    line-height: 1;
-    color: var(--text-disabled);
+  animation: typingBounce 1.4s infinite;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--text-disabled);
 }
 
 .ai-typing-dots span:nth-child(2) {
-    animation-delay: 0.2s;
+  animation-delay: 0.2s;
 }
 
 .ai-typing-dots span:nth-child(3) {
-    animation-delay: 0.4s;
+  animation-delay: 0.4s;
 }
 
 @keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
 
-    0%,
-    60%,
-    100% {
-        transform: translateY(0);
-    }
-
-    30% {
-        transform: translateY(-3px);
-    }
+  30% {
+    transform: translateY(-3px);
+  }
 }
 
 /* ---- INPUT ---- */
 .ai-input-row {
-    display: flex;
-    gap: var(--sp-2);
-    padding: var(--sp-3);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    background: rgba(0, 0, 0, 0.08);
-    flex-shrink: 0;
+  display: flex;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
 }
 
 .ai-input {
-    flex: 1;
-    background: var(--surface-sunken);
-    border: 1px solid var(--glass-border);
-    border-radius: var(--r-md);
-    padding: 8px 12px;
-    color: var(--text-primary);
-    font-size: var(--fs-sm);
-    outline: none;
-    transition: border-color var(--t-base) ease, box-shadow var(--t-base) ease;
-    caret-color: var(--neon-cyan);
+  flex: 1;
+  background: var(--surface-sunken);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  outline: none;
+  transition:
+    border-color var(--t-base) ease,
+    box-shadow var(--t-base) ease;
+  caret-color: var(--neon-cyan);
 }
 
 .ai-input:focus {
-    border-color: rgba(var(--neon-cyan-rgb), 0.25);
-    box-shadow: 0 0 0 2px rgba(var(--neon-cyan-rgb), 0.06);
+  border-color: rgba(var(--neon-cyan-rgb), 0.25);
+  box-shadow: 0 0 0 2px rgba(var(--neon-cyan-rgb), 0.06);
 }
 
 .ai-input::placeholder {
-    color: var(--text-disabled);
+  color: var(--text-disabled);
 }
 
 .ai-send {
-    width: 34px;
-    height: 34px;
-    border-radius: var(--r-md);
-    background: var(--neon-cyan-dim);
-    border: 1px solid rgba(var(--neon-cyan-rgb), 0.15);
-    color: var(--neon-cyan);
-    font-size: 15px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--t-fast) ease;
-    flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-md);
+  background: var(--neon-cyan-dim);
+  border: 1px solid rgba(var(--neon-cyan-rgb), 0.15);
+  color: var(--neon-cyan);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t-fast) ease;
+  flex-shrink: 0;
 }
 
 .ai-send:hover {
-    background: rgba(var(--neon-cyan-rgb), 0.18);
+  background: rgba(var(--neon-cyan-rgb), 0.18);
 }
 
 .ai-send:active {
-    transform: scale(0.92);
+  transform: scale(0.92);
 }

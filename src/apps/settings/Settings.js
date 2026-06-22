@@ -1,18 +1,17 @@
-import BaseApp from '../BaseApp.js'
-import Store from '../../core/Store.js'
-import EventBus from '../../core/EventBus.js'
-import FileSystem from '../../core/FileSystem.js'
-import ThemeEngine from '../../core/ThemeEngine.js'
+import BaseApp from "../BaseApp.js";
+import Store from "../../core/Store.js";
+import EventBus from "../../core/EventBus.js";
+import FileSystem from "../../core/FileSystem.js";
+import ThemeEngine from "../../core/ThemeEngine.js";
 
 export default class Settings extends BaseApp {
-
   async setup() {
-    const themes = ThemeEngine.getAll()
-    const currentTheme = ThemeEngine.getCurrent()
-    const particlesOn = Store.get('settings.particlesEnabled') !== false
-    const animationsOn = Store.get('settings.animationsEnabled') !== false
-    const soundOn = Store.get('settings.soundEnabled') !== false
-    const du = FileSystem.du('/')
+    const themes = ThemeEngine.getAll();
+    const currentTheme = ThemeEngine.getCurrent();
+    const particlesOn = Store.get("settings.particlesEnabled") !== false;
+    const animationsOn = Store.get("settings.animationsEnabled") !== false;
+    const soundOn = Store.get("settings.soundEnabled") !== false;
+    const du = FileSystem.du("/");
 
     this.container.innerHTML = `
       <div class="settings-container">
@@ -22,19 +21,23 @@ export default class Settings extends BaseApp {
           <div class="section-label">Theme</div>
           <div class="glass-card">
             <div class="settings-theme-grid" id="set-themes-${this.windowId}">
-              ${Object.entries(themes).map(([key, theme]) => `
-                <div class="settings-theme-option ${key === currentTheme ? 'active' : ''}"
+              ${Object.entries(themes)
+                .map(
+                  ([key, theme]) => `
+                <div class="settings-theme-option ${key === currentTheme ? "active" : ""}"
                      data-theme="${key}"
                      style="--preview-color: ${theme.accent}">
                   <div class="settings-theme-preview">
-                    <div class="stp-bar" style="background: ${theme.vars['--surface-0'] || '#0a0a1e'}"></div>
-                    <div class="stp-body" style="background: ${theme.vars['--surface-base'] || '#020206'}">
+                    <div class="stp-bar" style="background: ${theme.vars["--surface-0"] || "#0a0a1e"}"></div>
+                    <div class="stp-body" style="background: ${theme.vars["--surface-base"] || "#020206"}">
                       <div class="stp-dot" style="background: ${theme.accent}"></div>
                     </div>
                   </div>
                   <div class="settings-theme-name">${theme.name}</div>
                 </div>
-              `).join('')}
+              `,
+                )
+                .join("")}
             </div>
           </div>
         </div>
@@ -45,7 +48,7 @@ export default class Settings extends BaseApp {
             <div class="settings-row">
               <span>Particles</span>
               <label class="toggle">
-                <input type="checkbox" id="set-particles" ${particlesOn ? 'checked' : ''} />
+                <input type="checkbox" id="set-particles" ${particlesOn ? "checked" : ""} />
                 <span class="toggle-track"></span>
               </label>
             </div>
@@ -53,7 +56,7 @@ export default class Settings extends BaseApp {
             <div class="settings-row">
               <span>Animations</span>
               <label class="toggle">
-                <input type="checkbox" id="set-animations" ${animationsOn ? 'checked' : ''} />
+                <input type="checkbox" id="set-animations" ${animationsOn ? "checked" : ""} />
                 <span class="toggle-track"></span>
               </label>
             </div>
@@ -61,7 +64,7 @@ export default class Settings extends BaseApp {
             <div class="settings-row">
               <span>Sound Effects</span>
               <label class="toggle">
-                <input type="checkbox" id="set-sound" ${soundOn ? 'checked' : ''} />
+                <input type="checkbox" id="set-sound" ${soundOn ? "checked" : ""} />
                 <span class="toggle-track"></span>
               </label>
             </div>
@@ -99,9 +102,9 @@ export default class Settings extends BaseApp {
             <div class="settings-about-logo">⬡</div>
             <div class="settings-about-info">
               <div class="settings-about-name">HyperSpace OS</div>
-              <div class="settings-about-detail">Version ${Store.get('os.version')}</div>
-              <div class="settings-about-detail">FPS: <span id="set-fps">${Store.get('system.fps')}</span></div>
-              <div class="settings-about-detail">Windows: <span id="set-wins">${Store.get('windows.all')?.length || 0}</span></div>
+              <div class="settings-about-detail">Version ${Store.get("os.version")}</div>
+              <div class="settings-about-detail">FPS: <span id="set-fps">${Store.get("system.fps")}</span></div>
+              <div class="settings-about-detail">Windows: <span id="set-wins">${Store.get("windows.all")?.length || 0}</span></div>
             </div>
           </div>
         </div>
@@ -122,61 +125,69 @@ export default class Settings extends BaseApp {
           </div>
         </div>
       </div>
-    `
+    `;
 
     // Theme picker
-    this.$$('.settings-theme-option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        ThemeEngine.apply(opt.dataset.theme)
-        this.$$('.settings-theme-option').forEach(o => o.classList.remove('active'))
-        opt.classList.add('active')
-        this.notify('🎨', 'Theme Changed', ThemeEngine.getTheme(opt.dataset.theme)?.name)
-      })
-    })
+    this.$$(".settings-theme-option").forEach((opt) => {
+      opt.addEventListener("click", () => {
+        ThemeEngine.apply(opt.dataset.theme);
+        this.$$(".settings-theme-option").forEach((o) =>
+          o.classList.remove("active"),
+        );
+        opt.classList.add("active");
+        this.notify(
+          "🎨",
+          "Theme Changed",
+          ThemeEngine.getTheme(opt.dataset.theme)?.name,
+        );
+      });
+    });
 
     // Toggles
-    this.$('#set-particles').addEventListener('change', (e) => {
-      Store.set('settings.particlesEnabled', e.target.checked)
-      document.querySelectorAll('.particle').forEach(p => p.style.display = e.target.checked ? '' : 'none')
-    })
+    this.$("#set-particles").addEventListener("change", (e) => {
+      Store.set("settings.particlesEnabled", e.target.checked);
+      document
+        .querySelectorAll(".particle")
+        .forEach((p) => (p.style.display = e.target.checked ? "" : "none"));
+    });
 
-    this.$('#set-animations').addEventListener('change', (e) => {
-      Store.set('settings.animationsEnabled', e.target.checked)
-      document.body.classList.toggle('reduce-motion', !e.target.checked)
-    })
+    this.$("#set-animations").addEventListener("change", (e) => {
+      Store.set("settings.animationsEnabled", e.target.checked);
+      document.body.classList.toggle("reduce-motion", !e.target.checked);
+    });
 
-    this.$('#set-sound').addEventListener('change', (e) => {
-      Store.set('settings.soundEnabled', e.target.checked)
-    })
+    this.$("#set-sound").addEventListener("change", (e) => {
+      Store.set("settings.soundEnabled", e.target.checked);
+    });
 
     // Reset buttons
-    this.$('#set-fs-reset')?.addEventListener('click', () => {
-      if (confirm('Reset file system to defaults?')) {
-        FileSystem.reset()
-        this.notify('🔄', 'Reset', 'File system restored to defaults')
+    this.$("#set-fs-reset")?.addEventListener("click", () => {
+      if (confirm("Reset file system to defaults?")) {
+        FileSystem.reset();
+        this.notify("🔄", "Reset", "File system restored to defaults");
       }
-    })
+    });
 
-    this.$('#set-clear')?.addEventListener('click', () => {
-      if (confirm('Clear ALL saved data and reload?')) {
-        localStorage.clear()
-        location.reload()
+    this.$("#set-clear")?.addEventListener("click", () => {
+      if (confirm("Clear ALL saved data and reload?")) {
+        localStorage.clear();
+        location.reload();
       }
-    })
+    });
 
     // Live stats
     this.addInterval(() => {
-      const f = this.$('#set-fps')
-      const w = this.$('#set-wins')
-      if (f) f.textContent = Store.get('system.fps')
-      if (w) w.textContent = Store.get('windows.all')?.length || 0
-    }, 1000)
+      const f = this.$("#set-fps");
+      const w = this.$("#set-wins");
+      if (f) f.textContent = Store.get("system.fps");
+      if (w) w.textContent = Store.get("windows.all")?.length || 0;
+    }, 1000);
   }
 
   formatSize(b) {
-    if (!b) return '0 B'
-    if (b < 1024) return b + ' B'
-    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB'
-    return (b / (1024 * 1024)).toFixed(1) + ' MB'
+    if (!b) return "0 B";
+    if (b < 1024) return b + " B";
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + " KB";
+    return (b / (1024 * 1024)).toFixed(1) + " MB";
   }
 }

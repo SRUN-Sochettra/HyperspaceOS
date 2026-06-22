@@ -1,160 +1,164 @@
 .weather-container {
-    padding: var(--sp-5);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-5);
-    height: 100%;
-    background: linear-gradient(180deg, rgba(0, 25, 50, 0.25) 0%, transparent 50%);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 25, 50, 0.25) 0%,
+    transparent 50%
+  );
 }
 
 .weather-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding-bottom: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: var(--sp-3);
 }
 
 .weather-icon {
-    font-size: 56px;
-    filter: drop-shadow(0 4px 12px rgba(255, 200, 50, 0.2));
-    margin-bottom: var(--sp-1);
+  font-size: 56px;
+  filter: drop-shadow(0 4px 12px rgba(255, 200, 50, 0.2));
+  margin-bottom: var(--sp-1);
 }
 
 .weather-temp {
-    font-size: var(--fs-5xl);
-    font-weight: var(--fw-light);
-    letter-spacing: -3px;
-    line-height: 1;
+  font-size: var(--fs-5xl);
+  font-weight: var(--fw-light);
+  letter-spacing: -3px;
+  line-height: 1;
 }
 
 .weather-condition {
-    font-size: var(--fs-md);
-    color: var(--text-secondary);
-    font-weight: var(--fw-medium);
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
 }
 
 .weather-location {
-    font-size: var(--fs-xs);
-    color: var(--text-tertiary);
-    margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
 }
 
 .weather-feels {
-    font-size: var(--fs-xs);
-    color: var(--text-tertiary);
-    margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
 }
 
 .weather-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-    gap: var(--sp-2);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
+  gap: var(--sp-2);
 }
 
 .weather-detail {
-    text-align: center;
-    padding: var(--sp-3);
-    background: rgba(255, 255, 255, 0.015);
-    border-radius: var(--r-lg);
-    border: 1px solid rgba(255, 255, 255, 0.025);
-    transition: border-color var(--t-base) ease;
+  text-align: center;
+  padding: var(--sp-3);
+  background: rgba(255, 255, 255, 0.015);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  transition: border-color var(--t-base) ease;
 }
 
 .weather-detail:hover {
-    border-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 .weather-detail-value {
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-semibold);
-    margin-bottom: 3px;
-    font-variant-numeric: tabular-nums;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 3px;
+  font-variant-numeric: tabular-nums;
 }
 
 .weather-detail-label {
-    font-size: var(--fs-2xs);
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: var(--ls-wider);
-    font-weight: var(--fw-medium);
+  font-size: var(--fs-2xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-wider);
+  font-weight: var(--fw-medium);
 }
 
 /* ---- FORECAST ---- */
 .weather-forecast {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: auto;
 }
 
 .weather-forecast-title {
-    font-size: var(--fs-2xs);
-    text-transform: uppercase;
-    letter-spacing: var(--ls-widest);
-    color: var(--text-tertiary);
-    font-weight: var(--fw-semibold);
-    margin-bottom: var(--sp-2);
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-widest);
+  color: var(--text-tertiary);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--sp-2);
 }
 
 .weather-forecast-day {
-    display: flex;
-    align-items: center;
-    padding: 6px var(--sp-3);
-    border-radius: var(--r-md);
-    transition: background var(--t-fast) ease;
+  display: flex;
+  align-items: center;
+  padding: 6px var(--sp-3);
+  border-radius: var(--r-md);
+  transition: background var(--t-fast) ease;
 }
 
 .weather-forecast-day:hover {
-    background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.025);
 }
 
 .forecast-day {
-    width: 36px;
-    font-size: var(--fs-xs);
-    color: var(--text-secondary);
-    font-weight: var(--fw-medium);
+  width: 36px;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  font-weight: var(--fw-medium);
 }
 
 .forecast-icon {
-    font-size: 16px;
-    margin-right: auto;
+  font-size: 16px;
+  margin-right: auto;
 }
 
 .forecast-temps {
-    display: flex;
-    gap: var(--sp-3);
-    font-size: var(--fs-xs);
-    font-variant-numeric: tabular-nums;
-    font-family: var(--font-mono);
+  display: flex;
+  gap: var(--sp-3);
+  font-size: var(--fs-xs);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
 }
 
 .forecast-high {
-    color: var(--text-primary);
-    font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  font-weight: var(--fw-medium);
 }
 
 .forecast-low {
-    color: var(--text-tertiary);
+  color: var(--text-tertiary);
 }
 
 /* ---- LOADING ---- */
 .weather-loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    gap: var(--sp-4);
-    color: var(--text-tertiary);
-    font-size: var(--fs-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--sp-4);
+  color: var(--text-tertiary);
+  font-size: var(--fs-sm);
 }
 
 .weather-loading-spinner {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.06);
-    border-top-color: var(--neon-cyan);
-    animation: spin 0.7s linear infinite;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  border-top-color: var(--neon-cyan);
+  animation: spin 0.7s linear infinite;
 }
