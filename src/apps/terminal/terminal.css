@@ -1,104 +1,103 @@
 .terminal-container {
-    padding: 0;
-    font-family: var(--font-mono);
-    font-size: var(--fs-sm);
-    line-height: var(--lh-relaxed);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: rgba(0, 0, 0, 0.15);
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .terminal-output {
-    flex: 1;
-    overflow-y: auto;
-    padding: var(--sp-4) var(--sp-4) var(--sp-2);
-    scroll-behavior: smooth;
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4) var(--sp-4) var(--sp-2);
+  scroll-behavior: smooth;
 }
 
 .terminal-line {
-    margin-bottom: 1px;
-    word-break: break-all;
-    white-space: pre-wrap;
-    padding: 1px 0;
-    font-size: var(--fs-sm);
-    letter-spacing: 0.01em;
+  margin-bottom: 1px;
+  word-break: break-all;
+  white-space: pre-wrap;
+  padding: 1px 0;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.01em;
 }
 
 .terminal-line.command {
-    color: var(--neon-cyan);
-    font-weight: var(--fw-medium);
+  color: var(--neon-cyan);
+  font-weight: var(--fw-medium);
 }
 
 .terminal-line.output {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .terminal-line.error {
-    color: var(--neon-red);
-    background: rgba(255, 95, 87, 0.04);
-    padding: 2px 6px;
-    border-radius: var(--r-xs);
-    margin: 2px 0;
+  color: var(--neon-red);
+  background: rgba(255, 95, 87, 0.04);
+  padding: 2px 6px;
+  border-radius: var(--r-xs);
+  margin: 2px 0;
 }
 
 .terminal-line.success {
-    color: var(--neon-green);
+  color: var(--neon-green);
 }
 
 .terminal-line.info {
-    color: var(--neon-purple);
+  color: var(--neon-purple);
 }
 
 .terminal-input-row {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    padding: var(--sp-2) var(--sp-4) var(--sp-3);
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    background: rgba(0, 0, 0, 0.12);
-    flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-4) var(--sp-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
 }
 
 .terminal-prompt {
-    color: var(--neon-magenta);
-    font-weight: var(--fw-semibold);
-    white-space: nowrap;
-    font-size: var(--fs-sm);
-    opacity: 0.85;
+  color: var(--neon-magenta);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  font-size: var(--fs-sm);
+  opacity: 0.85;
 }
 
 .terminal-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-primary);
-    font-family: var(--font-mono);
-    font-size: var(--fs-sm);
-    caret-color: var(--neon-cyan);
-    padding: 4px 0;
-    letter-spacing: 0.01em;
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  caret-color: var(--neon-cyan);
+  padding: 4px 0;
+  letter-spacing: 0.01em;
 }
 
 .terminal-input::placeholder {
-    color: var(--text-disabled);
-    font-style: italic;
+  color: var(--text-disabled);
+  font-style: italic;
 }
 
 /* Cursor blink effect on the input */
 .terminal-input:focus {
-    animation: terminalCursorPulse 1.2s ease-in-out infinite;
+  animation: terminalCursorPulse 1.2s ease-in-out infinite;
 }
 
 @keyframes terminalCursorPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
+  50% {
+    opacity: 0.8;
+  }
 }

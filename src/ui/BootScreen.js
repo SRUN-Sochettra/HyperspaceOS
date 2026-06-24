@@ -4,49 +4,47 @@
 //  This module just controls the progress bar and dismissal.
 // ============================================================
 
-import Store from '../core/Store.js'
+import Store from "../core/Store.js";
 
 const BootScreen = (() => {
+  let container = null;
+  let progressBar = null;
+  let unsubscribe = null;
 
-    let container = null
-    let progressBar = null
-    let unsubscribe = null
+  function init() {
+    container = document.getElementById("boot-screen");
+    progressBar = document.getElementById("boot-bar");
 
-    function init() {
-        container = document.getElementById('boot-screen')
-        progressBar = document.getElementById('boot-bar')
-
-        if (!container || !progressBar) {
-            console.warn('[BootScreen] Boot screen elements not found')
-            return
-        }
-
-        // React to progress changes from OS.js
-        unsubscribe = Store.subscribe('os.bootProgress', (value) => {
-            if (progressBar) {
-                progressBar.style.width = `${value}%`
-            }
-        })
+    if (!container || !progressBar) {
+      console.warn("[BootScreen] Boot screen elements not found");
+      return;
     }
 
-    function dismiss() {
-        if (!container) return
+    // React to progress changes from OS.js
+    unsubscribe = Store.subscribe("os.bootProgress", (value) => {
+      if (progressBar) {
+        progressBar.style.width = `${value}%`;
+      }
+    });
+  }
 
-        container.classList.add('hidden')
+  function dismiss() {
+    if (!container) return;
 
-        // Remove from DOM after transition completes
-        setTimeout(() => {
-            if (container && container.parentNode) {
-                container.remove()
-            }
-            if (unsubscribe) unsubscribe()
-            container = null
-            progressBar = null
-        }, 1000)
-    }
+    container.classList.add("hidden");
 
-    return { init, dismiss }
+    // Remove from DOM after transition completes
+    setTimeout(() => {
+      if (container && container.parentNode) {
+        container.remove();
+      }
+      if (unsubscribe) unsubscribe();
+      container = null;
+      progressBar = null;
+    }, 1000);
+  }
 
-})()
+  return { init, dismiss };
+})();
 
-export default BootScreen
+export default BootScreen;

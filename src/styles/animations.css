@@ -3,252 +3,271 @@
    ============================================================ */
 
 @keyframes bootPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 40px rgba(var(--neon-cyan-rgb), 0.15);
+  }
 
-    0%,
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 40px rgba(var(--neon-cyan-rgb), 0.15);
-    }
-
-    50% {
-        transform: scale(1.03);
-        box-shadow: 0 0 60px rgba(var(--neon-cyan-rgb), 0.25);
-    }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 60px rgba(var(--neon-cyan-rgb), 0.25);
+  }
 }
 
 @keyframes notifSlide {
-    0% {
-        opacity: 0;
-        transform: translateY(-6px) translateX(20px) scale(0.96);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) translateX(20px) scale(0.96);
+  }
 
-    100% {
-        opacity: 1;
-        transform: translateY(0) translateX(0) scale(1);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+  }
 }
 
 @keyframes ctxAppear {
-    0% {
-        opacity: 0;
-        transform: scale(0.94) translateY(-3px);
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(-3px);
+  }
 
-    100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 @keyframes dockBounce {
-    0% {
-        transform: translateY(-8px) scale(1.22);
-    }
+  0% {
+    transform: translateY(-8px) scale(1.22);
+  }
 
-    25% {
-        transform: translateY(-20px) scale(1.22);
-    }
+  25% {
+    transform: translateY(-20px) scale(1.22);
+  }
 
-    50% {
-        transform: translateY(-8px) scale(1.22);
-    }
+  50% {
+    transform: translateY(-8px) scale(1.22);
+  }
 
-    75% {
-        transform: translateY(-13px) scale(1.22);
-    }
+  75% {
+    transform: translateY(-13px) scale(1.22);
+  }
 
-    100% {
-        transform: translateY(-8px) scale(1.22);
-    }
+  100% {
+    transform: translateY(-8px) scale(1.22);
+  }
 }
 
 .dock-item.dock-bounce {
-    animation: dockBounce 0.5s var(--ease-out);
+  animation: dockBounce 0.5s var(--ease-out);
 }
 
 @keyframes gridScroll {
-    0% {
-        background-position: 0 0;
-    }
+  0% {
+    background-position: 0 0;
+  }
 
-    100% {
-        background-position: 0 80px;
-    }
+  100% {
+    background-position: 0 80px;
+  }
 }
 
 @keyframes particleFloat {
-    0% {
-        transform: translateY(100vh) translateX(0);
-        opacity: 0;
-    }
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
 
-    6% {
-        opacity: 0.5;
-    }
+  6% {
+    opacity: 0.5;
+  }
 
-    94% {
-        opacity: 0.5;
-    }
+  94% {
+    opacity: 0.5;
+  }
 
-    100% {
-        transform: translateY(-20px) translateX(var(--drift));
-        opacity: 0;
-    }
+  100% {
+    transform: translateY(-20px) translateX(var(--drift));
+    opacity: 0;
+  }
 }
 
 .particle {
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-    animation: particleFloat linear infinite;
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: particleFloat linear infinite;
 }
 
 .grid-floor {
-    position: absolute;
-    bottom: -40%;
-    left: -20%;
-    width: 140%;
-    height: 100%;
-    background:
-        repeating-linear-gradient(90deg, rgba(0, 100, 255, 0.035) 0px, rgba(0, 100, 255, 0.035) 1px, transparent 1px, transparent 80px),
-        repeating-linear-gradient(0deg, rgba(0, 100, 255, 0.035) 0px, rgba(0, 100, 255, 0.035) 1px, transparent 1px, transparent 80px);
-    transform: rotateX(68deg);
-    transform-origin: center bottom;
-    mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 55%);
-    -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 55%);
-    animation: gridScroll 28s linear infinite;
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 140%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0, 100, 255, 0.035) 0px,
+      rgba(0, 100, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 80px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 100, 255, 0.035) 0px,
+      rgba(0, 100, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 80px
+    );
+  transform: rotateX(68deg);
+  transform-origin: center bottom;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 55%);
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.35) 0%,
+    transparent 55%
+  );
+  animation: gridScroll 28s linear infinite;
 }
 
 /* Utility animations */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.96);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
+  0% {
+    background-position: -200% 0;
+  }
 
-    100% {
-        background-position: 200% 0;
-    }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .fade-in {
-    animation: fadeIn var(--t-medium) ease;
+  animation: fadeIn var(--t-medium) ease;
 }
 
 .fade-in-up {
-    animation: fadeInUp var(--t-medium) var(--ease-out);
+  animation: fadeInUp var(--t-medium) var(--ease-out);
 }
 
 .fade-in-scale {
-    animation: fadeInScale var(--t-medium) var(--ease-out);
+  animation: fadeInScale var(--t-medium) var(--ease-out);
 }
 
 /* Loading spinner */
 .spinner {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    border-top-color: var(--neon-cyan);
-    animation: spin 0.7s linear infinite;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-top-color: var(--neon-cyan);
+  animation: spin 0.7s linear infinite;
 }
 
 /* Skeleton loader */
 .skeleton {
-    background: rgba(255, 255, 255, 0.025);
-    border-radius: var(--r-sm);
-    position: relative;
-    overflow: hidden;
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: var(--r-sm);
+  position: relative;
+  overflow: hidden;
 }
 
 .skeleton::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent 25%, rgba(255, 255, 255, 0.03) 50%, transparent 75%);
-    background-size: 200% 100%;
-    animation: shimmer 2s ease infinite;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.03) 50%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease infinite;
 }
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-    }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 body.reduce-motion *,
 body.reduce-motion *::before,
 body.reduce-motion *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
 }
 
 /* ---- SNAP PREVIEW ---- */
 .snap-preview {
-    position: fixed;
-    z-index: 99;
-    border-radius: var(--r-xl);
-    background: rgba(var(--neon-cyan-rgb), 0.06);
-    border: 2px solid rgba(var(--neon-cyan-rgb), 0.2);
-    pointer-events: none;
-    transition: all var(--t-base) var(--ease-out);
-    animation: snapAppear var(--t-fast) var(--ease-out);
+  position: fixed;
+  z-index: 99;
+  border-radius: var(--r-xl);
+  background: rgba(var(--neon-cyan-rgb), 0.06);
+  border: 2px solid rgba(var(--neon-cyan-rgb), 0.2);
+  pointer-events: none;
+  transition: all var(--t-base) var(--ease-out);
+  animation: snapAppear var(--t-fast) var(--ease-out);
 }
 
 @keyframes snapAppear {
-    from {
-        opacity: 0;
-        transform: scale(0.97);
-    }
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
 
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

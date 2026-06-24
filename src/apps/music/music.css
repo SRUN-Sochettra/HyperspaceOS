@@ -1,254 +1,258 @@
 .music-container {
-    padding: var(--sp-5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    gap: var(--sp-4);
-    background: linear-gradient(180deg, rgba(0, 20, 40, 0.2) 0%, transparent 40%);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: var(--sp-4);
+  background: linear-gradient(180deg, rgba(0, 20, 40, 0.2) 0%, transparent 40%);
 }
 
 /* ---- ARTWORK ---- */
 .music-artwork {
-    width: 140px;
-    height: 140px;
-    border-radius: var(--r-2xl);
-    background: linear-gradient(135deg, #0a0020 0%, #0a1830 50%, #081020 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 56px;
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    position: relative;
-    overflow: hidden;
-    transition: transform var(--t-slow) var(--ease-spring);
+  width: 140px;
+  height: 140px;
+  border-radius: var(--r-2xl);
+  background: linear-gradient(135deg, #0a0020 0%, #0a1830 50%, #081020 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--t-slow) var(--ease-spring);
 }
 
 .music-artwork:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 .music-artwork::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: var(--r-2xl);
-    background: linear-gradient(135deg, transparent 30%, rgba(var(--neon-cyan-rgb), 0.06) 100%);
-    pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--r-2xl);
+  background: linear-gradient(
+    135deg,
+    transparent 30%,
+    rgba(var(--neon-cyan-rgb), 0.06) 100%
+  );
+  pointer-events: none;
 }
 
 /* ---- TRACK INFO ---- */
 .music-info {
-    text-align: center;
+  text-align: center;
 }
 
 .music-title {
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-semibold);
-    letter-spacing: var(--ls-tight);
-    margin-bottom: 3px;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-tight);
+  margin-bottom: 3px;
 }
 
 .music-artist {
-    font-size: var(--fs-sm);
-    color: var(--text-secondary);
-    font-weight: var(--fw-regular);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  font-weight: var(--fw-regular);
 }
 
 /* ---- VISUALIZER ---- */
 .music-visualizer {
-    width: 100%;
-    height: 56px;
-    border-radius: var(--r-md);
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.02);
+  width: 100%;
+  height: 56px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .viz-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .viz-bar {
-    width: 4px;
-    border-radius: 2px;
-    background: linear-gradient(to top, var(--neon-cyan), var(--neon-purple));
-    transition: height 0.12s ease;
-    min-height: 3px;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--neon-cyan), var(--neon-purple));
+  transition: height 0.12s ease;
+  min-height: 3px;
 }
 
 /* ---- VIZ MODE SWITCHER ---- */
 .music-viz-modes {
-    display: flex;
-    gap: 3px;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: var(--r-md);
-    padding: 2px;
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--r-md);
+  padding: 2px;
 }
 
 .music-viz-btn {
-    padding: 4px 12px;
-    border-radius: var(--r-sm);
-    font-size: var(--fs-2xs);
-    font-weight: var(--fw-medium);
-    background: transparent;
-    color: var(--text-tertiary);
-    cursor: pointer;
-    border: none;
-    transition: all var(--t-fast) ease;
+  padding: 4px 12px;
+  border-radius: var(--r-sm);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-medium);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border: none;
+  transition: all var(--t-fast) ease;
 }
 
 .music-viz-btn:hover {
-    color: var(--text-secondary);
+  color: var(--text-secondary);
 }
 
 .music-viz-btn.active {
-    background: var(--neon-cyan-dim);
-    color: var(--neon-cyan);
+  background: var(--neon-cyan-dim);
+  color: var(--neon-cyan);
 }
 
 /* ---- PROGRESS ---- */
 .music-progress-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: var(--sp-3);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
 }
 
 .music-time {
-    font-size: var(--fs-2xs);
-    color: var(--text-tertiary);
-    font-variant-numeric: tabular-nums;
-    font-family: var(--font-mono);
-    min-width: 32px;
-    font-weight: var(--fw-medium);
+  font-size: var(--fs-2xs);
+  color: var(--text-tertiary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  min-width: 32px;
+  font-weight: var(--fw-medium);
 }
 
 .music-progress-track {
-    flex: 1;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 2px;
-    cursor: pointer;
-    position: relative;
-    transition: height var(--t-fast) ease;
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  transition: height var(--t-fast) ease;
 }
 
 .music-progress-track:hover {
-    height: 5px;
+  height: 5px;
 }
 
 .music-progress-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-    width: 0%;
-    transition: width 0.2s linear;
-    position: relative;
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+  width: 0%;
+  transition: width 0.2s linear;
+  position: relative;
 }
 
 .music-progress-fill::after {
-    content: '';
-    position: absolute;
-    right: -5px;
-    top: 50%;
-    transform: translateY(-50%) scale(0);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 8px rgba(var(--neon-cyan-rgb), 0.5);
-    transition: transform var(--t-fast) var(--ease-spring);
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 8px rgba(var(--neon-cyan-rgb), 0.5);
+  transition: transform var(--t-fast) var(--ease-spring);
 }
 
 .music-progress-track:hover .music-progress-fill::after {
-    transform: translateY(-50%) scale(1);
+  transform: translateY(-50%) scale(1);
 }
 
 /* ---- CONTROLS ---- */
 .music-controls {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-5);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
 }
 
 .music-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    font-size: 16px;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: all var(--t-fast) ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all var(--t-fast) ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .music-btn:hover {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .music-btn:active {
-    transform: scale(0.9);
-    transition-duration: var(--t-instant);
+  transform: scale(0.9);
+  transition-duration: var(--t-instant);
 }
 
 .music-btn.play {
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
-    color: var(--neon-cyan);
-    background: var(--neon-cyan-dim);
-    border: 1px solid rgba(var(--neon-cyan-rgb), 0.15);
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  color: var(--neon-cyan);
+  background: var(--neon-cyan-dim);
+  border: 1px solid rgba(var(--neon-cyan-rgb), 0.15);
 }
 
 .music-btn.play:hover {
-    background: rgba(var(--neon-cyan-rgb), 0.18);
-    box-shadow: 0 0 20px rgba(var(--neon-cyan-rgb), 0.1);
+  background: rgba(var(--neon-cyan-rgb), 0.18);
+  box-shadow: 0 0 20px rgba(var(--neon-cyan-rgb), 0.1);
 }
 
 /* ---- VOLUME ---- */
 .music-volume {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-2);
-    width: 100%;
-    padding: 0 var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: 0 var(--sp-4);
 }
 
 .music-vol-icon {
-    font-size: 13px;
-    opacity: 0.5;
+  font-size: 13px;
+  opacity: 0.5;
 }
 
 .music-vol-slider {
-    flex: 1;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 2px;
-    outline: none;
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  outline: none;
 }
 
 .music-vol-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--text-secondary);
-    cursor: pointer;
-    transition: background var(--t-fast) ease;
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--t-fast) ease;
 }
 
 .music-vol-slider::-webkit-slider-thumb:hover {
-    background: var(--neon-cyan);
+  background: var(--neon-cyan);
 }

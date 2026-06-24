@@ -13,22 +13,26 @@ HyperSpace OS is more than just a website; it's a fully functional desktop envir
 ## 🌟 Key Features
 
 ### 🖥️ Advanced Window Management
+
 - **Multi-Window Interface**: Open, drag, resize, and stack multiple applications.
 - **Glassmorphism UI**: High-end visual aesthetic with real-time blur, frosted glass effects, and sleek animations.
 - **Workspaces**: Organise your workflow across multiple virtual desktops.
 - **Spotlight Search**: Quick-launch apps and search files with `Alt + Space`.
 
 ### 📂 Virtual File System (VFS)
+
 - **Persistent Storage**: Real CRUD operations persisted via LocalStorage.
 - **Unix-like Structure**: Root `/`, `home`, `usr`, `etc` directories.
 - **File Interop**: Open files from the terminal or file manager directly into the code editor.
 
 ### 🎨 Visual Excellence
+
 - **Three.js Background**: Dynamic, GPU-accelerated particle backgrounds and grids.
 - **Theme Engine**: System-wide theme switching with accent color customization.
 - **Smooth Animations**: 60 FPS transitions and micro-interactions powered by custom CSS and JS.
 
 ### 🛠️ Built-in Application Suite
+
 - **Terminal**: A powerful shell with 27+ Unix-like commands (`ls`, `cd`, `mkdir`, `top`, `neofetch`, etc.).
 - **Editor**: A full-featured code editor powered by **CodeMirror 6**.
 - **Files**: Interactive file explorer with grid/list views and context menus.
@@ -43,23 +47,27 @@ HyperSpace OS is more than just a website; it's a fully functional desktop envir
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - [Node.js](https://nodejs.org/) (v18+ recommended)
 - [Vite](https://vitejs.dev/)
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/hyperspace-os.git
    cd hyperspace-os
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -85,16 +93,16 @@ HyperSpace OS is more than just a website; it's a fully functional desktop envir
 
 The HyperSpace Terminal supports a wide range of commands:
 
-| Command | Description |
-| :--- | :--- |
-| `ls` / `ll` | List directory contents |
-| `cd` | Change current directory |
-| `cat` | View file contents |
-| `edit` | Open file in the Code Editor |
-| `top` | Open Task Manager |
-| `neofetch` | Display system information |
-| `clear` | Clear the terminal screen |
-| `help` | List all available commands |
+| Command     | Description                  |
+| :---------- | :--------------------------- |
+| `ls` / `ll` | List directory contents      |
+| `cd`        | Change current directory     |
+| `cat`       | View file contents           |
+| `edit`      | Open file in the Code Editor |
+| `top`       | Open Task Manager            |
+| `neofetch`  | Display system information   |
+| `clear`     | Clear the terminal screen    |
+| `help`      | List all available commands  |
 
 ---
 
