@@ -20,6 +20,7 @@ async function registerApps() {
     import("../apps/games/index.js"),
     import("../apps/calendar/index.js"),
     import("../apps/photos/index.js"),
+    import("../apps/video/index.js"),
   ]);
   modules.forEach((mod) => mod.default());
 }
