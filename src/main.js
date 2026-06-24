@@ -1,4 +1,5 @@
 // Styles
+import "./styles/fonts.css";
 import "./styles/variables.css";
 import "./styles/base.css";
 import "./styles/glass.css";
@@ -21,6 +22,7 @@ import "./apps/ai/ai.css";
 import "./apps/games/games.css";
 import "./apps/calendar/calendar.css";
 import "./apps/photos/photos.css";
+import "./apps/video/video.css";
 
 // Boot
 import { boot } from "./core/OS.js";
