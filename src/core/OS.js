@@ -21,6 +21,7 @@ async function registerApps() {
     import("../apps/calendar/index.js"),
     import("../apps/photos/index.js"),
     import("../apps/video/index.js"),
+    import("../apps/markdown/index.js"),
   ]);
   modules.forEach((mod) => mod.default());
 }
