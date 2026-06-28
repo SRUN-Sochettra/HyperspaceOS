@@ -23,6 +23,7 @@ import "./apps/games/games.css";
 import "./apps/calendar/calendar.css";
 import "./apps/photos/photos.css";
 import "./apps/video/video.css";
+import "./apps/markdown/markdown.css";
 
 // Boot
 import { boot } from "./core/OS.js";
