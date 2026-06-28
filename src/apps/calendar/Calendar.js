@@ -7,6 +7,7 @@ export default class Calendar extends BaseApp {
 
     this.container.innerHTML = `
             <div class="calendar-container">
+              <div class="calendar-main">
                 <div class="calendar-header">
                     <button class="calendar-nav-btn" id="cal-prev-${this.windowId}">◀</button>
                     <h2 id="cal-month-year-${this.windowId}"></h2>
@@ -19,11 +20,21 @@ export default class Calendar extends BaseApp {
                     </div>
                     <div class="calendar-days" id="cal-days-${this.windowId}"></div>
                 </div>
+              </div>
+                <div class="calendar-events-panel" id="cal-events-panel-${this.windowId}">
+                    <div class="calendar-events-header">
+                        <h3 id="cal-selected-date-title-${this.windowId}">Events</h3>
+                        <button class="glass-btn primary" id="cal-add-event-${this.windowId}">+ Add Event</button>
+                    </div>
+                    <div class="calendar-events-list" id="cal-events-list-${this.windowId}"></div>
+                </div>
             </div>
         `;
 
     this.monthYearEl = this.$(`#cal-month-year-${this.windowId}`);
     this.daysEl = this.$(`#cal-days-${this.windowId}`);
+    this.eventsListEl = this.$(`#cal-events-list-${this.windowId}`);
+    this.selectedDateTitleEl = this.$(`#cal-selected-date-title-${this.windowId}`);
 
     this.$(`#cal-prev-${this.windowId}`).addEventListener("click", () =>
       this.changeMonth(-1),
