@@ -78,3 +78,70 @@
   transform: scale(1.05);
   background: var(--accent-hover);
 }
+
+.games-menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.games-menu h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: var(--text-primary);
+}
+
+.games-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.games-menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 120px;
+  min-height: 120px;
+}
+
+.games-menu-btn:hover {
+  background: var(--surface-2);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.games-menu-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.games-back-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.games-back-btn:hover {
+  color: var(--text-primary);
+}
