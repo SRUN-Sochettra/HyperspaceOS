@@ -21,6 +21,11 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">🏓</span>
                             Pong
                         </button>
+
+                        <button class="games-menu-btn" data-game="flappy">
+                            <span class="games-menu-icon">🐦</span>
+                            Flappy
+                        </button>
                         <button class="games-menu-btn" data-game="tetris">
                             <span class="games-menu-icon">🧩</span>
                             Tetris
@@ -74,6 +79,17 @@ export default class Games extends BaseApp {
     this.pongPaddleSpeed = 6; // slightly faster paddle
     // Keystates for Pong
     this.keys = { up: false, down: false };
+
+
+    // Flappy Bird specific state
+    this.flappyScore = 0;
+    this.flappyHighScore = localStorage.getItem("flappyHighScore") || 0;
+    this.bird = { y: 150, velocity: 0, gravity: 0.6, jump: -8, radius: 8 };
+    this.pipes = [];
+    this.pipeWidth = 40;
+    this.pipeGap = 100;
+    this.pipeSpeed = 3;
+    this.frames = 0;
 
     // Tetris specific state
     this.tetrisGrid = [];
@@ -158,6 +174,11 @@ export default class Games extends BaseApp {
           this.titleEl.textContent = "Pong";
           this.startBtn.textContent = "Start Game";
           this.updateScore();
+      } else if (game === 'flappy') {
+          this.titleBarEl.textContent = "Flappy Bird";
+          this.titleEl.textContent = "Flappy Bird";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
       } else if (game === 'tetris') {
           this.titleBarEl.textContent = "Tetris";
           this.titleEl.textContent = "Tetris";
@@ -187,6 +208,10 @@ export default class Games extends BaseApp {
           this.startPong();
           // Using requestAnimationFrame is better for Pong, but sticking to interval for consistency with original structure, just faster.
           this.gameLoop = setInterval(() => this.updatePong(), 1000/60);
+      } else if (this.currentGame === 'flappy') {
+          this.startFlappy();
+          this.gameLoop = setInterval(() => this.updateFlappy(), 1000/60);
+
       } else if (this.currentGame === 'tetris') {
           this.startTetris();
           this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
@@ -230,6 +255,9 @@ export default class Games extends BaseApp {
     if (this.currentGame === 'snake' && this.snakeScore > this.snakeHighScore) {
       this.snakeHighScore = this.snakeScore;
       localStorage.setItem("snakeHighScore", this.snakeHighScore);
+    } else if (this.currentGame === 'flappy' && this.flappyScore > this.flappyHighScore) {
+      this.flappyHighScore = this.flappyScore;
+      localStorage.setItem("flappyHighScore", this.flappyHighScore);
     } else if (this.currentGame === 'tetris' && this.tetrisScore > this.tetrisHighScore) {
       this.tetrisHighScore = this.tetrisScore;
       localStorage.setItem("tetrisHighScore", this.tetrisHighScore);
@@ -340,6 +368,16 @@ export default class Games extends BaseApp {
 
 
   // ---- TETRIS MECHANICS ----
+
+  startFlappy() {
+      this.flappyScore = 0;
+      this.bird.y = 150;
+      this.bird.velocity = 0;
+      this.pipes = [];
+      this.frames = 0;
+      this.updateScore();
+  }
+
   startTetris() {
       this.tetrisScore = 0;
       this.tetrisDropInterval = 500;
@@ -369,6 +407,98 @@ export default class Games extends BaseApp {
       if (this.checkTetrisCollision(this.tetrisX, this.tetrisY, this.tetrisPiece.shape)) {
           this.gameOver();
       }
+  }
+
+
+  updateFlappy() {
+      this.frames++;
+
+      // Bird physics
+      this.bird.velocity += this.bird.gravity;
+      this.bird.y += this.bird.velocity;
+
+      // Floor collision
+      if (this.bird.y + this.bird.radius >= this.canvas.height) {
+          this.gameOver();
+      }
+
+      // Ceiling collision
+      if (this.bird.y - this.bird.radius <= 0) {
+          this.bird.y = this.bird.radius;
+          this.bird.velocity = 0;
+      }
+
+      // Pipes generation
+      if (this.frames % 70 === 0) {
+          const minHeight = 40;
+          const maxHeight = this.canvas.height - this.pipeGap - minHeight;
+          const topHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
+
+          this.pipes.push({
+              x: this.canvas.width,
+              top: topHeight,
+              bottom: this.canvas.height - (topHeight + this.pipeGap),
+              passed: false
+          });
+      }
+
+      // Update pipes and check collisions
+      for (let i = 0; i < this.pipes.length; i++) {
+          let p = this.pipes[i];
+          p.x -= this.pipeSpeed;
+
+          // Collision detection
+          // Bird bounding box approximation
+          let birdLeft = 50 - this.bird.radius;
+          let birdRight = 50 + this.bird.radius;
+          let birdTop = this.bird.y - this.bird.radius;
+          let birdBottom = this.bird.y + this.bird.radius;
+
+          if (
+              birdRight > p.x &&
+              birdLeft < p.x + this.pipeWidth &&
+              (birdTop < p.top || birdBottom > this.canvas.height - p.bottom)
+          ) {
+              this.gameOver();
+          }
+
+          // Score update
+          if (p.x + this.pipeWidth < birdLeft && !p.passed) {
+              this.flappyScore++;
+              this.updateScore();
+              p.passed = true;
+          }
+
+          // Remove off-screen pipes
+          if (p.x + this.pipeWidth < 0) {
+              this.pipes.shift();
+              i--;
+          }
+      }
+
+      this.drawFlappy();
+  }
+
+  drawFlappy() {
+      // Clear background
+      this.ctx.fillStyle = "#70c5ce"; // Sky blue
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Draw pipes
+      this.ctx.fillStyle = "#73bf2e"; // Pipe green
+      for (let i = 0; i < this.pipes.length; i++) {
+          let p = this.pipes[i];
+          // Top pipe
+          this.ctx.fillRect(p.x, 0, this.pipeWidth, p.top);
+          // Bottom pipe
+          this.ctx.fillRect(p.x, this.canvas.height - p.bottom, this.pipeWidth, p.bottom);
+      }
+
+      // Draw bird
+      this.ctx.fillStyle = "#f2b705"; // Bird yellow
+      this.ctx.beginPath();
+      this.ctx.arc(50, this.bird.y, this.bird.radius, 0, Math.PI * 2);
+      this.ctx.fill();
   }
 
   updateTetris() {
@@ -597,6 +727,8 @@ export default class Games extends BaseApp {
         this.scoreEl.textContent = `You: ${this.pongScore.player} | AI: ${this.pongScore.ai}`;
       } else if (this.currentGame === 'tetris') {
         this.scoreEl.textContent = `Score: ${this.tetrisScore} | High: ${this.tetrisHighScore}`;
+      } else if (this.currentGame === 'flappy') {
+        this.scoreEl.textContent = `Score: ${this.flappyScore} | High: ${this.flappyHighScore}`;
       } else {
         this.scoreEl.textContent = "";
       }
@@ -638,6 +770,10 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'pong') {
         if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") this.keys.up = isDown;
         if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") this.keys.down = isDown;
+    } else if (this.currentGame === 'flappy' && isDown) {
+        if (e.key === ' ' || e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') {
+            this.bird.velocity = this.bird.jump;
+        }
     } else if (this.currentGame === 'tetris' && isDown) {
         switch (e.key) {
           case "ArrowLeft":
