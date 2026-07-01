@@ -108,4 +108,28 @@ export const funCommands = {
       terminal.writeLine("error", "  error    — errors / red");
     },
   },
+
+  play: {
+    description: "Launch an arcade game (snake, pong, tetris)",
+    execute({ args, terminal }) {
+      const game = args[0];
+      const validGames = ['snake', 'pong', 'tetris'];
+      if (!game || !validGames.includes(game.toLowerCase())) {
+        terminal.writeLine("error", "play: specify a valid game: snake, pong, tetris");
+        return;
+      }
+
+      // We must dynamically import Registry and EventBus just like 'apps.js' does, or they might not be available
+      import("../../../core/Registry.js").then(({ default: Registry }) => {
+        import("../../../core/EventBus.js").then(({ default: EventBus }) => {
+            Registry.launch("games");
+            // Delay slightly to ensure window is spawned, then trigger game
+            setTimeout(() => {
+                EventBus.emit("games:start", game.toLowerCase());
+            }, 100);
+            terminal.writeLine("success", `Launching ${game}...`);
+        });
+      });
+    },
+  },
 };

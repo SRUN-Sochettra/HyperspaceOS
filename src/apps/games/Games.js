@@ -21,6 +21,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">🏓</span>
                             Pong
                         </button>
+                        <button class="games-menu-btn" data-game="tetris">
+                            <span class="games-menu-icon">🧩</span>
+                            Tetris
+                        </button>
                     </div>
                 </div>
 
@@ -71,6 +75,36 @@ export default class Games extends BaseApp {
     // Keystates for Pong
     this.keys = { up: false, down: false };
 
+    // Tetris specific state
+    this.tetrisGrid = [];
+    this.tetrisScore = 0;
+    this.tetrisHighScore = localStorage.getItem("tetrisHighScore") || 0;
+    this.tetrisPiece = null;
+    this.tetrisX = 0;
+    this.tetrisY = 0;
+    this.tetrisDropInterval = 500;
+    this.tetrisCols = 10;
+    this.tetrisRows = 20;
+    this.tetrisBlockSize = this.canvas.width / this.tetrisCols; // 300 / 10 = 30
+    this.tetrisShapes = [
+      [[1,1,1,1]], // I
+      [[1,1],[1,1]], // O
+      [[0,1,0],[1,1,1]], // T
+      [[1,0,0],[1,1,1]], // L
+      [[0,0,1],[1,1,1]], // J
+      [[0,1,1],[1,1,0]], // S
+      [[1,1,0],[0,1,1]]  // Z
+    ];
+    this.tetrisColors = [
+      '#00ffff', // I - cyan
+      '#ffff00', // O - yellow
+      '#800080', // T - purple
+      '#ffa500', // L - orange
+      '#0000ff', // J - blue
+      '#00ff00', // S - green
+      '#ff0000'  // Z - red
+    ];
+
     this.startBtn.addEventListener("click", () => this.startGame());
     this.backBtn.addEventListener("click", () => this.showMenu());
 
@@ -86,7 +120,12 @@ export default class Games extends BaseApp {
     document.addEventListener("keydown", this.keyHandler);
     document.addEventListener("keyup", this.keyUpHandler);
 
+    this.listen("games:start", (gameName) => {
+        this.selectGame(gameName);
+    });
+
     this.drawInitial();
+
   }
 
   showMenu() {
@@ -119,6 +158,11 @@ export default class Games extends BaseApp {
           this.titleEl.textContent = "Pong";
           this.startBtn.textContent = "Start Game";
           this.updateScore();
+      } else if (game === 'tetris') {
+          this.titleBarEl.textContent = "Tetris";
+          this.titleEl.textContent = "Tetris";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
       }
 
       this.drawInitial();
@@ -143,6 +187,9 @@ export default class Games extends BaseApp {
           this.startPong();
           // Using requestAnimationFrame is better for Pong, but sticking to interval for consistency with original structure, just faster.
           this.gameLoop = setInterval(() => this.updatePong(), 1000/60);
+      } else if (this.currentGame === 'tetris') {
+          this.startTetris();
+          this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
       }
   }
 
@@ -183,6 +230,9 @@ export default class Games extends BaseApp {
     if (this.currentGame === 'snake' && this.snakeScore > this.snakeHighScore) {
       this.snakeHighScore = this.snakeScore;
       localStorage.setItem("snakeHighScore", this.snakeHighScore);
+    } else if (this.currentGame === 'tetris' && this.tetrisScore > this.tetrisHighScore) {
+      this.tetrisHighScore = this.tetrisScore;
+      localStorage.setItem("tetrisHighScore", this.tetrisHighScore);
     }
   }
 
@@ -288,6 +338,186 @@ export default class Games extends BaseApp {
       }
   }
 
+
+  // ---- TETRIS MECHANICS ----
+  startTetris() {
+      this.tetrisScore = 0;
+      this.tetrisDropInterval = 500;
+      this.updateScore();
+
+      // Initialize empty grid
+      this.tetrisGrid = Array(this.tetrisRows).fill().map(() => Array(this.tetrisCols).fill(0));
+
+      this.spawnTetrisPiece();
+      this.drawTetris();
+  }
+
+  spawnTetrisPiece() {
+      const typeId = Math.floor(Math.random() * this.tetrisShapes.length);
+      const shape = this.tetrisShapes[typeId];
+      this.tetrisPiece = {
+          shape: shape,
+          color: this.tetrisColors[typeId],
+          typeId: typeId + 1 // >0 so it's truthy in grid
+      };
+
+      // Center piece at top
+      this.tetrisX = Math.floor(this.tetrisCols / 2) - Math.floor(shape[0].length / 2);
+      this.tetrisY = 0;
+
+      // If collision on spawn, game over
+      if (this.checkTetrisCollision(this.tetrisX, this.tetrisY, this.tetrisPiece.shape)) {
+          this.gameOver();
+      }
+  }
+
+  updateTetris() {
+      // Move down automatically
+      if (!this.checkTetrisCollision(this.tetrisX, this.tetrisY + 1, this.tetrisPiece.shape)) {
+          this.tetrisY++;
+      } else {
+          // Lock piece
+          this.lockTetrisPiece();
+          this.clearTetrisLines();
+          if (this.isPlaying) {
+              this.spawnTetrisPiece();
+          }
+      }
+      this.drawTetris();
+  }
+
+  lockTetrisPiece() {
+      const shape = this.tetrisPiece.shape;
+      for (let y = 0; y < shape.length; y++) {
+          for (let x = 0; x < shape[y].length; x++) {
+              if (shape[y][x]) {
+                  this.tetrisGrid[this.tetrisY + y][this.tetrisX + x] = this.tetrisPiece.typeId;
+              }
+          }
+      }
+  }
+
+  clearTetrisLines() {
+      let linesCleared = 0;
+
+      for (let y = this.tetrisRows - 1; y >= 0; y--) {
+          let isFull = true;
+          for (let x = 0; x < this.tetrisCols; x++) {
+              if (this.tetrisGrid[y][x] === 0) {
+                  isFull = false;
+                  break;
+              }
+          }
+
+          if (isFull) {
+              // Remove line
+              this.tetrisGrid.splice(y, 1);
+              // Add empty line at top
+              this.tetrisGrid.unshift(Array(this.tetrisCols).fill(0));
+              linesCleared++;
+              y++; // check same row index again since everything shifted down
+          }
+      }
+
+      if (linesCleared > 0) {
+          // Increase score based on lines cleared (100, 300, 500, 800)
+          const scores = [0, 100, 300, 500, 800];
+          this.tetrisScore += scores[linesCleared];
+
+          // Speed up slightly
+          if (this.tetrisDropInterval > 100) {
+              this.tetrisDropInterval -= 10 * linesCleared;
+              clearInterval(this.gameLoop);
+              this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
+          }
+
+          this.updateScore();
+      }
+  }
+
+  checkTetrisCollision(newX, newY, shape) {
+      for (let y = 0; y < shape.length; y++) {
+          for (let x = 0; x < shape[y].length; x++) {
+              if (shape[y][x]) {
+                  const targetX = newX + x;
+                  const targetY = newY + y;
+
+                  // Out of bounds horizontally
+                  if (targetX < 0 || targetX >= this.tetrisCols) return true;
+                  // Out of bounds vertically (bottom)
+                  if (targetY >= this.tetrisRows) return true;
+                  // Collision with existing blocks
+                  if (targetY >= 0 && this.tetrisGrid[targetY][targetX] !== 0) return true;
+              }
+          }
+      }
+      return false;
+  }
+
+  rotateTetrisPiece() {
+      if (!this.tetrisPiece) return;
+
+      const shape = this.tetrisPiece.shape;
+      // Transpose & reverse rows for 90deg clockwise rotation
+      const newShape = shape[0].map((val, index) => shape.map(row => row[index]).reverse());
+
+      // If rotated piece collides, try wall kicking or cancel rotation
+      let kickX = 0;
+      if (this.checkTetrisCollision(this.tetrisX, this.tetrisY, newShape)) {
+          // Simple wall kick: try moving left or right by 1
+          if (!this.checkTetrisCollision(this.tetrisX + 1, this.tetrisY, newShape)) kickX = 1;
+          else if (!this.checkTetrisCollision(this.tetrisX - 1, this.tetrisY, newShape)) kickX = -1;
+          else return; // Cannot rotate
+      }
+
+      this.tetrisX += kickX;
+      this.tetrisPiece.shape = newShape;
+      this.drawTetris();
+  }
+
+  moveTetrisPiece(dx, dy) {
+      if (!this.checkTetrisCollision(this.tetrisX + dx, this.tetrisY + dy, this.tetrisPiece.shape)) {
+          this.tetrisX += dx;
+          this.tetrisY += dy;
+          this.drawTetris();
+          return true;
+      }
+      return false;
+  }
+
+  drawTetris() {
+      // Clear background
+      this.ctx.fillStyle = "#1e1e2e";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Draw Grid (existing locked pieces)
+      for (let y = 0; y < this.tetrisRows; y++) {
+          for (let x = 0; x < this.tetrisCols; x++) {
+              const typeId = this.tetrisGrid[y][x];
+              if (typeId !== 0) {
+                  this.drawTetrisBlock(x, y, this.tetrisColors[typeId - 1]);
+              }
+          }
+      }
+
+      // Draw falling piece
+      if (this.tetrisPiece) {
+          const shape = this.tetrisPiece.shape;
+          for (let y = 0; y < shape.length; y++) {
+              for (let x = 0; x < shape[y].length; x++) {
+                  if (shape[y][x]) {
+                      this.drawTetrisBlock(this.tetrisX + x, this.tetrisY + y, this.tetrisPiece.color);
+                  }
+              }
+          }
+      }
+  }
+
+  drawTetrisBlock(x, y, color) {
+      this.ctx.fillStyle = color;
+      this.ctx.fillRect(x * this.tetrisBlockSize + 1, y * this.tetrisBlockSize + 1, this.tetrisBlockSize - 2, this.tetrisBlockSize - 2);
+  }
+
   drawSnake() {
     // Clear background
     this.ctx.fillStyle = "#1e1e2e";
@@ -365,6 +595,8 @@ export default class Games extends BaseApp {
         this.scoreEl.textContent = `Score: ${this.snakeScore} | High: ${this.snakeHighScore}`;
       } else if (this.currentGame === 'pong') {
         this.scoreEl.textContent = `You: ${this.pongScore.player} | AI: ${this.pongScore.ai}`;
+      } else if (this.currentGame === 'tetris') {
+        this.scoreEl.textContent = `Score: ${this.tetrisScore} | High: ${this.tetrisHighScore}`;
       } else {
         this.scoreEl.textContent = "";
       }
@@ -406,6 +638,33 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'pong') {
         if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") this.keys.up = isDown;
         if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") this.keys.down = isDown;
+    } else if (this.currentGame === 'tetris' && isDown) {
+        switch (e.key) {
+          case "ArrowLeft":
+          case "a":
+          case "A":
+            this.moveTetrisPiece(-1, 0);
+            break;
+          case "ArrowRight":
+          case "d":
+          case "D":
+            this.moveTetrisPiece(1, 0);
+            break;
+          case "ArrowDown":
+          case "s":
+          case "S":
+            this.moveTetrisPiece(0, 1);
+            break;
+          case "ArrowUp":
+          case "w":
+          case "W":
+            this.rotateTetrisPiece();
+            break;
+          case " ":
+            e.preventDefault();
+            while (this.moveTetrisPiece(0, 1)) {}
+            break;
+        }
     }
   }
 
