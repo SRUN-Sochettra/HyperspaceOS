@@ -30,6 +30,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">🧩</span>
                             Tetris
                         </button>
+                        <button class="games-menu-btn" data-game="2048">
+                            <span class="games-menu-icon">🔢</span>
+                            2048
+                        </button>
                     </div>
                 </div>
 
@@ -84,6 +88,14 @@ export default class Games extends BaseApp {
     // Flappy Bird specific state
     this.flappyScore = 0;
     this.flappyHighScore = localStorage.getItem("flappyHighScore") || 0;
+
+    // 2048 specific state
+    this.score2048 = 0;
+    this.highScore2048 = localStorage.getItem("highScore2048") || 0;
+    this.grid2048 = [];
+    this.size2048 = 4;
+    this.cell2048Size = 65;
+    this.cell2048Gap = 8;
     this.bird = { y: 150, velocity: 0, gravity: 0.6, jump: -8, radius: 8 };
     this.pipes = [];
     this.pipeWidth = 40;
@@ -184,6 +196,11 @@ export default class Games extends BaseApp {
           this.titleEl.textContent = "Tetris";
           this.startBtn.textContent = "Start Game";
           this.updateScore();
+      } else if (game === '2048') {
+          this.titleBarEl.textContent = "2048";
+          this.titleEl.textContent = "2048";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
       }
 
       this.drawInitial();
@@ -214,6 +231,8 @@ export default class Games extends BaseApp {
 
       } else if (this.currentGame === 'tetris') {
           this.startTetris();
+      } else if (this.currentGame === '2048') {
+          this.start2048();
           this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
       }
   }
@@ -258,6 +277,9 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'flappy' && this.flappyScore > this.flappyHighScore) {
       this.flappyHighScore = this.flappyScore;
       localStorage.setItem("flappyHighScore", this.flappyHighScore);
+    } else if (this.currentGame === '2048' && this.score2048 > this.highScore2048) {
+      this.highScore2048 = this.score2048;
+      localStorage.setItem("highScore2048", this.highScore2048);
     } else if (this.currentGame === 'tetris' && this.tetrisScore > this.tetrisHighScore) {
       this.tetrisHighScore = this.tetrisScore;
       localStorage.setItem("tetrisHighScore", this.tetrisHighScore);
@@ -368,6 +390,148 @@ export default class Games extends BaseApp {
 
 
   // ---- TETRIS MECHANICS ----
+  start2048() {
+      this.score2048 = 0;
+      this.grid2048 = Array(this.size2048).fill().map(() => Array(this.size2048).fill(0));
+      this.spawnTile2048();
+      this.spawnTile2048();
+      this.updateScore();
+      this.draw2048();
+  }
+
+  spawnTile2048() {
+      let emptyCells = [];
+      for (let r = 0; r < this.size2048; r++) {
+          for (let c = 0; c < this.size2048; c++) {
+              if (this.grid2048[r][c] === 0) {
+                  emptyCells.push({ r, c });
+              }
+          }
+      }
+      if (emptyCells.length > 0) {
+          let randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+          this.grid2048[randomCell.r][randomCell.c] = Math.random() < 0.9 ? 2 : 4;
+      }
+  }
+
+  draw2048() {
+      // Clear background
+      this.ctx.fillStyle = "#bbada0";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      const offset = (this.canvas.width - (this.size2048 * this.cell2048Size + (this.size2048 + 1) * this.cell2048Gap)) / 2;
+
+      for (let r = 0; r < this.size2048; r++) {
+          for (let c = 0; c < this.size2048; c++) {
+              let val = this.grid2048[r][c];
+              let x = offset + this.cell2048Gap + c * (this.cell2048Size + this.cell2048Gap);
+              let y = offset + this.cell2048Gap + r * (this.cell2048Size + this.cell2048Gap);
+
+              this.ctx.fillStyle = this.get2048Color(val);
+              this.ctx.beginPath();
+              this.ctx.roundRect(x, y, this.cell2048Size, this.cell2048Size, 4);
+              this.ctx.fill();
+
+              if (val !== 0) {
+                  this.ctx.fillStyle = val <= 4 ? "#776e65" : "#f9f6f2";
+                  this.ctx.font = "bold " + (val >= 1000 ? "20px" : val >= 100 ? "24px" : "32px") + " Arial";
+                  this.ctx.textAlign = "center";
+                  this.ctx.textBaseline = "middle";
+                  this.ctx.fillText(val, x + this.cell2048Size / 2, y + this.cell2048Size / 2 + 2);
+              }
+          }
+      }
+  }
+
+  get2048Color(val) {
+      const colors = {
+          0: "#cdc1b4",
+          2: "#eee4da",
+          4: "#ede0c8",
+          8: "#f2b179",
+          16: "#f59563",
+          32: "#f67c5f",
+          64: "#f65e3b",
+          128: "#edcf72",
+          256: "#edcc61",
+          512: "#edc850",
+          1024: "#edc53f",
+          2048: "#edc22e"
+      };
+      return colors[val] || "#3c3a32";
+  }
+
+  move2048(direction) {
+      let moved = false;
+      let newGrid = JSON.parse(JSON.stringify(this.grid2048));
+
+      const slide = (row) => {
+          let arr = row.filter(val => val);
+          let missing = this.size2048 - arr.length;
+          let zeros = Array(missing).fill(0);
+          return arr.concat(zeros);
+      };
+
+      const combine = (row) => {
+          for (let i = 0; i < this.size2048 - 1; i++) {
+              if (row[i] !== 0 && row[i] === row[i + 1]) {
+                  row[i] *= 2;
+                  this.score2048 += row[i];
+                  row[i + 1] = 0;
+              }
+          }
+          return row;
+      };
+
+      for (let i = 0; i < this.size2048; i++) {
+          let row = [];
+          if (direction === 'Left' || direction === 'Right') {
+              row = newGrid[i];
+          } else {
+              for (let j = 0; j < this.size2048; j++) row.push(newGrid[j][i]);
+          }
+
+          if (direction === 'Right' || direction === 'Down') row.reverse();
+
+          let slided = slide(row);
+          let combined = combine(slided);
+          let slidedAgain = slide(combined);
+
+          if (direction === 'Right' || direction === 'Down') slidedAgain.reverse();
+
+          for (let j = 0; j < this.size2048; j++) {
+              if (direction === 'Left' || direction === 'Right') {
+                  if (newGrid[i][j] !== slidedAgain[j]) moved = true;
+                  newGrid[i][j] = slidedAgain[j];
+              } else {
+                  if (newGrid[j][i] !== slidedAgain[j]) moved = true;
+                  newGrid[j][i] = slidedAgain[j];
+              }
+          }
+      }
+
+      if (moved) {
+          this.grid2048 = newGrid;
+          this.spawnTile2048();
+          this.draw2048();
+          this.updateScore();
+          if (this.check2048GameOver()) {
+              this.gameOver();
+          }
+      }
+  }
+
+  check2048GameOver() {
+      for (let r = 0; r < this.size2048; r++) {
+          for (let c = 0; c < this.size2048; c++) {
+              if (this.grid2048[r][c] === 0) return false;
+              if (c !== this.size2048 - 1 && this.grid2048[r][c] === this.grid2048[r][c + 1]) return false;
+              if (r !== this.size2048 - 1 && this.grid2048[r][c] === this.grid2048[r + 1][c]) return false;
+          }
+      }
+      return true;
+  }
+
 
   startFlappy() {
       this.flappyScore = 0;
@@ -727,6 +891,8 @@ export default class Games extends BaseApp {
         this.scoreEl.textContent = `You: ${this.pongScore.player} | AI: ${this.pongScore.ai}`;
       } else if (this.currentGame === 'tetris') {
         this.scoreEl.textContent = `Score: ${this.tetrisScore} | High: ${this.tetrisHighScore}`;
+      } else if (this.currentGame === '2048') {
+        this.scoreEl.textContent = `Score: ${this.score2048} | High: ${this.highScore2048}`;
       } else if (this.currentGame === 'flappy') {
         this.scoreEl.textContent = `Score: ${this.flappyScore} | High: ${this.flappyHighScore}`;
       } else {
@@ -799,6 +965,29 @@ export default class Games extends BaseApp {
           case " ":
             e.preventDefault();
             while (this.moveTetrisPiece(0, 1)) {}
+            break;
+        }
+    } else if (this.currentGame === '2048' && isDown) {
+        switch (e.key) {
+          case "ArrowLeft":
+          case "a":
+          case "A":
+            this.move2048('Left');
+            break;
+          case "ArrowRight":
+          case "d":
+          case "D":
+            this.move2048('Right');
+            break;
+          case "ArrowUp":
+          case "w":
+          case "W":
+            this.move2048('Up');
+            break;
+          case "ArrowDown":
+          case "s":
+          case "S":
+            this.move2048('Down');
             break;
         }
     }
