@@ -1,0 +1,67 @@
+.camera-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  position: relative;
+}
+
+.camera-toolbar {
+  padding: var(--sp-2) var(--sp-3);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.camera-feed-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.camera-feed-container video {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.camera-controls {
+  padding: var(--sp-3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.camera-capture-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--fs-md);
+  border-radius: var(--r-full);
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.camera-capture-btn:hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+.camera-capture-btn:active {
+  transform: scale(0.95);
+}
