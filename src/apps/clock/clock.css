@@ -1,0 +1,227 @@
+.clock-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.clock-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  gap: 10px;
+}
+
+.clock-tab {
+  flex: 1;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+  font-size: var(--text-sm);
+}
+
+.clock-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.clock-tab.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.clock-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.clock-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.clock-pane.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* World Clock */
+.clock-display {
+  font-size: 4rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.clock-date {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+}
+
+.clock-timezone {
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Stopwatch & Timer */
+.time-display {
+  font-size: 4.5rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 40px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-mono);
+}
+
+.clock-controls {
+  display: flex;
+  gap: 20px;
+}
+
+.clock-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: var(--text-base);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.clock-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.clock-btn:active {
+  transform: scale(0.95);
+}
+
+.clock-btn.start {
+  background: rgba(40, 200, 64, 0.2);
+  color: #4cd964;
+  border-color: rgba(40, 200, 64, 0.4);
+}
+
+.clock-btn.start:hover {
+  background: rgba(40, 200, 64, 0.3);
+}
+
+.clock-btn.stop {
+  background: rgba(255, 59, 48, 0.2);
+  color: #ff3b30;
+  border-color: rgba(255, 59, 48, 0.4);
+}
+
+.clock-btn.stop:hover {
+  background: rgba(255, 59, 48, 0.3);
+}
+
+/* Laps */
+.laps-container {
+  margin-top: 30px;
+  width: 80%;
+  max-height: 150px;
+  overflow-y: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.laps-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.laps-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.lap-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Timer Input */
+.timer-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.timer-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-field input {
+  width: 70px;
+  height: 70px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.timer-field input:focus {
+  border-color: var(--neon-cyan);
+}
+
+.timer-field label {
+  margin-top: 8px;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timer-colon {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  padding-bottom: 25px;
+}
