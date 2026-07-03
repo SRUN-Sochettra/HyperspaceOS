@@ -4,6 +4,7 @@ import Registry from "./Registry.js";
 
 async function registerApps() {
   const modules = await Promise.all([
+    import("../apps/camera/index.js"),
     import("../apps/terminal/index.js"),
     import("../apps/sysmon/index.js"),
     import("../apps/music/index.js"),

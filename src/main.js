@@ -6,6 +6,7 @@ import "./styles/glass.css";
 import "./styles/animations.css";
 
 // App styles
+import "./apps/camera/camera.css";
 import "./apps/terminal/terminal.css";
 import "./apps/sysmon/sysmon.css";
 import "./apps/music/music.css";
