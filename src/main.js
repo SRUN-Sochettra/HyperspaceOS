@@ -25,6 +25,7 @@ import "./apps/calendar/calendar.css";
 import "./apps/photos/photos.css";
 import "./apps/video/video.css";
 import "./apps/markdown/markdown.css";
+import "./apps/mail/mail.css";
 
 // Boot
 import { boot } from "./core/OS.js";
