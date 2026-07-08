@@ -25,6 +25,7 @@ async function registerApps() {
     import("../apps/markdown/index.js"),
     import("../apps/clock/index.js"),
     import("../apps/mail/index.js"),
+    import("../apps/contacts/index.js"),
   ]);
   modules.forEach((mod) => mod.default());
 }
