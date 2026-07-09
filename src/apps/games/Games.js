@@ -34,6 +34,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">🔢</span>
                             2048
                         </button>
+                        <button class="games-menu-btn" data-game="minesweeper">
+                            <span class="games-menu-icon">💣</span>
+                            Minesweeper
+                        </button>
                     </div>
                 </div>
 
@@ -103,6 +107,15 @@ export default class Games extends BaseApp {
     this.pipeSpeed = 3;
     this.frames = 0;
 
+    // Minesweeper specific state
+    this.minesScore = 0;
+    this.minesHighScore = localStorage.getItem("minesHighScore") || 0;
+    this.minesCols = 10;
+    this.minesRows = 10;
+    this.minesCount = 10;
+    this.minesGrid = [];
+    this.minesCellSize = 30;
+
     // Tetris specific state
     this.tetrisGrid = [];
     this.tetrisScore = 0;
@@ -147,6 +160,17 @@ export default class Games extends BaseApp {
 
     document.addEventListener("keydown", this.keyHandler);
     document.addEventListener("keyup", this.keyUpHandler);
+
+    this.clickHandler = (e) => this.handleMouseClick(e, false);
+    this.rightClickHandler = (e) => this.handleMouseClick(e, true);
+    this.canvas.addEventListener("click", this.clickHandler);
+    this.contextMenuHandler = (e) => {
+      if (this.currentGame === 'minesweeper' && this.isPlaying) {
+        e.preventDefault();
+        this.rightClickHandler(e);
+      }
+    };
+    this.canvas.addEventListener("contextmenu", this.contextMenuHandler);
 
     this.listen("games:start", (gameName) => {
         this.selectGame(gameName);
@@ -231,9 +255,11 @@ export default class Games extends BaseApp {
 
       } else if (this.currentGame === 'tetris') {
           this.startTetris();
+          this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
       } else if (this.currentGame === '2048') {
           this.start2048();
-          this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
+      } else if (this.currentGame === 'minesweeper') {
+          this.startMinesweeper();
       }
   }
 
@@ -283,6 +309,9 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'tetris' && this.tetrisScore > this.tetrisHighScore) {
       this.tetrisHighScore = this.tetrisScore;
       localStorage.setItem("tetrisHighScore", this.tetrisHighScore);
+    } else if (this.currentGame === 'minesweeper' && this.minesScore > this.minesHighScore) {
+      this.minesHighScore = this.minesScore;
+      localStorage.setItem("minesHighScore", this.minesHighScore);
     }
   }
 
@@ -665,6 +694,141 @@ export default class Games extends BaseApp {
       this.ctx.fill();
   }
 
+
+  // ---- MINESWEEPER MECHANICS ----
+  startMinesweeper() {
+      this.minesScore = 0;
+      this.minesGrid = [];
+      for (let y = 0; y < this.minesRows; y++) {
+          this.minesGrid[y] = [];
+          for (let x = 0; x < this.minesCols; x++) {
+              this.minesGrid[y][x] = {
+                  isMine: false,
+                  isRevealed: false,
+                  isFlagged: false,
+                  neighborMines: 0
+              };
+          }
+      }
+      let minesPlaced = 0;
+      while (minesPlaced < this.minesCount) {
+          const rx = Math.floor(Math.random() * this.minesCols);
+          const ry = Math.floor(Math.random() * this.minesRows);
+          if (!this.minesGrid[ry][rx].isMine) {
+              this.minesGrid[ry][rx].isMine = true;
+              minesPlaced++;
+          }
+      }
+      for (let y = 0; y < this.minesRows; y++) {
+          for (let x = 0; x < this.minesCols; x++) {
+              if (!this.minesGrid[y][x].isMine) {
+                  let count = 0;
+                  for (let dy = -1; dy <= 1; dy++) {
+                      for (let dx = -1; dx <= 1; dx++) {
+                          if (dy === 0 && dx === 0) continue;
+                          const ny = y + dy;
+                          const nx = x + dx;
+                          if (ny >= 0 && ny < this.minesRows && nx >= 0 && nx < this.minesCols) {
+                              if (this.minesGrid[ny][nx].isMine) count++;
+                          }
+                      }
+                  }
+                  this.minesGrid[y][x].neighborMines = count;
+              }
+          }
+      }
+      this.updateScore();
+      this.drawMinesweeper();
+  }
+
+  handleMouseClick(e, isRightClick) {
+      if (!this.isPlaying || this.currentGame !== 'minesweeper') return;
+      const rect = this.canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const col = Math.floor(x / this.minesCellSize);
+      const row = Math.floor(y / this.minesCellSize);
+      if (row < 0 || row >= this.minesRows || col < 0 || col >= this.minesCols) return;
+      const cell = this.minesGrid[row][col];
+      if (isRightClick) {
+          if (!cell.isRevealed) {
+              cell.isFlagged = !cell.isFlagged;
+              this.drawMinesweeper();
+          }
+      } else {
+          if (!cell.isFlagged && !cell.isRevealed) {
+              if (cell.isMine) {
+                  cell.isRevealed = true;
+                  this.drawMinesweeper();
+                  this.gameOver();
+              } else {
+                  this.revealMinesweeper(row, col);
+                  this.drawMinesweeper();
+                  this.checkMinesweeperWin();
+              }
+          }
+      }
+  }
+
+  revealMinesweeper(row, col) {
+      if (row < 0 || row >= this.minesRows || col < 0 || col >= this.minesCols) return;
+      const cell = this.minesGrid[row][col];
+      if (cell.isRevealed || cell.isFlagged) return;
+      cell.isRevealed = true;
+      this.minesScore += 10;
+      this.updateScore();
+      if (cell.neighborMines === 0) {
+          for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                  if (dy !== 0 || dx !== 0) this.revealMinesweeper(row + dy, col + dx);
+              }
+          }
+      }
+  }
+
+  checkMinesweeperWin() {
+      let win = true;
+      for (let y = 0; y < this.minesRows; y++) {
+          for (let x = 0; x < this.minesCols; x++) {
+              if (!this.minesGrid[y][x].isMine && !this.minesGrid[y][x].isRevealed) win = false;
+          }
+      }
+      if (win) this.gameOver();
+  }
+
+  drawMinesweeper() {
+      this.ctx.fillStyle = "#1e1e2e";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      for (let y = 0; y < this.minesRows; y++) {
+          for (let x = 0; x < this.minesCols; x++) {
+              const cell = this.minesGrid[y][x];
+              const px = x * this.minesCellSize;
+              const py = y * this.minesCellSize;
+              if (!cell.isRevealed) {
+                  this.ctx.fillStyle = "#313244";
+                  this.ctx.fillRect(px, py, this.minesCellSize - 1, this.minesCellSize - 1);
+                  if (cell.isFlagged) {
+                      this.ctx.fillStyle = "#ff5f57";
+                      this.ctx.font = "16px Arial";
+                      this.ctx.fillText("🚩", px + 4, py + 22);
+                  }
+              } else {
+                  this.ctx.fillStyle = "#181825";
+                  this.ctx.fillRect(px, py, this.minesCellSize - 1, this.minesCellSize - 1);
+                  if (cell.isMine) {
+                      this.ctx.fillStyle = "#ff5f57";
+                      this.ctx.font = "16px Arial";
+                      this.ctx.fillText("💣", px + 4, py + 22);
+                  } else if (cell.neighborMines > 0) {
+                      this.ctx.fillStyle = ["#89b4fa", "#a6e3a1", "#f9e2af", "#fab387", "#f38ba8", "#cba6f7", "#f5c2e7", "#b4befe"][cell.neighborMines - 1];
+                      this.ctx.font = "bold 18px Arial";
+                      this.ctx.fillText(cell.neighborMines, px + 10, py + 22);
+                  }
+              }
+          }
+      }
+  }
+
   updateTetris() {
       // Move down automatically
       if (!this.checkTetrisCollision(this.tetrisX, this.tetrisY + 1, this.tetrisPiece.shape)) {
@@ -895,6 +1059,8 @@ export default class Games extends BaseApp {
         this.scoreEl.textContent = `Score: ${this.score2048} | High: ${this.highScore2048}`;
       } else if (this.currentGame === 'flappy') {
         this.scoreEl.textContent = `Score: ${this.flappyScore} | High: ${this.flappyHighScore}`;
+      } else if (this.currentGame === 'minesweeper') {
+        this.scoreEl.textContent = `Score: ${this.minesScore} | High: ${this.minesHighScore}`;
       } else {
         this.scoreEl.textContent = "";
       }
@@ -997,5 +1163,9 @@ export default class Games extends BaseApp {
     if (this.gameLoop) clearInterval(this.gameLoop);
     if (this.keyHandler) document.removeEventListener("keydown", this.keyHandler);
     if (this.keyUpHandler) document.removeEventListener("keyup", this.keyUpHandler);
+    if (this.canvas) {
+      this.canvas.removeEventListener("click", this.clickHandler);
+      this.canvas.removeEventListener("contextmenu", this.contextMenuHandler);
+    }
   }
 }

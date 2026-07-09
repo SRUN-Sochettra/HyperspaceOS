@@ -37,6 +37,7 @@
   border: 2px solid var(--border);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: crosshair;
 }
 
 .games-overlay {
