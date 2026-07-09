@@ -2,6 +2,12 @@ import Store from "../../../core/Store.js";
 import FileSystem from "../../../core/FileSystem.js";
 
 export const systemCommands = {
+  echo: {
+    description: "Print text to the terminal",
+    execute({ args, terminal }) {
+      terminal.writeLine("output", args.join(" "));
+    },
+  },
   help: {
     description: "Show available commands",
     execute({ terminal }) {
