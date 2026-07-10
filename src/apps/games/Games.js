@@ -38,6 +38,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">💣</span>
                             Minesweeper
                         </button>
+                        <button class="games-menu-btn" data-game="breakout">
+                            <span class="games-menu-icon">🧱</span>
+                            Breakout
+                        </button>
                     </div>
                 </div>
 
@@ -115,6 +119,15 @@ export default class Games extends BaseApp {
     this.minesCount = 10;
     this.minesGrid = [];
     this.minesCellSize = 30;
+
+    // Breakout specific state
+    this.breakoutScore = 0;
+    this.breakoutHighScore = localStorage.getItem("breakoutHighScore") || 0;
+    this.breakoutPaddle = { x: 110, width: 80, height: 10 };
+    this.breakoutBall = { x: 150, y: 250, dx: 3, dy: -3, radius: 5 };
+    this.breakoutBricks = [];
+    this.breakoutKeys = { left: false, right: false };
+
 
     // Tetris specific state
     this.tetrisGrid = [];
@@ -245,7 +258,16 @@ export default class Games extends BaseApp {
       if (this.currentGame === 'snake') {
           this.startSnake();
           this.gameLoop = setInterval(() => this.updateSnake(), 100);
-      } else if (this.currentGame === 'pong') {
+      } else if (this.currentGame === 'breakout') {
+          this.startBreakout();
+          this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
+      } else if (this.currentGame === 'breakout') {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
+    } else if (this.currentGame === 'breakout') {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
+    } else if (this.currentGame === 'pong') {
           this.startPong();
           // Using requestAnimationFrame is better for Pong, but sticking to interval for consistency with original structure, just faster.
           this.gameLoop = setInterval(() => this.updatePong(), 1000/60);
@@ -258,6 +280,11 @@ export default class Games extends BaseApp {
           this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
       } else if (this.currentGame === '2048') {
           this.start2048();
+      } else if (this.currentGame === 'breakout') {
+          this.startBreakout();
+          this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
+      } else if (this.currentGame === 'breakout') {
+        this.scoreEl.textContent = `Score: ${this.breakoutScore} | High: ${this.breakoutHighScore}`;
       } else if (this.currentGame === 'minesweeper') {
           this.startMinesweeper();
       }
@@ -309,10 +336,90 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'tetris' && this.tetrisScore > this.tetrisHighScore) {
       this.tetrisHighScore = this.tetrisScore;
       localStorage.setItem("tetrisHighScore", this.tetrisHighScore);
+    } else if (this.currentGame === 'breakout' && this.breakoutScore > this.breakoutHighScore) {
+      this.breakoutHighScore = this.breakoutScore;
+      localStorage.setItem("breakoutHighScore", this.breakoutHighScore);
     } else if (this.currentGame === 'minesweeper' && this.minesScore > this.minesHighScore) {
       this.minesHighScore = this.minesScore;
       localStorage.setItem("minesHighScore", this.minesHighScore);
     }
+  }
+
+
+  updateBreakout() {
+      // Move paddle
+      if (this.breakoutKeys.right && this.breakoutPaddle.x < this.canvas.width - this.breakoutPaddle.width) {
+          this.breakoutPaddle.x += 7;
+      } else if (this.breakoutKeys.left && this.breakoutPaddle.x > 0) {
+          this.breakoutPaddle.x -= 7;
+      }
+
+      this.breakoutBall.x += this.breakoutBall.dx;
+      this.breakoutBall.y += this.breakoutBall.dy;
+
+      // Wall collision
+      if (this.breakoutBall.x + this.breakoutBall.dx > this.canvas.width - this.breakoutBall.radius || this.breakoutBall.x + this.breakoutBall.dx < this.breakoutBall.radius) {
+          this.breakoutBall.dx = -this.breakoutBall.dx;
+      }
+      if (this.breakoutBall.y + this.breakoutBall.dy < this.breakoutBall.radius) {
+          this.breakoutBall.dy = -this.breakoutBall.dy;
+      } else if (this.breakoutBall.y + this.breakoutBall.dy > this.canvas.height - this.breakoutBall.radius) {
+          if (this.breakoutBall.x > this.breakoutPaddle.x && this.breakoutBall.x < this.breakoutPaddle.x + this.breakoutPaddle.width) {
+              this.breakoutBall.dy = -this.breakoutBall.dy;
+          } else {
+              this.gameOver();
+              return;
+          }
+      }
+
+      // Brick collision
+      let win = true;
+      for (let c = 0; c < this.breakoutBricks.length; c++) {
+          for (let r = 0; r < this.breakoutBricks[c].length; r++) {
+              let b = this.breakoutBricks[c][r];
+              if (b.status === 1) {
+                  win = false;
+                  if (this.breakoutBall.x > b.x && this.breakoutBall.x < b.x + 40 && this.breakoutBall.y > b.y && this.breakoutBall.y < b.y + 15) {
+                      this.breakoutBall.dy = -this.breakoutBall.dy;
+                      b.status = 0;
+                      this.breakoutScore++;
+                      this.updateScore();
+                  }
+              }
+          }
+      }
+
+      if (win) {
+          this.gameOver();
+      }
+
+      this.drawBreakout();
+  }
+
+  drawBreakout() {
+      this.ctx.fillStyle = "#1e1e2e";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Draw bricks
+      for (let c = 0; c < this.breakoutBricks.length; c++) {
+          for (let r = 0; r < this.breakoutBricks[c].length; r++) {
+              if (this.breakoutBricks[c][r].status === 1) {
+                  let b = this.breakoutBricks[c][r];
+                  this.ctx.fillStyle = ["#ff5f57", "#fab387", "#f9e2af", "#a6e3a1", "#89b4fa"][r];
+                  this.ctx.fillRect(b.x, b.y, 40, 15);
+              }
+          }
+      }
+
+      // Draw paddle
+      this.ctx.fillStyle = "#00f5ff";
+      this.ctx.fillRect(this.breakoutPaddle.x, this.canvas.height - this.breakoutPaddle.height - 10, this.breakoutPaddle.width, this.breakoutPaddle.height);
+
+      // Draw ball
+      this.ctx.fillStyle = "#fff";
+      this.ctx.beginPath();
+      this.ctx.arc(this.breakoutBall.x, this.breakoutBall.y, this.breakoutBall.radius, 0, Math.PI * 2);
+      this.ctx.fill();
   }
 
   updateSnake() {
@@ -741,6 +848,38 @@ export default class Games extends BaseApp {
       this.drawMinesweeper();
   }
 
+  startBreakout() {
+      this.breakoutScore = 0;
+      this.breakoutPaddle.x = (this.canvas.width - this.breakoutPaddle.width) / 2;
+      this.breakoutBall.x = this.canvas.width / 2;
+      this.breakoutBall.y = this.canvas.height - 30;
+      this.breakoutBall.dx = 3;
+      this.breakoutBall.dy = -3;
+      this.breakoutKeys = { left: false, right: false };
+
+      this.breakoutBricks = [];
+      const brickRowCount = 5;
+      const brickColumnCount = 6;
+      const brickWidth = 40;
+      const brickHeight = 15;
+      const brickPadding = 5;
+      const brickOffsetTop = 30;
+      const brickOffsetLeft = 18;
+
+      for(let c = 0; c < brickColumnCount; c++) {
+          this.breakoutBricks[c] = [];
+          for(let r = 0; r < brickRowCount; r++) {
+              this.breakoutBricks[c][r] = { x: 0, y: 0, status: 1 };
+              const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+              const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+              this.breakoutBricks[c][r].x = brickX;
+              this.breakoutBricks[c][r].y = brickY;
+          }
+      }
+      this.updateScore();
+  }
+
+
   handleMouseClick(e, isRightClick) {
       if (!this.isPlaying || this.currentGame !== 'minesweeper') return;
       const rect = this.canvas.getBoundingClientRect();
@@ -1099,6 +1238,9 @@ export default class Games extends BaseApp {
             if (this.velocity.x !== -1) this.velocity = { x: 1, y: 0 };
             break;
         }
+    } else if (this.currentGame === 'breakout') {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
     } else if (this.currentGame === 'pong') {
         if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") this.keys.up = isDown;
         if (e.key === "ArrowDown" || e.key === "s" || e.key === "S") this.keys.down = isDown;
