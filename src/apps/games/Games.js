@@ -38,6 +38,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">💣</span>
                             Minesweeper
                         </button>
+                        <button class="games-menu-btn" data-game="tictactoe">
+                            <span class="games-menu-icon">❌</span>
+                            Tic-Tac-Toe
+                        </button>
                         <button class="games-menu-btn" data-game="breakout">
                             <span class="games-menu-icon">🧱</span>
                             Breakout
@@ -128,6 +132,17 @@ export default class Games extends BaseApp {
     this.breakoutBricks = [];
     this.breakoutKeys = { left: false, right: false };
 
+
+
+    // Tic-Tac-Toe specific state
+    this.tttBoard = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
+    this.tttCurrentPlayer = 'X';
+    this.tttWinner = null;
+    this.tttScore = { X: 0, O: 0, Ties: 0 };
 
     // Tetris specific state
     this.tetrisGrid = [];
@@ -258,6 +273,8 @@ export default class Games extends BaseApp {
       if (this.currentGame === 'snake') {
           this.startSnake();
           this.gameLoop = setInterval(() => this.updateSnake(), 100);
+      } else if (this.currentGame === 'tictactoe') {
+          this.startTicTacToe();
       } else if (this.currentGame === 'breakout') {
           this.startBreakout();
           this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
@@ -271,6 +288,8 @@ export default class Games extends BaseApp {
           this.startPong();
           // Using requestAnimationFrame is better for Pong, but sticking to interval for consistency with original structure, just faster.
           this.gameLoop = setInterval(() => this.updatePong(), 1000/60);
+      } else if (this.currentGame === 'tictactoe') {
+        this.scoreEl.textContent = `Score: X: ${this.tttScore.X} | O: ${this.tttScore.O} | Ties: ${this.tttScore.Ties}`;
       } else if (this.currentGame === 'flappy') {
           this.startFlappy();
           this.gameLoop = setInterval(() => this.updateFlappy(), 1000/60);
@@ -881,13 +900,19 @@ export default class Games extends BaseApp {
 
 
   handleMouseClick(e, isRightClick) {
-      if (!this.isPlaying || this.currentGame !== 'minesweeper') return;
+      if (!this.isPlaying || (this.currentGame !== 'minesweeper' && this.currentGame !== 'tictactoe')) return;
       const rect = this.canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const col = Math.floor(x / this.minesCellSize);
       const row = Math.floor(y / this.minesCellSize);
       if (row < 0 || row >= this.minesRows || col < 0 || col >= this.minesCols) return;
+
+      if (this.currentGame === 'tictactoe') {
+          this.handleTicTacToeClick(x, y);
+          return;
+      }
+
       const cell = this.minesGrid[row][col];
       if (isRightClick) {
           if (!cell.isRevealed) {

@@ -312,6 +312,54 @@ export const systemCommands = {
     },
   },
 
+
+  tree: {
+    description: "List contents of directories in a tree-like format",
+    execute({ args, terminal }) {
+      const target = args[0] || terminal.cwd;
+      const resolvedPath = terminal.resolvePath(target);
+
+      const entries = FileSystem.readdir(resolvedPath);
+      if (!entries) {
+        terminal.writeLine("error", `tree: cannot access '${resolvedPath}': No such directory`);
+        return;
+      }
+
+      terminal.writeLine("output", resolvedPath);
+
+      let dirs = 0;
+      let files = 0;
+
+      function traverse(currentPath, prefix) {
+        const currentEntries = FileSystem.readdir(currentPath);
+        if (!currentEntries) return;
+
+        const filtered = currentEntries;
+
+        filtered.forEach((entry, index) => {
+          const isLast = index === filtered.length - 1;
+          const connector = isLast ? "└── " : "├── ";
+
+          if (entry.type === 'dir') {
+             terminal.writeLine("info", prefix + connector + entry.name);
+          } else {
+             terminal.writeLine("output", prefix + connector + entry.name);
+          }
+
+          if (entry.type === 'dir') {
+            dirs++;
+            traverse(FileSystem.join(currentPath, entry.name), prefix + (isLast ? "    " : "│   "));
+          } else {
+            files++;
+          }
+        });
+      }
+
+      traverse(resolvedPath, "");
+      terminal.writeLine("output", `\n${dirs} directories, ${files} files`);
+    }
+  },
+
   head: {
     description: "Display first N lines of a file",
     execute({ args, terminal }) {
