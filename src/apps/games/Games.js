@@ -278,32 +278,17 @@ export default class Games extends BaseApp {
       } else if (this.currentGame === 'breakout') {
           this.startBreakout();
           this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
-      } else if (this.currentGame === 'breakout') {
-        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
-        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
-    } else if (this.currentGame === 'breakout') {
-        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
-        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
-    } else if (this.currentGame === 'pong') {
+      } else if (this.currentGame === 'pong') {
           this.startPong();
-          // Using requestAnimationFrame is better for Pong, but sticking to interval for consistency with original structure, just faster.
           this.gameLoop = setInterval(() => this.updatePong(), 1000/60);
-      } else if (this.currentGame === 'tictactoe') {
-        this.scoreEl.textContent = `Score: X: ${this.tttScore.X} | O: ${this.tttScore.O} | Ties: ${this.tttScore.Ties}`;
       } else if (this.currentGame === 'flappy') {
           this.startFlappy();
           this.gameLoop = setInterval(() => this.updateFlappy(), 1000/60);
-
       } else if (this.currentGame === 'tetris') {
           this.startTetris();
           this.gameLoop = setInterval(() => this.updateTetris(), this.tetrisDropInterval);
       } else if (this.currentGame === '2048') {
           this.start2048();
-      } else if (this.currentGame === 'breakout') {
-          this.startBreakout();
-          this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
-      } else if (this.currentGame === 'breakout') {
-        this.scoreEl.textContent = `Score: ${this.breakoutScore} | High: ${this.breakoutHighScore}`;
       } else if (this.currentGame === 'minesweeper') {
           this.startMinesweeper();
       }
@@ -1263,6 +1248,7 @@ export default class Games extends BaseApp {
             if (this.velocity.x !== -1) this.velocity = { x: 1, y: 0 };
             break;
         }
+
     } else if (this.currentGame === 'breakout') {
         if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.breakoutKeys.left = isDown;
         if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.breakoutKeys.right = isDown;
