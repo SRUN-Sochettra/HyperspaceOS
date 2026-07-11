@@ -110,12 +110,12 @@ export const funCommands = {
   },
 
   play: {
-    description: "Launch an arcade game (snake, pong, flappy, tetris, 2048, breakout, tictactoe)",
+    description: "Launch an arcade game (snake, pong, flappy, tetris, 2048, breakout, tictactoe, minesweeper)",
     execute({ args, terminal }) {
       const game = args[0];
-      const validGames = ['snake', 'pong', 'flappy', 'tetris', '2048', 'breakout', 'tictactoe'];
+      const validGames = ['snake', 'pong', 'flappy', 'tetris', '2048', 'breakout', 'tictactoe', 'minesweeper'];
       if (!game || !validGames.includes(game.toLowerCase())) {
-        terminal.writeLine("error", "play: specify a valid game: snake, pong, flappy, tetris, 2048, breakout, tictactoe");
+        terminal.writeLine("error", "play: specify a valid game: snake, pong, flappy, tetris, 2048, breakout, tictactoe, minesweeper");
         return;
       }
 
