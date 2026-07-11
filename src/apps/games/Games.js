@@ -1326,6 +1326,130 @@ export default class Games extends BaseApp {
     }
   }
 
+
+  // ---- TIC-TAC-TOE MECHANICS ----
+  startTicTacToe() {
+      this.resetTicTacToe();
+  }
+
+  resetTicTacToe() {
+      this.tttBoard = [
+          ['', '', ''],
+          ['', '', ''],
+          ['', '', '']
+      ];
+      this.tttCurrentPlayer = 'X';
+      this.tttWinner = null;
+      this.drawTicTacToe();
+      this.updateScore();
+  }
+
+  drawTicTacToe() {
+      this.ctx.fillStyle = "#1e1e2e";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      const cellSize = this.canvas.width / 3;
+
+      this.ctx.strokeStyle = "#45475a";
+      this.ctx.lineWidth = 4;
+
+      // Draw grid lines
+      this.ctx.beginPath();
+      this.ctx.moveTo(cellSize, 0);
+      this.ctx.lineTo(cellSize, this.canvas.height);
+      this.ctx.moveTo(cellSize * 2, 0);
+      this.ctx.lineTo(cellSize * 2, this.canvas.height);
+      this.ctx.moveTo(0, cellSize);
+      this.ctx.lineTo(this.canvas.width, cellSize);
+      this.ctx.moveTo(0, cellSize * 2);
+      this.ctx.lineTo(this.canvas.width, cellSize * 2);
+      this.ctx.stroke();
+
+      // Draw X and O
+      for (let row = 0; row < 3; row++) {
+          for (let col = 0; col < 3; col++) {
+              const mark = this.tttBoard[row][col];
+              if (mark) {
+                  this.ctx.font = "bold 60px Arial";
+                  this.ctx.textAlign = "center";
+                  this.ctx.textBaseline = "middle";
+                  this.ctx.fillStyle = mark === 'X' ? "#f38ba8" : "#89b4fa";
+                  this.ctx.fillText(mark, col * cellSize + cellSize / 2, row * cellSize + cellSize / 2);
+              }
+          }
+      }
+
+      // Draw winner text if game over
+      if (this.tttWinner) {
+          this.ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+          this.ctx.fillStyle = "#a6e3a1";
+          this.ctx.font = "bold 40px Arial";
+          this.ctx.textAlign = "center";
+          this.ctx.textBaseline = "middle";
+
+          if (this.tttWinner === 'Tie') {
+              this.ctx.fillText("It's a Tie!", this.canvas.width / 2, this.canvas.height / 2);
+          } else {
+              this.ctx.fillText(this.tttWinner + " Wins!", this.canvas.width / 2, this.canvas.height / 2);
+          }
+      }
+  }
+
+  handleTicTacToeClick(x, y) {
+      if (this.tttWinner) {
+          this.resetTicTacToe();
+          return;
+      }
+
+      const cellSize = this.canvas.width / 3;
+      const col = Math.floor(x / cellSize);
+      const row = Math.floor(y / cellSize);
+
+      if (row >= 0 && row < 3 && col >= 0 && col < 3) {
+          if (this.tttBoard[row][col] === '') {
+              this.tttBoard[row][col] = this.tttCurrentPlayer;
+              this.checkTicTacToeWin();
+
+              if (!this.tttWinner) {
+                  this.tttCurrentPlayer = this.tttCurrentPlayer === 'X' ? 'O' : 'X';
+              }
+              this.drawTicTacToe();
+          }
+      }
+  }
+
+  checkTicTacToeWin() {
+      const b = this.tttBoard;
+      const lines = [
+          [b[0][0], b[0][1], b[0][2]],
+          [b[1][0], b[1][1], b[1][2]],
+          [b[2][0], b[2][1], b[2][2]],
+          [b[0][0], b[1][0], b[2][0]],
+          [b[0][1], b[1][1], b[2][1]],
+          [b[0][2], b[1][2], b[2][2]],
+          [b[0][0], b[1][1], b[2][2]],
+          [b[0][2], b[1][1], b[2][0]]
+      ];
+
+      for (let line of lines) {
+          if (line[0] !== '' && line[0] === line[1] && line[1] === line[2]) {
+              this.tttWinner = line[0];
+              this.tttScore[this.tttWinner]++;
+              this.updateScore();
+              return;
+          }
+      }
+
+      const isTie = b.every(row => row.every(cell => cell !== ''));
+      if (isTie) {
+          this.tttWinner = 'Tie';
+          this.tttScore.Ties++;
+          this.updateScore();
+      }
+  }
+
   onDestroy() {
     if (this.gameLoop) clearInterval(this.gameLoop);
     if (this.keyHandler) document.removeEventListener("keydown", this.keyHandler);
