@@ -70,6 +70,25 @@ export const appCommands = {
     },
   },
 
+  md: {
+    description: "Open a file in the Markdown Viewer",
+    execute({ args, terminal }) {
+      if (!args[0]) {
+        terminal.writeLine("error", "md: usage: md [filename]");
+        return;
+      }
+      const path = terminal.resolvePath(args[0]);
+      if (!FileSystem.isFile(path)) {
+        terminal.writeLine("error", `md: not a file: ${path}`);
+        return;
+      }
+      EventBus.emit("markdown:queueFile", { path });
+      EventBus.emit("markdown:openFile", { path });
+      Registry.launch("markdown", { path });
+      terminal.writeLine("success", `Opening ${path} in Markdown Viewer`);
+    },
+  },
+
   apps: {
     description: "List all registered apps",
     execute({ terminal }) {

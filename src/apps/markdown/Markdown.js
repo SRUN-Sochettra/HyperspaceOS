@@ -1,6 +1,7 @@
 import BaseApp from "../BaseApp.js";
 import FileSystem from "../../core/FileSystem.js";
 import { marked } from "marked";
+import { getPendingFiles } from "./index.js";
 
 export default class MarkdownViewer extends BaseApp {
   async setup() {
@@ -27,6 +28,18 @@ export default class MarkdownViewer extends BaseApp {
         this.openFile(this.currentPath);
       }
     });
+
+    // Listen for files opened while the app is running
+    this.listen("markdown:openFile", ({ path }) => {
+      this.openFile(path);
+    });
+
+    // Process any files that were queued before we mounted
+    const pending = getPendingFiles();
+    if (pending.length > 0) {
+      // Just open the last one
+      this.openFile(pending[pending.length - 1].path);
+    }
 
     // Check if a file was passed when the app was launched
     const { path } = this.options || {};
