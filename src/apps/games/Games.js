@@ -253,6 +253,21 @@ export default class Games extends BaseApp {
           this.titleEl.textContent = "2048";
           this.startBtn.textContent = "Start Game";
           this.updateScore();
+      } else if (game === 'minesweeper') {
+          this.titleBarEl.textContent = "Minesweeper";
+          this.titleEl.textContent = "Minesweeper";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
+      } else if (game === 'tictactoe') {
+          this.titleBarEl.textContent = "Tic Tac Toe";
+          this.titleEl.textContent = "Tic Tac Toe";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
+      } else if (game === 'breakout') {
+          this.titleBarEl.textContent = "Breakout";
+          this.titleEl.textContent = "Breakout";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
       }
 
       this.drawInitial();
@@ -1210,6 +1225,10 @@ export default class Games extends BaseApp {
         this.scoreEl.textContent = `Score: ${this.flappyScore} | High: ${this.flappyHighScore}`;
       } else if (this.currentGame === 'minesweeper') {
         this.scoreEl.textContent = `Score: ${this.minesScore} | High: ${this.minesHighScore}`;
+      } else if (this.currentGame === 'tictactoe') {
+        this.scoreEl.textContent = `X: ${this.tttScore.X} | O: ${this.tttScore.O} | Ties: ${this.tttScore.Ties}`;
+      } else if (this.currentGame === 'breakout') {
+        this.scoreEl.textContent = `Score: ${this.breakoutScore} | High: ${this.breakoutHighScore}`;
       } else {
         this.scoreEl.textContent = "";
       }
