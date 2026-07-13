@@ -365,6 +365,13 @@ export default class Files extends BaseApp {
 
     const isText = !ext || textExtensions.includes(ext) || name.startsWith(".");
 
+    if (ext === "md") {
+      EventBus.emit("markdown:queueFile", { path });
+      EventBus.emit("markdown:openFile", { path });
+      Registry.launch("markdown", { path });
+      return;
+    }
+
     if (isText) {
       // Queue the file first (editor/index.js catches this even if editor isn't mounted)
       EventBus.emit("editor:queueFile", { path, content });
