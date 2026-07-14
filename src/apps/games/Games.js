@@ -42,6 +42,10 @@ export default class Games extends BaseApp {
                             <span class="games-menu-icon">❌</span>
                             Tic-Tac-Toe
                         </button>
+                        <button class="games-menu-btn" data-game="asteroids">
+                            <span class="games-menu-icon">🚀</span>
+                            Asteroids
+                        </button>
                         <button class="games-menu-btn" data-game="breakout">
                             <span class="games-menu-icon">🧱</span>
                             Breakout
@@ -133,6 +137,16 @@ export default class Games extends BaseApp {
     this.breakoutKeys = { left: false, right: false };
 
 
+
+
+    // Asteroids specific state
+    this.asteroidsScore = 0;
+    this.asteroidsHighScore = localStorage.getItem("asteroidsHighScore") || 0;
+    this.asteroidsShip = { x: 150, y: 150, angle: 0, velocity: { x: 0, y: 0 }, radius: 10 };
+    this.asteroidsProjectiles = [];
+    this.asteroidsRocks = [];
+    this.asteroidsKeys = { left: false, right: false, up: false, space: false };
+    this.asteroidsLastShot = 0;
 
     // Tic-Tac-Toe specific state
     this.tttBoard = [
@@ -258,6 +272,11 @@ export default class Games extends BaseApp {
           this.titleEl.textContent = "Minesweeper";
           this.startBtn.textContent = "Start Game";
           this.updateScore();
+      } else if (game === 'asteroids') {
+          this.titleBarEl.textContent = "Asteroids";
+          this.titleEl.textContent = "Asteroids";
+          this.startBtn.textContent = "Start Game";
+          this.updateScore();
       } else if (game === 'tictactoe') {
           this.titleBarEl.textContent = "Tic Tac Toe";
           this.titleEl.textContent = "Tic Tac Toe";
@@ -288,9 +307,19 @@ export default class Games extends BaseApp {
       if (this.currentGame === 'snake') {
           this.startSnake();
           this.gameLoop = setInterval(() => this.updateSnake(), 100);
+      } else if (this.currentGame === 'asteroids') {
+          this.startAsteroids();
+          this.gameLoop = setInterval(() => this.updateAsteroids(), 1000/60);
+      } else if (this.currentGame === 'asteroids') {
+        this.scoreEl.textContent = `Score: ${this.asteroidsScore} | High: ${this.asteroidsHighScore}`;
       } else if (this.currentGame === 'tictactoe') {
           this.startTicTacToe();
-      } else if (this.currentGame === 'breakout') {
+      } else if (this.currentGame === 'asteroids') {
+        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") this.asteroidsKeys.left = isDown;
+        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") this.asteroidsKeys.right = isDown;
+        if (e.key === "ArrowUp" || e.key === "w" || e.key === "W") this.asteroidsKeys.up = isDown;
+        if (e.key === " ") this.asteroidsKeys.space = isDown;
+    } else if (this.currentGame === 'breakout') {
           this.startBreakout();
           this.gameLoop = setInterval(() => this.updateBreakout(), 1000/60);
       } else if (this.currentGame === 'pong') {
@@ -361,6 +390,9 @@ export default class Games extends BaseApp {
     } else if (this.currentGame === 'minesweeper' && this.minesScore > this.minesHighScore) {
       this.minesHighScore = this.minesScore;
       localStorage.setItem("minesHighScore", this.minesHighScore);
+    } else if (this.currentGame === 'asteroids' && this.asteroidsScore > this.asteroidsHighScore) {
+      this.asteroidsHighScore = this.asteroidsScore;
+      localStorage.setItem("asteroidsHighScore", this.asteroidsHighScore);
     }
   }
 
@@ -1422,6 +1454,176 @@ export default class Games extends BaseApp {
               }
               this.drawTicTacToe();
           }
+      }
+  }
+
+
+  startAsteroids() {
+      this.asteroidsScore = 0;
+      this.asteroidsShip = { x: this.canvas.width / 2, y: this.canvas.height / 2, angle: -Math.PI / 2, velocity: { x: 0, y: 0 }, radius: 10 };
+      this.asteroidsProjectiles = [];
+      this.asteroidsRocks = [];
+      this.asteroidsKeys = { left: false, right: false, up: false, space: false };
+      this.asteroidsLastShot = 0;
+
+      for (let i = 0; i < 5; i++) {
+          this.spawnAsteroid();
+      }
+      this.updateScore();
+  }
+
+  spawnAsteroid(x, y, radius) {
+      if (x === undefined) {
+          x = Math.random() < 0.5 ? 0 : this.canvas.width;
+          y = Math.random() * this.canvas.height;
+      }
+      radius = radius || 30;
+      const angle = Math.random() * Math.PI * 2;
+      const speed = (Math.random() * 1 + 0.5) * (40 / radius);
+      this.asteroidsRocks.push({
+          x, y, radius,
+          velocity: { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed }
+      });
+  }
+
+  updateAsteroids() {
+      // Ship rotation
+      if (this.asteroidsKeys.left) this.asteroidsShip.angle -= 0.1;
+      if (this.asteroidsKeys.right) this.asteroidsShip.angle += 0.1;
+
+      // Ship thrust
+      if (this.asteroidsKeys.up) {
+          this.asteroidsShip.velocity.x += Math.cos(this.asteroidsShip.angle) * 0.1;
+          this.asteroidsShip.velocity.y += Math.sin(this.asteroidsShip.angle) * 0.1;
+      }
+
+      // Friction
+      this.asteroidsShip.velocity.x *= 0.99;
+      this.asteroidsShip.velocity.y *= 0.99;
+
+      // Update ship position
+      this.asteroidsShip.x += this.asteroidsShip.velocity.x;
+      this.asteroidsShip.y += this.asteroidsShip.velocity.y;
+
+      // Wrap ship
+      if (this.asteroidsShip.x < 0) this.asteroidsShip.x = this.canvas.width;
+      if (this.asteroidsShip.x > this.canvas.width) this.asteroidsShip.x = 0;
+      if (this.asteroidsShip.y < 0) this.asteroidsShip.y = this.canvas.height;
+      if (this.asteroidsShip.y > this.canvas.height) this.asteroidsShip.y = 0;
+
+      // Shooting
+      if (this.asteroidsKeys.space && Date.now() - this.asteroidsLastShot > 200) {
+          this.asteroidsProjectiles.push({
+              x: this.asteroidsShip.x + Math.cos(this.asteroidsShip.angle) * this.asteroidsShip.radius,
+              y: this.asteroidsShip.y + Math.sin(this.asteroidsShip.angle) * this.asteroidsShip.radius,
+              velocity: {
+                  x: Math.cos(this.asteroidsShip.angle) * 5,
+                  y: Math.sin(this.asteroidsShip.angle) * 5
+              }
+          });
+          this.asteroidsLastShot = Date.now();
+      }
+
+      // Update projectiles
+      for (let i = this.asteroidsProjectiles.length - 1; i >= 0; i--) {
+          let p = this.asteroidsProjectiles[i];
+          p.x += p.velocity.x;
+          p.y += p.velocity.y;
+          if (p.x < 0 || p.x > this.canvas.width || p.y < 0 || p.y > this.canvas.height) {
+              this.asteroidsProjectiles.splice(i, 1);
+          }
+      }
+
+      // Update rocks and check collisions
+      for (let i = this.asteroidsRocks.length - 1; i >= 0; i--) {
+          let r = this.asteroidsRocks[i];
+          r.x += r.velocity.x;
+          r.y += r.velocity.y;
+
+          if (r.x < -r.radius) r.x = this.canvas.width + r.radius;
+          if (r.x > this.canvas.width + r.radius) r.x = -r.radius;
+          if (r.y < -r.radius) r.y = this.canvas.height + r.radius;
+          if (r.y > this.canvas.height + r.radius) r.y = -r.radius;
+
+          // Ship collision
+          const distToShip = Math.hypot(this.asteroidsShip.x - r.x, this.asteroidsShip.y - r.y);
+          if (distToShip < this.asteroidsShip.radius + r.radius) {
+              this.gameOver();
+              return;
+          }
+
+          // Projectile collision
+          for (let j = this.asteroidsProjectiles.length - 1; j >= 0; j--) {
+              let p = this.asteroidsProjectiles[j];
+              const distToProj = Math.hypot(p.x - r.x, p.y - r.y);
+              if (distToProj < r.radius) {
+                  // Hit!
+                  this.asteroidsProjectiles.splice(j, 1);
+                  this.asteroidsScore += (40 - Math.floor(r.radius)) * 10;
+                  this.updateScore();
+
+                  if (r.radius > 15) {
+                      this.spawnAsteroid(r.x, r.y, r.radius / 2);
+                      this.spawnAsteroid(r.x, r.y, r.radius / 2);
+                  }
+
+                  this.asteroidsRocks.splice(i, 1);
+
+                  if (this.asteroidsRocks.length === 0) {
+                      for (let k = 0; k < 5 + Math.floor(this.asteroidsScore / 1000); k++) {
+                          this.spawnAsteroid();
+                      }
+                  }
+                  break; // Asteroid destroyed, move to next
+              }
+          }
+      }
+
+      this.drawAsteroids();
+  }
+
+  drawAsteroids() {
+      this.ctx.fillStyle = "#1e1e2e";
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Draw Ship
+      this.ctx.save();
+      this.ctx.translate(this.asteroidsShip.x, this.asteroidsShip.y);
+      this.ctx.rotate(this.asteroidsShip.angle);
+      this.ctx.strokeStyle = "#a6e3a1";
+      this.ctx.lineWidth = 2;
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.asteroidsShip.radius, 0);
+      this.ctx.lineTo(-this.asteroidsShip.radius, this.asteroidsShip.radius * 0.7);
+      this.ctx.lineTo(-this.asteroidsShip.radius * 0.5, 0);
+      this.ctx.lineTo(-this.asteroidsShip.radius, -this.asteroidsShip.radius * 0.7);
+      this.ctx.closePath();
+      this.ctx.stroke();
+
+      // Draw flame
+      if (this.asteroidsKeys.up) {
+          this.ctx.strokeStyle = "#f38ba8";
+          this.ctx.beginPath();
+          this.ctx.moveTo(-this.asteroidsShip.radius * 0.6, 0);
+          this.ctx.lineTo(-this.asteroidsShip.radius * 1.5, Math.random() * 4 - 2);
+          this.ctx.stroke();
+      }
+      this.ctx.restore();
+
+      // Draw Projectiles
+      this.ctx.fillStyle = "#f9e2af";
+      for (let p of this.asteroidsProjectiles) {
+          this.ctx.beginPath();
+          this.ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+          this.ctx.fill();
+      }
+
+      // Draw Rocks
+      this.ctx.strokeStyle = "#cba6f7";
+      for (let r of this.asteroidsRocks) {
+          this.ctx.beginPath();
+          this.ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+          this.ctx.stroke();
       }
   }
 
