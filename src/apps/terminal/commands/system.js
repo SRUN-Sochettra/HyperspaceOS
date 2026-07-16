@@ -2,6 +2,46 @@ import Store from "../../../core/Store.js";
 import FileSystem from "../../../core/FileSystem.js";
 
 export const systemCommands = {
+
+  pwd: {
+    description: "Print working directory",
+    execute({ terminal }) {
+      terminal.writeLine("output", terminal.cwd);
+    }
+  },
+
+  date: {
+    description: "Print current date and time",
+    execute({ terminal }) {
+      terminal.writeLine("output", new Date().toString());
+    }
+  },
+
+  whoami: {
+    description: "Print effective userid",
+    execute({ terminal }) {
+      terminal.writeLine("output", "root");
+    }
+  },
+
+  hostname: {
+    description: "Print or set system name",
+    execute({ terminal }) {
+      terminal.writeLine("output", "hyperspace");
+    }
+  },
+
+  uptime: {
+    description: "Tell how long the system has been running",
+    execute({ terminal }) {
+      const ms = performance.now();
+      const s = Math.floor(ms / 1000);
+      const m = Math.floor(s / 60);
+      const h = Math.floor(m / 60);
+      terminal.writeLine("output", `up ${h} hours, ${m % 60} minutes, ${s % 60} seconds`);
+    }
+  },
+
   echo: {
     description: "Print text to the terminal",
     execute({ args, terminal }) {
