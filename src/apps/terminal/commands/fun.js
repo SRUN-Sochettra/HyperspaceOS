@@ -52,6 +52,36 @@ export const funCommands = {
     },
   },
 
+  rps: {
+    description: "Rock Paper Scissors",
+    execute({ args, terminal }) {
+      const RPS_CHOICES = ["rock", "paper", "scissors"];
+      const RPS_OUTCOMES = {
+        rock: { rock: "draw", paper: "lose", scissors: "win" },
+        paper: { rock: "win", paper: "draw", scissors: "lose" },
+        scissors: { rock: "lose", paper: "draw", scissors: "win" },
+      };
+
+      const choice = args[0]?.trim().toLowerCase();
+      if (!choice || !RPS_CHOICES.includes(choice)) {
+        terminal.writeLine("error", `Usage: rps <rock|paper|scissors>`);
+        return;
+      }
+
+      const computerChoice = RPS_CHOICES[Math.floor(Math.random() * RPS_CHOICES.length)];
+      const outcome = RPS_OUTCOMES[choice][computerChoice];
+
+      const outcomeMessages = {
+        win: "You win!",
+        lose: "You lose!",
+        draw: "It's a draw!",
+      };
+
+      terminal.writeLine("output", `You chose: ${choice} | Computer chose: ${computerChoice}`);
+      terminal.writeLine(outcome === "win" ? "success" : outcome === "lose" ? "error" : "info", outcomeMessages[outcome]);
+    }
+  },
+
   magic8ball: {
     description: "Ask the Magic 8-Ball a question",
     execute({ args, terminal }) {
