@@ -1,5 +1,4 @@
 import Registry from "../../core/Registry.js";
-import "./clock.css";
 
 export default function registerClock() {
   Registry.register("clock", {
