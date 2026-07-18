@@ -1,4 +1,96 @@
 export const funCommands = {
+  banner: {
+    description: "Print large text",
+    execute({ args, terminal }) {
+      if (args.length === 0) {
+        terminal.writeLine("error", "banner: missing text");
+        return;
+      }
+      const text = args.join(" ").toUpperCase();
+      const font = {
+        'A': ['  A  ', ' A A ', 'AAAAA', 'A   A', 'A   A'],
+        'B': ['BBBB ', 'B   B', 'BBBB ', 'B   B', 'BBBB '],
+        'C': [' CCC ', 'C   C', 'C    ', 'C   C', ' CCC '],
+        'D': ['DDDD ', 'D   D', 'D   D', 'D   D', 'DDDD '],
+        'E': ['EEEEE', 'E    ', 'EEEE ', 'E    ', 'EEEEE'],
+        'F': ['FFFFF', 'F    ', 'FFFF ', 'F    ', 'F    '],
+        'G': [' GGG ', 'G    ', 'G  GG', 'G   G', ' GGG '],
+        'H': ['H   H', 'H   H', 'HHHHH', 'H   H', 'H   H'],
+        'I': [' III ', '  I  ', '  I  ', '  I  ', ' III '],
+        'J': ['   JJ', '    J', '    J', 'J   J', ' JJJ '],
+        'K': ['K   K', 'K  K ', 'KKK  ', 'K  K ', 'K   K'],
+        'L': ['L    ', 'L    ', 'L    ', 'L    ', 'LLLLL'],
+        'M': ['M   M', 'MM MM', 'M M M', 'M   M', 'M   M'],
+        'N': ['N   N', 'NN  N', 'N N N', 'N  NN', 'N   N'],
+        'O': [' OOO ', 'O   O', 'O   O', 'O   O', ' OOO '],
+        'P': ['PPPP ', 'P   P', 'PPPP ', 'P    ', 'P    '],
+        'Q': [' QQQ ', 'Q   Q', 'Q   Q', 'Q  QQ', ' QQQQ'],
+        'R': ['RRRR ', 'R   R', 'RRRR ', 'R  R ', 'R   R'],
+        'S': [' SSSS', 'S    ', ' SSS ', '    S', 'SSSS '],
+        'T': ['TTTTT', '  T  ', '  T  ', '  T  ', '  T  '],
+        'U': ['U   U', 'U   U', 'U   U', 'U   U', ' UUU '],
+        'V': ['V   V', 'V   V', 'V   V', ' V V ', '  V  '],
+        'W': ['W   W', 'W   W', 'W W W', 'WW WW', 'W   W'],
+        'X': ['X   X', ' X X ', '  X  ', ' X X ', 'X   X'],
+        'Y': ['Y   Y', ' Y Y ', '  Y  ', '  Y  ', '  Y  '],
+        'Z': ['ZZZZZ', '   Z ', '  Z  ', ' Z   ', 'ZZZZZ'],
+        ' ': ['     ', '     ', '     ', '     ', '     '],
+        '!': ['  !  ', '  !  ', '  !  ', '     ', '  !  '],
+        '?': [' ??? ', '    ?', '  ?  ', '     ', '  ?  '],
+        '-': ['     ', '     ', ' --- ', '     ', '     '],
+        '.': ['     ', '     ', '     ', '     ', '  .  '],
+      };
+
+      for (let i = 0; i < 5; i++) {
+        let line = "";
+        for (const char of text) {
+          const charPattern = font[char] || font['?'];
+          line += charPattern[i] + "  ";
+        }
+        terminal.writeLine("output", line);
+      }
+    },
+  },
+
+  magic8ball: {
+    description: "Ask the Magic 8-Ball a question",
+    execute({ args, terminal }) {
+      if (args.length === 0) {
+        terminal.writeLine("error", "magic8ball: ask a question first!");
+        return;
+      }
+      const answers = [
+        "It is certain.", "It is decidedly so.", "Without a doubt.",
+        "Yes definitely.", "You may rely on it.", "As I see it, yes.",
+        "Most likely.", "Outlook good.", "Yes.", "Signs point to yes.",
+        "Reply hazy, try again.", "Ask again later.", "Better not tell you now.",
+        "Cannot predict now.", "Concentrate and ask again.",
+        "Don't count on it.", "My reply is no.", "My sources say no.",
+        "Outlook not so good.", "Very doubtful."
+      ];
+      terminal.writeLine("output", "🎱 " + answers[Math.floor(Math.random() * answers.length)]);
+    },
+  },
+
+  sl: {
+    description: "Steam Locomotive",
+    execute({ terminal }) {
+      const train = [
+        "      ====        ________                ___________ ",
+        "  _D _|  |_______/        \\__I_I_____===__|_________|",
+        "   |(_)---  |   H\\________/ |   |        =|___ ___|   ",
+        "   /     |  |   H  |  |     |   |         ||_| |_||   ",
+        "  |      |  |   H  |__--------------------| [___] |   ",
+        "  | ________|___H__/__|_____/[][]~\\_______|       |   ",
+        "  |/ |   |-----------I_____I [][] []  D   |=======|__ ",
+        "__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__ ",
+        " |/-=|___|=    ||    ||    ||    |_____/~\\___/        ",
+        "  \\_/      \\O=====O=====O=====O_/      \\_/            "
+      ];
+      train.forEach(line => terminal.writeLine("output", line));
+    },
+  },
+
   matrix: {
     description: "Display Matrix rain",
     execute({ terminal }) {
