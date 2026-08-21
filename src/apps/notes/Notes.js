@@ -27,12 +27,12 @@ export default class Notes extends BaseApp {
         </div>
         <div class="notes-editor">
           <div class="notes-toolbar">
-            <button class="notes-tool-btn" id="notes-toggle-${this.windowId}" title="Toggle Preview">👁️</button>
+            <button class="notes-tool-btn" id="notes-toggle-${this.windowId}" title="Toggle Preview">Preview</button>
             <button class="notes-tool-btn" data-insert="**" title="Bold"><b>B</b></button>
             <button class="notes-tool-btn" data-insert="*" title="Italic"><i>I</i></button>
             <button class="notes-tool-btn" data-insert="\`" title="Code">{ }</button>
             <div style="flex:1"></div>
-            <button class="notes-tool-btn" id="notes-delete-${this.windowId}" title="Delete Note">🗑️</button>
+            <button class="notes-tool-btn" id="notes-delete-${this.windowId}" title="Delete Note">Delete</button>
           </div>
           <textarea class="notes-textarea" id="notes-textarea-${this.windowId}" placeholder="Write in Markdown..."></textarea>
           <div class="notes-preview" id="notes-preview-${this.windowId}" style="display:none"></div>

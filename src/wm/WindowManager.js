@@ -93,11 +93,11 @@ const WindowManager = (() => {
         container.appendChild(element)
 
         windows.set(id, win)
+        EventBus.emit('window:opened', { id, appId })
         await win.loadApp()
         focus(id)
         syncStore()
 
-        EventBus.emit('window:opened', { id, appId })
         return win
     }
 
@@ -227,15 +227,17 @@ const WindowManager = (() => {
     // ---- CLOSE ALL ----
     async function closeAll() {
         const ids = [...windows.keys()]
-        for (const id of ids) {
-            await close(id)
+        await Promise.all(ids.map(id => close(id)))
+        windows.clear()
+        if (container) {
+            container.innerHTML = ''
         }
     }
 
     // ---- QUERY HELPERS ----
 
     function getWindow(id) {
-        return windows.get(id) || null
+        return windows.get(id) ?? windows.get(Number(id)) ?? windows.get(String(id)) ?? null
     }
 
     function findByAppId(appId) {

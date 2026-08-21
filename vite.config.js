@@ -1,6 +1,11 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+    server: {
+        watch: {
+            ignored: ['**/verification/**', '**/dist/**', '**/.git/**'],
+        }
+    },
     // Each app folder becomes its own lazy chunk
     build: {
         rollupOptions: {

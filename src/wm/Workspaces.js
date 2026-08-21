@@ -6,6 +6,7 @@
 
 import EventBus from '../core/EventBus.js'
 import Store from '../core/Store.js'
+import { icon } from '../ui/Icons.js'
 
 const Workspaces = (() => {
 
@@ -33,6 +34,9 @@ const Workspaces = (() => {
 
         // Assign new windows to current workspace
         EventBus.on('window:opened', ({ id }) => {
+            if (!assignments.has(current)) {
+                assignments.set(current, new Set())
+            }
             assignments.get(current).add(id)
         })
 
@@ -40,6 +44,8 @@ const Workspaces = (() => {
         EventBus.on('window:closed', ({ id }) => {
             for (const [, set] of assignments) {
                 set.delete(id)
+                set.delete(Number(id))
+                set.delete(String(id))
             }
             updateIndicator()
         })
@@ -57,9 +63,9 @@ const Workspaces = (() => {
         current = index
 
         // Hide windows from previous workspace
-        const prevWindows = assignments.get(prevIndex)
+        const prevWindows = assignments.get(prevIndex) || new Set()
         for (const winId of prevWindows) {
-            const el = document.getElementById(`window-${winId}`)
+            const el = document.getElementById(`window-${winId}`) || document.querySelector(`[data-window-id="${winId}"]`)
             if (el) {
                 el.style.display = 'none'
                 el.style.pointerEvents = 'none'
@@ -67,9 +73,9 @@ const Workspaces = (() => {
         }
 
         // Show windows from current workspace
-        const currWindows = assignments.get(current)
+        const currWindows = assignments.get(current) || new Set()
         for (const winId of currWindows) {
-            const el = document.getElementById(`window-${winId}`)
+            const el = document.getElementById(`window-${winId}`) || document.querySelector(`[data-window-id="${winId}"]`)
             if (el) {
                 el.style.display = 'flex'
                 el.style.pointerEvents = 'auto'
@@ -87,7 +93,7 @@ const Workspaces = (() => {
         updateIndicator()
 
         EventBus.emit('notification:show', {
-            icon: '🖥️',
+            icon: icon('settings'),
             title: `Desktop ${current + 1}`,
             body: `${currWindows.size} window${currWindows.size !== 1 ? 's' : ''}`,
             duration: 1500,
@@ -141,11 +147,19 @@ const Workspaces = (() => {
 
     function getCurrent() { return current }
 
+    function reset() {
+        current = 0
+        for (let i = 0; i < MAX; i++) {
+            assignments.set(i, new Set())
+        }
+        updateIndicator()
+    }
+
     function destroy() {
         assignments.clear()
     }
 
-    return { init, switchTo, getCurrent, destroy }
+    return { init, switchTo, getCurrent, reset, destroy }
 
 })()
 

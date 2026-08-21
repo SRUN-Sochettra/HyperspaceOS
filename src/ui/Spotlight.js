@@ -7,6 +7,7 @@
 import Registry from '../core/Registry.js'
 import FileSystem from '../core/FileSystem.js'
 import EventBus from '../core/EventBus.js'
+import { icon } from './Icons.js'
 
 const Spotlight = (() => {
 
@@ -47,7 +48,7 @@ const Spotlight = (() => {
         overlay.innerHTML = `
       <div class="spotlight-container">
         <div class="spotlight-input-row">
-          <span class="spotlight-icon">🔍</span>
+          <span class="spotlight-icon">${icon('search')}</span>
           <input
             type="text"
             class="spotlight-input"
@@ -150,7 +151,7 @@ const Spotlight = (() => {
                 .slice(0, 8)
                 .map(f => ({
                     type: 'file',
-                    icon: f.type === 'dir' ? '📁' : '📄',
+                    icon: icon(f.type === 'dir' ? 'folder' : 'file'),
                     title: f.name,
                     subtitle: f.path,
                     action: () => {
@@ -180,12 +181,15 @@ const Spotlight = (() => {
         // Category 3: Quick actions
         if (q.length >= 1) {
             const actions = [
-                { match: ['tile', 'arrange', 'windows'], icon: '⊞', title: 'Tile All Windows', action: () => EventBus.emit('window:tile') },
-                { match: ['theme', 'color', 'accent'], icon: '🎨', title: 'Change Theme', action: () => Registry.launch('settings') },
-                { match: ['terminal', 'command', 'shell', 'bash'], icon: '⌨️', title: 'New Terminal', action: () => Registry.launch('terminal') },
-                { match: ['reload', 'restart', 'reboot'], icon: '🔄', title: 'Restart OS', action: () => location.reload() },
+                { match: ['tile', 'arrange', 'windows'], icon: icon('maximize'), title: 'Tile All Windows', action: () => EventBus.emit('window:tile') },
+                { match: ['theme', 'color', 'accent'], icon: icon('settings'), title: 'Change Theme', action: () => Registry.launch('settings') },
+                { match: ['terminal', 'command', 'shell', 'bash'], icon: icon('terminal'), title: 'New Terminal', action: () => Registry.launch('terminal') },
+                { match: ['reload', 'restart', 'reboot'], icon: icon('settings'), title: 'Restart OS', action: () => location.reload() },
                 {
-                    match: ['clear', 'reset', 'wipe'], icon: '🗑️', title: 'Clear All Data', action: () => {
+                    match: ['clear', 'reset', 'wipe'],
+                    icon: icon('close'),
+                    title: 'Clear All Data',
+                    action: () => {
                         if (confirm('Clear all saved data?')) {
                             localStorage.clear()
                             location.reload()
@@ -212,7 +216,7 @@ const Spotlight = (() => {
         if (currentResults.length === 0 && q.length > 0) {
             currentResults.push({
                 type: 'empty',
-                icon: '🔍',
+                icon: '',
                 title: 'No results found',
                 subtitle: `Nothing matches "${q}"`,
             })

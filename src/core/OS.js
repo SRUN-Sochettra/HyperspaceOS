@@ -21,7 +21,7 @@ async function registerApps() {
 }
 
 async function boot() {
-    console.log('%c[HyperSpace OS] Booting...', 'color: #00f5ff; font-weight: bold')
+    console.log('%c[HyperSpace] Booting...', 'color: #00f5ff; font-weight: bold')
     EventBus.emit('os:boot:start')
 
     try {
@@ -121,8 +121,8 @@ async function boot() {
 
         setTimeout(() => {
             EventBus.emit('notification:show', {
-                icon: '🚀',
-                title: 'HyperSpace OS',
+                icon: '',
+                title: 'HyperSpace',
                 body: 'System ready. Welcome back.',
             })
         }, 1000)
@@ -134,14 +134,14 @@ async function boot() {
                 Registry.launch('terminal')
             } else {
                 EventBus.emit('notification:show', {
-                    icon: '💾',
+                    icon: 'Export',
                     title: 'Session Restored',
                     body: 'Your previous workspace is back.',
                 })
             }
         }, 1500)
 
-        console.log('%c[HyperSpace OS] Boot complete ✓', 'color: #28c840; font-weight: bold')
+        console.log('%c[HyperSpace] Boot complete ready', 'color: #28c840; font-weight: bold')
 
     } catch (err) {
         console.error('[OS] Boot failed:', err)
@@ -196,7 +196,7 @@ if (typeof window !== 'undefined') {
             location.reload()
         },
         debug() {
-            console.group('%c[HyperSpace OS]', 'color:#00f5ff;font-weight:bold')
+            console.group('%c[HyperSpace]', 'color:#00f5ff;font-weight:bold')
             console.log('Booted:', Store.get('os.booted'))
             console.log('FPS:', Store.get('system.fps'))
             console.log('Windows:', Store.get('windows.all')?.length || 0)

@@ -56,15 +56,15 @@ export default class Files extends BaseApp {
 
           <div style="flex:1"></div>
 
-          <button class="fm-action-btn" id="fm-newfile-${this.windowId}" title="New File">+📄</button>
-          <button class="fm-action-btn" id="fm-newfolder-${this.windowId}" title="New Folder">+📁</button>
+          <button class="fm-action-btn" id="fm-newfile-${this.windowId}" title="New File">+file</button>
+          <button class="fm-action-btn" id="fm-newfolder-${this.windowId}" title="New Folder">+folder</button>
           <button class="fm-action-btn" id="fm-refresh-${this.windowId}" title="Refresh">↻</button>
         </div>
 
         <div class="fm-grid" id="fm-grid-${this.windowId}">
           ${entries.length === 0
         ? `<div class="fm-empty">
-                <div style="font-size:32px;margin-bottom:8px;opacity:0.3">📂</div>
+                <div style="font-size:32px;margin-bottom:8px;opacity:0.3">folder</div>
                 <div>Empty folder</div>
                 <div style="font-size:var(--text-xs);margin-top:4px;color:var(--text-tertiary)">
                   Right-click to create files
@@ -110,40 +110,40 @@ export default class Files extends BaseApp {
     if (entry.type === 'dir') {
       // Special folder icons
       const folderIcons = {
-        'Desktop': '🖥️', 'Documents': '📄', 'Downloads': '📥',
-        'Music': '🎵', 'Projects': '💻', 'Pictures': '🖼️',
-        'Notes': '📝', '.config': '⚙️', '.ssh': '🔑',
-        'node_modules': '📦', 'experiments': '🧪',
-        'hyperspace-os': '🚀',
+        'Desktop': 'desktop', 'Documents': 'file', 'Downloads': 'download',
+        'Music': 'music', 'Projects': 'code', 'Pictures': 'image',
+        'Notes': 'note', '.config': 'settings', '.ssh': 'key',
+        'node_modules': 'archive', 'experiments': 'lab',
+        'hyperspace-os': '',
       }
-      return folderIcons[entry.name] || '📁'
+      return folderIcons[entry.name] || 'folder'
     }
 
     // File icons by extension
     const ext = entry.name.split('.').pop()?.toLowerCase()
     const fileIcons = {
-      js: '📜', mjs: '📜', ts: '📘', jsx: '⚛️', tsx: '⚛️',
-      json: '📋', css: '🎨', html: '🌐', xml: '📰',
-      md: '📝', txt: '📄', log: '📊',
-      py: '🐍', rb: '💎', go: '🔵', rs: '🦀', java: '☕',
-      sh: '⚡', bash: '⚡', zsh: '⚡',
-      yml: '⚙️', yaml: '⚙️', toml: '⚙️', ini: '⚙️',
-      png: '🖼️', jpg: '🖼️', jpeg: '🖼️', gif: '🖼️', svg: '🖼️',
-      mp3: '🎵', wav: '🎵', flac: '🎵',
-      mp4: '🎬', avi: '🎬', mkv: '🎬',
-      pdf: '📕', doc: '📘', docx: '📘', xls: '📗', xlsx: '📗',
-      zip: '📦', tar: '📦', gz: '📦',
-      env: '🔒', lock: '🔒',
+      js: 'code', mjs: 'code', ts: 'file', jsx: 'React', tsx: 'React',
+      json: 'list', css: '', html: 'web', xml: 'XML',
+      md: 'note', txt: 'file', log: 'chart',
+      py: 'Python', rb: '', go: 'Go', rs: 'Rust', java: 'Java',
+      sh: '', bash: '', zsh: '',
+      yml: 'settings', yaml: 'settings', toml: 'settings', ini: 'settings',
+      png: 'image', jpg: 'image', jpeg: 'image', gif: 'image', svg: 'image',
+      mp3: 'music', wav: 'music', flac: 'music',
+      mp4: 'video', avi: 'video', mkv: 'video',
+      pdf: 'PDF', doc: 'file', docx: 'file', xls: 'sheet', xlsx: 'sheet',
+      zip: 'archive', tar: 'archive', gz: 'archive',
+      env: 'locked', lock: 'locked',
     }
 
     // Exact filename matches
     const nameIcons = {
-      'README.md': '📖', 'LICENSE': '📜', 'Makefile': '🔧',
-      '.bashrc': '⚡', '.gitignore': '🙈', 'package.json': '📦',
-      'known_hosts': '🔑', 'system.log': '📊',
+      'README.md': 'readme', 'LICENSE': 'code', 'Makefile': 'tool',
+      '.bashrc': '', '.gitignore': 'ignored', 'package.json': 'archive',
+      'known_hosts': 'key', 'system.log': 'chart',
     }
 
-    return nameIcons[entry.name] || fileIcons[ext] || '📄'
+    return nameIcons[entry.name] || fileIcons[ext] || 'file'
   }
 
   bindEvents() {
@@ -265,7 +265,7 @@ export default class Files extends BaseApp {
     const content = FileSystem.readFile(path)
 
     if (content === null) {
-      this.notify('❌', 'Error', `Cannot read file: ${name}`)
+      this.notify('Error', 'Error', `Cannot read file: ${name}`)
       return
     }
 
@@ -295,7 +295,7 @@ export default class Files extends BaseApp {
     }
 
     // Non-text files
-    this.notify('📄', name, `${this.formatSize(content.length)} — .${ext?.toUpperCase() || 'Unknown'} file`)
+    this.notify('file', name, `${this.formatSize(content.length)} — .${ext?.toUpperCase() || 'Unknown'} file`)
   }
 
   // ---- SELECTION UI ----
@@ -385,15 +385,15 @@ export default class Files extends BaseApp {
     const path = FileSystem.join(this.currentPath, name.trim())
 
     if (FileSystem.exists(path)) {
-      this.notify('⚠️', 'Already exists', `"${name}" already exists in this folder`)
+      this.notify('Warning', 'Already exists', `"${name}" already exists in this folder`)
       return
     }
 
     const result = FileSystem.writeFile(path, '')
     if (result.error) {
-      this.notify('❌', 'Error', result.error)
+      this.notify('Error', 'Error', result.error)
     } else {
-      this.notify('✅', 'Created', name)
+      this.notify('Done', 'Created', name)
       this.render()
     }
   }
@@ -405,15 +405,15 @@ export default class Files extends BaseApp {
     const path = FileSystem.join(this.currentPath, name.trim())
 
     if (FileSystem.exists(path)) {
-      this.notify('⚠️', 'Already exists', `"${name}" already exists in this folder`)
+      this.notify('Warning', 'Already exists', `"${name}" already exists in this folder`)
       return
     }
 
     const result = FileSystem.mkdir(path)
     if (result.error) {
-      this.notify('❌', 'Error', result.error)
+      this.notify('Error', 'Error', result.error)
     } else {
-      this.notify('✅', 'Created', name)
+      this.notify('Done', 'Created', name)
       this.render()
     }
   }
@@ -427,13 +427,13 @@ export default class Files extends BaseApp {
     const newPath = FileSystem.join(FileSystem.parentPath(path), newName.trim())
 
     if (FileSystem.exists(newPath)) {
-      this.notify('⚠️', 'Already exists', `"${newName}" already exists`)
+      this.notify('Warning', 'Already exists', `"${newName}" already exists`)
       return
     }
 
     const result = FileSystem.mv(path, newPath)
     if (result.error) {
-      this.notify('❌', 'Rename failed', result.error)
+      this.notify('Error', 'Rename failed', result.error)
     } else {
       this.selectedItems.clear()
       this.selectedItems.add(newPath)
@@ -458,7 +458,7 @@ export default class Files extends BaseApp {
     }
 
     this.selectedItems.clear()
-    this.notify('🗑️', 'Deleted', `${deleted} item${deleted !== 1 ? 's' : ''} removed`)
+    this.notify('Delete', 'Deleted', `${deleted} item${deleted !== 1 ? 's' : ''} removed`)
     this.render()
   }
 
@@ -468,7 +468,7 @@ export default class Files extends BaseApp {
       action: 'copy',
       paths: [...this.selectedItems],
     }
-    this.notify('📋', 'Copied', `${this.selectedItems.size} item${this.selectedItems.size !== 1 ? 's' : ''}`)
+    this.notify('list', 'Copied', `${this.selectedItems.size} item${this.selectedItems.size !== 1 ? 's' : ''}`)
   }
 
   cutSelected() {
@@ -477,7 +477,7 @@ export default class Files extends BaseApp {
       action: 'cut',
       paths: [...this.selectedItems],
     }
-    this.notify('✂️', 'Cut', `${this.selectedItems.size} item${this.selectedItems.size !== 1 ? 's' : ''}`)
+    this.notify('Cut', 'Cut', `${this.selectedItems.size} item${this.selectedItems.size !== 1 ? 's' : ''}`)
   }
 
   pasteClipboard() {
@@ -512,7 +512,7 @@ export default class Files extends BaseApp {
     }
 
     this.selectedItems.clear()
-    this.notify('📋', 'Pasted', `${completed} item${completed !== 1 ? 's' : ''}`)
+    this.notify('list', 'Pasted', `${completed} item${completed !== 1 ? 's' : ''}`)
     this.render()
   }
 
@@ -525,20 +525,20 @@ export default class Files extends BaseApp {
 
     // Open
     if (type === 'dir') {
-      items.push({ icon: '📂', label: 'Open', action: () => this.navigate(path) })
+      items.push({ icon: 'folder', label: 'Open', action: () => this.navigate(path) })
     } else {
-      items.push({ icon: '📝', label: 'Open in Editor', action: () => this.openFile(path, name) })
+      items.push({ icon: 'note', label: 'Open in Editor', action: () => this.openFile(path, name) })
     }
 
     items.push({ type: 'separator' })
 
     // Edit operations
-    items.push({ icon: '✏️', label: 'Rename', shortcut: 'F2', action: () => this.renameItem(path) })
-    items.push({ icon: '📋', label: 'Copy', shortcut: '⌘C', action: () => this.copySelected() })
-    items.push({ icon: '✂️', label: 'Cut', shortcut: '⌘X', action: () => this.cutSelected() })
+    items.push({ icon: 'Pencil', label: 'Rename', shortcut: 'F2', action: () => this.renameItem(path) })
+    items.push({ icon: 'list', label: 'Copy', shortcut: '⌘C', action: () => this.copySelected() })
+    items.push({ icon: 'Cut', label: 'Cut', shortcut: '⌘X', action: () => this.cutSelected() })
 
     if (this.clipboard) {
-      items.push({ icon: '📄', label: 'Paste', shortcut: '⌘V', action: () => this.pasteClipboard() })
+      items.push({ icon: 'file', label: 'Paste', shortcut: '⌘V', action: () => this.pasteClipboard() })
     }
 
     items.push({ type: 'separator' })
@@ -547,7 +547,7 @@ export default class Files extends BaseApp {
     const stat = FileSystem.stat(path)
     if (stat && stat.type === 'file') {
       items.push({
-        icon: 'ℹ️',
+        icon: 'Info',
         label: `${this.formatSize(stat.size)}`,
         action: () => { },
         disabled: true,
@@ -557,7 +557,7 @@ export default class Files extends BaseApp {
     if (stat && stat.type === 'dir') {
       const dirDu = FileSystem.du(path)
       items.push({
-        icon: 'ℹ️',
+        icon: 'Info',
         label: `${dirDu.fileCount} files, ${this.formatSize(dirDu.totalSize)}`,
         action: () => { },
         disabled: true,
@@ -567,7 +567,7 @@ export default class Files extends BaseApp {
     items.push({ type: 'separator' })
 
     // Delete
-    items.push({ icon: '🗑️', label: 'Delete', shortcut: 'Del', action: () => this.deleteSelected() })
+    items.push({ icon: 'Delete', label: 'Delete', shortcut: 'Del', action: () => this.deleteSelected() })
 
     this.showMenu(x, y, items)
   }
@@ -576,13 +576,13 @@ export default class Files extends BaseApp {
     this.closeMenu()
 
     const items = [
-      { icon: '📄', label: 'New File', action: () => this.createNewFile() },
-      { icon: '📁', label: 'New Folder', action: () => this.createNewFolder() },
+      { icon: 'file', label: 'New File', action: () => this.createNewFile() },
+      { icon: 'folder', label: 'New Folder', action: () => this.createNewFolder() },
       { type: 'separator' },
     ]
 
     if (this.clipboard) {
-      items.push({ icon: '📋', label: 'Paste', shortcut: '⌘V', action: () => this.pasteClipboard() })
+      items.push({ icon: 'list', label: 'Paste', shortcut: '⌘V', action: () => this.pasteClipboard() })
       items.push({ type: 'separator' })
     }
 

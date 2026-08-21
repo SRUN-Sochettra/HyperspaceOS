@@ -50,7 +50,7 @@ export const funCommands = {
     flip: {
         description: 'Flip a coin',
         execute({ terminal }) {
-            terminal.writeLine('output', Math.random() > 0.5 ? '🪙 Heads!' : '🪙 Tails!')
+            terminal.writeLine('output', Math.random() > 0.5 ? ' Heads!' : ' Tails!')
         }
     },
 
@@ -67,7 +67,7 @@ export const funCommands = {
             const sides = parseInt(match[2])
             const rolls = Array.from({ length: count }, () => Math.floor(Math.random() * sides) + 1)
             const total = rolls.reduce((a, b) => a + b, 0)
-            terminal.writeLine('output', `🎲 [${rolls.join(', ')}]`)
+            terminal.writeLine('output', ` [${rolls.join(', ')}]`)
             terminal.writeLine('success', `Total: ${total}`)
         }
     },
@@ -83,7 +83,7 @@ export const funCommands = {
                 'The code you write today is the legacy code of tomorrow.',
                 'You will find the missing semicolon. Eventually.',
             ]
-            terminal.writeLine('info', '🔮 ' + list[Math.floor(Math.random() * list.length)])
+            terminal.writeLine('info', ' ' + list[Math.floor(Math.random() * list.length)])
         }
     },
 

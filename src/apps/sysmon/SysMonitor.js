@@ -1,15 +1,16 @@
 import BaseApp from '../BaseApp.js'
 import Sparkline from './Sparkline.js'
 import Store from '../../core/Store.js'
+import { icon } from '../../ui/Icons.js'
 
 export default class SysMonitor extends BaseApp {
 
     async setup() {
         this.metrics = [
-            { key: 'fps', label: 'Frame Rate', color: '#28c840', unit: ' fps', icon: '🎯' },
-            { key: 'heap', label: 'JS Heap', color: '#ff00e5', unit: ' MB', icon: '🧠' },
-            { key: 'dom', label: 'DOM Nodes', color: '#00f5ff', unit: '', icon: '🌐' },
-            { key: 'lag', label: 'Event Loop Lag', color: '#b400ff', unit: ' ms', icon: '⚡' },
+            { key: 'fps', label: 'Frame Rate', color: '#28c840', unit: ' fps', icon: icon('sysmon') },
+            { key: 'heap', label: 'JS Heap', color: '#ff00e5', unit: ' MB', icon: icon('taskman') },
+            { key: 'dom', label: 'DOM Nodes', color: '#00f5ff', unit: '', icon: icon('files') },
+            { key: 'lag', label: 'Event Loop Lag', color: '#b400ff', unit: ' ms', icon: icon('settings') },
         ]
 
         this.loopLag = 0

@@ -5,6 +5,7 @@
 // ============================================================
 
 import EventBus from '../core/EventBus.js'
+import { icon } from './Icons.js'
 
 const ClipboardManager = (() => {
 
@@ -15,7 +16,7 @@ const ClipboardManager = (() => {
 
     function init() {
         // Track copies
-        document.addEventListener('copy', (e) => {
+        document.addEventListener('copy', () => {
             const text = window.getSelection()?.toString()
             if (text && text.trim()) {
                 addToHistory(text.trim())
@@ -29,7 +30,7 @@ const ClipboardManager = (() => {
 
         // Ctrl+Shift+V to open clipboard history
         document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'V') {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.code === 'KeyV' || e.key === 'v' || e.key === 'V')) {
                 e.preventDefault()
                 toggle()
             }
@@ -38,13 +39,25 @@ const ClipboardManager = (() => {
             }
         })
 
+        // Seed with some initial items
+        addToHistory('console.log("HyperSpace OS v2.0")')
+        addToHistory('https://github.com/hyperspace-os')
+        addToHistory('fetch("https://api.hyperspace.dev/stats")')
+
         console.log('[ClipboardManager] Initialized (Ctrl+Shift+V to open)')
     }
 
     function addToHistory(text, type = 'text') {
+        if (!text) return
+
         // Don't add duplicates at the top
         if (history.length > 0 && history[0].text === text) return
 
+        // Deduplicate
+        const existingIdx = history.findIndex(h => h.text === text)
+        if (existingIdx !== -1) history.splice(existingIdx, 1)
+
+        // Add to top
         history.unshift({
             text,
             type,
@@ -70,7 +83,7 @@ const ClipboardManager = (() => {
         overlay.innerHTML = `
       <div class="clipboard-panel">
         <div class="clipboard-header">
-          <span class="clipboard-title">📋 Clipboard History</span>
+          <span class="clipboard-title">Clipboard History</span>
           <button class="clipboard-clear" id="cb-clear">Clear All</button>
         </div>
         <div class="clipboard-list" id="cb-list">
@@ -97,7 +110,7 @@ const ClipboardManager = (() => {
                 if (item) {
                     navigator.clipboard.writeText(item.text).then(() => {
                         EventBus.emit('notification:show', {
-                            icon: '📋',
+                            icon: icon('notes'),
                             title: 'Copied',
                             body: item.text.slice(0, 60) + (item.text.length > 60 ? '...' : ''),
                             duration: 2000,
@@ -121,7 +134,7 @@ const ClipboardManager = (() => {
             history.length = 0
             close()
             EventBus.emit('notification:show', {
-                icon: '🗑️',
+                icon: icon('close'),
                 title: 'Clipboard',
                 body: 'History cleared',
                 duration: 2000,
@@ -148,9 +161,6 @@ const ClipboardManager = (() => {
 
     function escapeHtml(str) {
         return str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
             .replace(/\n/g, '<br>')
             .slice(0, 200)
     }

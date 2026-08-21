@@ -14,11 +14,11 @@ export default class MusicPlayer extends BaseApp {
         this.vizMode = 'bars'
 
         this.tracks = [
-            { title: 'Neon Dreams', artist: 'HyperSpace Radio', emoji: '🎧', dur: 242 },
-            { title: 'Digital Horizons', artist: 'CyberWave', emoji: '🌌', dur: 198 },
-            { title: 'Pixel Storm', artist: 'ByteBeats', emoji: '⚡', dur: 267 },
-            { title: 'Glass Memories', artist: 'NeonDrift', emoji: '💎', dur: 185 },
-            { title: 'Quantum Loop', artist: 'SynthOS', emoji: '🔮', dur: 312 },
+            { title: 'Neon Dreams', artist: 'HyperSpace Radio', emoji: '', dur: 242 },
+            { title: 'Digital Horizons', artist: 'CyberWave', emoji: '', dur: 198 },
+            { title: 'Pixel Storm', artist: 'ByteBeats', emoji: '', dur: 267 },
+            { title: 'Glass Memories', artist: 'NeonDrift', emoji: '', dur: 185 },
+            { title: 'Quantum Loop', artist: 'SynthOS', emoji: '', dur: 312 },
         ]
 
         this.trackIndex = 0
@@ -50,7 +50,7 @@ export default class MusicPlayer extends BaseApp {
           <button class="music-btn" id="music-next-${this.windowId}">⏭</button>
         </div>
         <div class="music-volume">
-          <span class="music-vol-icon">🔊</span>
+          <span class="music-vol-icon">Volume</span>
           <input type="range" class="music-vol-slider" id="music-vol-${this.windowId}" min="0" max="100" value="15" />
         </div>
       </div>
@@ -116,7 +116,7 @@ export default class MusicPlayer extends BaseApp {
                 console.error('[Music] Playback failed:', err)
                 this.playing = false
                 btn.textContent = '▶'
-                this.notify('⚠️', 'Music', 'Click again to enable audio (browser requires user interaction)')
+                this.notify('Warning', 'Music', 'Click again to enable audio (browser requires user interaction)')
             }
         }
 
@@ -191,8 +191,5 @@ export default class MusicPlayer extends BaseApp {
         }
         this.playing = false
 
-        import('../../core/Store.js').then(({ default: Store }) => {
-            Store.set('music.playing', false)
-        })
     }
 }

@@ -6,6 +6,7 @@
 
 import EventBus from '../core/EventBus.js'
 import Registry from '../core/Registry.js'
+import { icon } from './Icons.js'
 
 const ContextMenu = (() => {
 
@@ -35,49 +36,49 @@ const ContextMenu = (() => {
     function buildDesktopMenu() {
         const items = [
             {
-                icon: '⌨️',
+                icon: icon('terminal'),
                 label: 'Open Terminal',
                 action: () => Registry.launch('terminal'),
             },
             {
-                icon: '📊',
+                icon: icon('sysmon'),
                 label: 'System Monitor',
                 action: () => Registry.launch('sysmon'),
             },
             { type: 'separator' },
             {
-                icon: '📁',
+                icon: icon('files'),
                 label: 'Open Files',
                 action: () => Registry.launch('files'),
             },
             {
-                icon: '⚙️',
+                icon: icon('settings'),
                 label: 'Settings',
                 action: () => Registry.launch('settings'),
             },
             { type: 'separator' },
             {
-                icon: '⊞',
+                icon: icon('maximize'),
                 label: 'Tile All Windows',
                 action: () => EventBus.emit('window:tile'),
             },
             {
-                icon: '🎨',
+                icon: icon('settings'),
                 label: 'Change Theme',
                 action: () => EventBus.emit('notification:show', {
-                    icon: '🎨',
+                    icon: icon('settings'),
                     title: 'Theme',
                     body: 'Open Settings to change theme.',
                 }),
             },
             { type: 'separator' },
             {
-                icon: 'ℹ️',
+                icon: icon('info'),
                 label: 'About HyperSpace',
                 action: () => EventBus.emit('notification:show', {
-                    icon: '⬡',
-                    title: 'HyperSpace OS v2.0',
-                    body: 'Built with vanilla JS, Canvas, and too much caffeine.',
+                    icon: icon('brand'),
+                    title: 'HyperSpace v2.0',
+                    body: 'A browser-native desktop environment.',
                 }),
             },
         ]
@@ -115,6 +116,7 @@ const ContextMenu = (() => {
         })
 
         // Position — keep within viewport
+        if (!container) container = document.getElementById('context-menu-container') || document.body
         container.appendChild(menu)
 
         const rect = menu.getBoundingClientRect()
@@ -151,7 +153,7 @@ const ContextMenu = (() => {
         close()
     }
 
-    return { init, close, destroy }
+    return { init, show, close, destroy }
 
 })()
 

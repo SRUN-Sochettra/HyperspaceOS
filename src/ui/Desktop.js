@@ -1,6 +1,7 @@
 import FileSystem from '../core/FileSystem.js'
 import EventBus from '../core/EventBus.js'
 import Registry from '../core/Registry.js'
+import { icon } from './Icons.js'
 
 const Desktop = (() => {
 
@@ -29,7 +30,7 @@ const Desktop = (() => {
         const items = FileSystem.readdir('/home/root/Desktop') || []
         if (items.length === 0) {
             FileSystem.writeFile('/home/root/Desktop/Welcome.md',
-                '# Welcome to HyperSpace OS\n\nDouble-click this file to open it in the editor.\n\nTry right-clicking the desktop for more options!\n')
+                '# Welcome to HyperSpace\n\nDouble-click this file to open it in the editor.\n\nTry right-clicking the desktop for more options!\n')
             FileSystem.writeFile('/home/root/Desktop/Notes.md',
                 '# Quick Notes\n\nWrite anything here.\n')
         }
@@ -122,7 +123,7 @@ const Desktop = (() => {
 
         const items = [
             {
-                icon: '📂', label: 'Open', action: () => {
+                icon: icon('files'), label: 'Open', action: () => {
                     if (type === 'dir') {
                         Registry.launch('files')
                     } else {
@@ -135,7 +136,7 @@ const Desktop = (() => {
             },
             { type: 'separator' },
             {
-                icon: '✏️', label: 'Rename', action: () => {
+                icon: icon('editor'), label: 'Rename', action: () => {
                     const newName = prompt('Rename to:', name)
                     if (newName && newName !== name) {
                         const newPath = FileSystem.join('/home/root/Desktop', newName)
@@ -144,7 +145,7 @@ const Desktop = (() => {
                 }
             },
             {
-                icon: '🗑️', label: 'Delete', action: () => {
+                icon: icon('close'), label: 'Delete', action: () => {
                     if (confirm(`Delete "${name}"?`)) {
                         FileSystem.rm(path, true)
                     }
@@ -160,22 +161,22 @@ const Desktop = (() => {
 
         const items = [
             {
-                icon: '📄', label: 'New File', action: () => {
+                icon: icon('file'), label: 'New File', action: () => {
                     const name = prompt('File name:')
                     if (name) FileSystem.writeFile(FileSystem.join('/home/root/Desktop', name), '')
                 }
             },
             {
-                icon: '📁', label: 'New Folder', action: () => {
+                icon: icon('folder'), label: 'New Folder', action: () => {
                     const name = prompt('Folder name:')
                     if (name) FileSystem.mkdir(FileSystem.join('/home/root/Desktop', name))
                 }
             },
             { type: 'separator' },
-            { icon: '⌨️', label: 'Open Terminal', action: () => Registry.launch('terminal') },
-            { icon: '⚙️', label: 'Settings', action: () => Registry.launch('settings') },
+            { icon: icon('terminal'), label: 'Open Terminal', action: () => Registry.launch('terminal') },
+            { icon: icon('settings'), label: 'Settings', action: () => Registry.launch('settings') },
             { type: 'separator' },
-            { icon: '⊞', label: 'Tile Windows', action: () => EventBus.emit('window:tile') },
+            { icon: icon('maximize'), label: 'Tile Windows', action: () => EventBus.emit('window:tile') },
         ]
 
         createMenu(x, y, items)
@@ -224,13 +225,12 @@ const Desktop = (() => {
     }
 
     function getIcon(item) {
-        if (item.type === 'dir') return '📁'
+        if (item.type === 'dir') return icon('folder')
         const ext = item.name.split('.').pop()?.toLowerCase()
         const map = {
-            md: '📝', txt: '📄', js: '📜', json: '📋', css: '🎨',
-            html: '🌐', log: '📊', py: '🐍', sh: '⚡',
+            md: 'notes', txt: 'file', js: 'editor', json: 'files', css: 'files',
+            html: 'files', log: 'sysmon', py: 'editor', sh: 'terminal',
         }
-        return map[ext] || '📄'
     }
 
     return { init }

@@ -25,7 +25,6 @@ export default class Editor extends BaseApp {
         </div>
         <div class="editor-body" id="ed-body-${this.windowId}">
           <div class="editor-empty" id="ed-empty-${this.windowId}">
-            <div class="editor-empty-icon">💻</div>
             <div class="editor-empty-title">Code Editor</div>
             <div class="editor-empty-hint">
               Open a file from Files app or terminal:<br>
@@ -98,7 +97,7 @@ export default class Editor extends BaseApp {
     if (content === undefined || content === null) {
       content = FileSystem.readFile(path)
       if (content === null) {
-        this.notify('❌', 'Editor', `Cannot read: ${path}`)
+        this.notify('Error', 'Editor', `Cannot read: ${path}`)
         return
       }
     }
@@ -272,7 +271,7 @@ export default class Editor extends BaseApp {
 
     const result = FileSystem.writeFile(file.path, file.content)
     if (result.error) {
-      this.notify('❌', 'Save Failed', result.error)
+      this.notify('Error', 'Save Failed', result.error)
       return
     }
 
@@ -359,12 +358,12 @@ export default class Editor extends BaseApp {
           <div class="editor-picker-list">
             ${currentPath !== '/' ? `
               <div class="editor-picker-item" data-action="nav" data-path="${FileSystem.parentPath(currentPath)}">
-                <span>📂</span><span>..</span>
+                <span>folder</span><span>..</span>
               </div>
             ` : ''}
             ${entries.map(e => `
               <div class="editor-picker-item" data-action="${e.type === 'dir' ? 'nav' : 'open'}" data-path="${e.path}">
-                <span>${e.type === 'dir' ? '📁' : this.getFileIcon(e.name)}</span>
+                <span>${e.type === 'dir' ? 'folder' : this.getFileIcon(e.name)}</span>
                 <span>${e.name}</span>
                 ${e.type === 'file' ? `<span class="editor-picker-size">${this.formatSize(e.size)}</span>` : ''}
               </div>
@@ -416,10 +415,10 @@ export default class Editor extends BaseApp {
   getFileIcon(name) {
     const ext = name.split('.').pop()?.toLowerCase()
     const map = {
-      js: '📜', ts: '📘', json: '📋', css: '🎨', html: '🌐',
-      md: '📝', txt: '📄', log: '📊', py: '🐍', sh: '⚡',
+      js: 'code', ts: 'file', json: 'list', css: '', html: 'web',
+      md: 'note', txt: 'file', log: 'chart', py: 'Python', sh: '',
     }
-    return map[ext] || '📄'
+    return map[ext] || 'file'
   }
 
   formatSize(bytes) {

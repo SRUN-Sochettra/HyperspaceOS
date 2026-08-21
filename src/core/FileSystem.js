@@ -35,7 +35,7 @@ const FileSystem = (() => {
             '/usr': { type: 'dir', children: [], created: Date.now() },
             '/etc': { type: 'dir', children: ['hostname', 'motd'], created: Date.now() },
             '/etc/hostname': { type: 'file', content: 'hyperspace-mainframe', size: 22, created: Date.now(), modified: Date.now() },
-            '/etc/motd': { type: 'file', content: 'Welcome to HyperSpace OS v2.0\nType "help" for available commands.\n', size: 56, created: Date.now(), modified: Date.now() },
+            '/etc/motd': { type: 'file', content: 'Welcome to HyperSpace v2.0\nType "help" for available commands.\n', size: 56, created: Date.now(), modified: Date.now() },
             '/tmp': { type: 'dir', children: [], created: Date.now() },
             '/home/root': { type: 'dir', children: ['Desktop', 'Documents', 'Downloads', 'Music', 'Projects', 'Pictures', '.config', '.bashrc', '.ssh', 'README.md', 'system.log'], created: Date.now() },
             '/home/root/Desktop': { type: 'dir', children: [], created: Date.now() },
@@ -47,13 +47,13 @@ const FileSystem = (() => {
             '/home/root/Music/playlist.txt': { type: 'file', content: '1. Neon Dreams - HyperSpace Radio\n2. Digital Horizons - CyberWave\n3. Pixel Storm - ByteBeats\n4. Glass Memories - NeonDrift\n5. Quantum Loop - SynthOS\n', size: 156, created: Date.now(), modified: Date.now() },
             '/home/root/Projects': { type: 'dir', children: ['hyperspace-os', 'experiments'], created: Date.now() },
             '/home/root/Projects/hyperspace-os': { type: 'dir', children: ['main.js', 'README.md'], created: Date.now() },
-            '/home/root/Projects/hyperspace-os/main.js': { type: 'file', content: '// HyperSpace OS Entry Point\nimport { boot } from \'./core/OS.js\'\n\nboot()\n', size: 68, created: Date.now(), modified: Date.now() },
-            '/home/root/Projects/hyperspace-os/README.md': { type: 'file', content: '# HyperSpace OS\n\nA web-based operating system built with vanilla JavaScript.\n\n## Features\n- Window manager\n- Terminal with 27+ commands\n- 9 built-in apps\n- Three.js background\n- Real file system\n', size: 198, created: Date.now(), modified: Date.now() },
+            '/home/root/Projects/hyperspace-os/main.js': { type: 'file', content: '// HyperSpace Entry Point\nimport { boot } from \'./core/OS.js\'\n\nboot()\n', size: 68, created: Date.now(), modified: Date.now() },
+            '/home/root/Projects/hyperspace-os/README.md': { type: 'file', content: '# HyperSpace\n\nA web-based operating system built with vanilla JavaScript.\n\n## Features\n- Window manager\n- Terminal with 27+ commands\n- 9 built-in apps\n- Three.js background\n- Virtual file system\n', size: 198, created: Date.now(), modified: Date.now() },
             '/home/root/Projects/experiments': { type: 'dir', children: [], created: Date.now() },
             '/home/root/Pictures': { type: 'dir', children: [], created: Date.now() },
             '/home/root/.config': { type: 'dir', children: ['theme.json'], created: Date.now() },
             '/home/root/.config/theme.json': { type: 'file', content: '{\n  "accent": "#00f5ff",\n  "particles": true,\n  "animations": true\n}\n', size: 68, created: Date.now(), modified: Date.now() },
-            '/home/root/.bashrc': { type: 'file', content: '# HyperSpace bash config\nexport PS1="\\u@hyperspace:\\w$ "\nexport EDITOR=vim\nalias ll="ls -la"\nalias cls="clear"\n\necho "Welcome to HyperSpace OS"\n', size: 140, created: Date.now(), modified: Date.now() },
+            '/home/root/.bashrc': { type: 'file', content: '# HyperSpace bash config\nexport PS1="\\u@hyperspace:\\w$ "\nexport EDITOR=vim\nalias ll="ls -la"\nalias cls="clear"\n\necho "Welcome to HyperSpace"\n', size: 140, created: Date.now(), modified: Date.now() },
             '/home/root/.ssh': { type: 'dir', children: ['known_hosts'], created: Date.now() },
             '/home/root/.ssh/known_hosts': { type: 'file', content: '# Known hosts\n', size: 14, created: Date.now(), modified: Date.now() },
             '/home/root/README.md': { type: 'file', content: '# Home Directory\n\nThis is the root user home folder.\n\nFeel free to create, edit, and delete files using:\n- The **Terminal** (`touch`, `mkdir`, `rm`, `echo > file`)\n- The **Files** app (double-click, right-click)\n- The **Editor** app (open files to edit)\n', size: 230, created: Date.now(), modified: Date.now() },
@@ -375,9 +375,9 @@ const FileSystem = (() => {
             const node = tree[p]
             const indent = '  '.repeat(p.split('/').length - 1)
             if (node.type === 'dir') {
-                console.log(`${indent}📁 ${basename(p)}/  (${node.children.length} items)`)
+                console.log(`${indent}folder ${basename(p)}/  (${node.children.length} items)`)
             } else {
-                console.log(`${indent}📄 ${basename(p)}  (${node.size}B)`)
+                console.log(`${indent}file ${basename(p)}  (${node.size}B)`)
             }
         }
         console.groupEnd()

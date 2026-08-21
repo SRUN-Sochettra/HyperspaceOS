@@ -1,8 +1,8 @@
-# Contributing to HyperSpace OS
+# Contributing to HyperSpace
 
-First off, thank you for considering contributing to HyperSpace OS! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
+First off, thank you for considering contributing to HyperSpace! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
 
-## 🌈 How Can I Contribute?
+## How Can I Contribute?
 
 ### Reporting Bugs
 - **Check the Issues**: Before creating a new issue, please check if the bug has already been reported.
@@ -18,7 +18,7 @@ First off, thank you for considering contributing to HyperSpace OS! It's people 
 3. **Coding Standards**:
    - Follow the existing project structure.
    - Use ES6+ features where appropriate.
-   - Maintain the **Glassmorphism** design aesthetic.
+   - Use the semantic tokens and restrained HyperSpace visual language.
 4. **Test Your Changes**: Ensure your changes don't break the boot sequence or existing apps.
 5. **Commit**: Keep your commit messages descriptive.
 6. **Push**: Push to your branch (`git push origin feature/amazing-feature`).
@@ -26,10 +26,10 @@ First off, thank you for considering contributing to HyperSpace OS! It's people 
 
 ---
 
-## 🛠️ Technical Guidelines
+## Technical Guidelines
 
 ### Architecture
-HyperSpace OS is built with a modular architecture:
+HyperSpace is built with a modular architecture:
 - **Core**: Kernel, FileSystem, and EventBus are the backbone. Avoid heavy modifications here unless necessary.
 - **Apps**: New applications should be placed in `src/apps/[app-name]`.
 - **UI**: Shared components belong in `src/ui`.
@@ -44,12 +44,12 @@ HyperSpace OS is built with a modular architecture:
 
 ---
 
-## 📜 Code of Conduct
+## Code of Conduct
 We are committed to providing a friendly, safe, and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
 
 ---
 
-## ⚖️ License
+## License
 By contributing, you agree that your contributions will be licensed under its **MIT License**.
 
-Happy Coding! 🚀
+Happy Coding!

@@ -60,7 +60,7 @@ export default class Window {
           <button class="traffic-btn maximize" data-action="maximize" data-window-id="${this.id}"></button>
         </div>
         <div class="window-title">
-          <span class="window-title-icon">${def?.icon || '📄'}</span>
+          <span class="window-title-icon">${def?.icon || 'file'}</span>
           <span class="window-title-text">${def?.title || 'Untitled'}</span>
         </div>
         <div class="window-titlebar-spacer"></div>

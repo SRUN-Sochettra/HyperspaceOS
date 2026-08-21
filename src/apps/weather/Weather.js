@@ -91,15 +91,15 @@ export default class Weather extends BaseApp {
   }
 
   codeToEmoji(code) {
-    if (code === 113) return '☀️'
-    if (code === 116) return '⛅'
-    if (code === 119 || code === 122) return '☁️'
-    if ([143, 248, 260].includes(code)) return '🌫️'
-    if ([176, 263, 266, 293, 296].includes(code)) return '🌦️'
-    if ([299, 302, 305, 308, 356, 359].includes(code)) return '🌧️'
-    if ([200, 386, 389, 392, 395].includes(code)) return '⛈️'
-    if ([179, 182, 185, 227, 230, 281, 284, 311, 314, 317, 320, 323, 326, 329, 332, 335, 338, 350, 362, 365, 368, 371, 374, 377].includes(code)) return '❄️'
-    return '🌤️'
+    if (code === 113) return 'Clear'
+    if (code === 116) return 'Partly cloudy'
+    if (code === 119 || code === 122) return 'Cloudy'
+    if ([143, 248, 260].includes(code)) return 'Fog'
+    if ([176, 263, 266, 293, 296].includes(code)) return 'Showers'
+    if ([299, 302, 305, 308, 356, 359].includes(code)) return 'Rain'
+    if ([200, 386, 389, 392, 395].includes(code)) return 'Storm'
+    if ([179, 182, 185, 227, 230, 281, 284, 311, 314, 317, 320, 323, 326, 329, 332, 335, 338, 350, 362, 365, 368, 371, 374, 377].includes(code)) return 'Snow'
+    return 'Partly cloudy'
   }
 
   renderWeather(data) {
@@ -109,7 +109,7 @@ export default class Weather extends BaseApp {
           <div class="weather-icon">${data.icon}</div>
           <div class="weather-temp">${data.temp}°</div>
           <div class="weather-condition">${data.condition}</div>
-          <div class="weather-location">📍 ${data.city}, ${data.country}</div>
+          <div class="weather-location">Location: ${data.city}, ${data.country}</div>
           <div class="weather-feels">Feels like ${data.feelsLike}°</div>
         </div>
 
@@ -154,32 +154,14 @@ export default class Weather extends BaseApp {
   }
 
   renderFallback(errorMsg) {
-    // Fall back to fake data if API fails
     this.container.innerHTML = `
       <div class="weather-container">
-        <div class="weather-hero">
-          <div class="weather-icon">☀️</div>
-          <div class="weather-temp">24°</div>
-          <div class="weather-condition">Clear Sky</div>
-          <div class="weather-location">📍 Neo Tokyo, Sector 7</div>
-          <div class="weather-feels" style="color:var(--neon-yellow);font-size:11px">⚠ Offline — showing demo data</div>
-        </div>
-
-        <div class="weather-details">
-          <div class="weather-detail">
-            <div class="weather-detail-value">42%</div>
-            <div class="weather-detail-label">Humidity</div>
-          </div>
-          <div class="weather-detail">
-            <div class="weather-detail-value">8</div>
-            <div class="weather-detail-label">km/h NE</div>
-          </div>
-          <div class="weather-detail">
-            <div class="weather-detail-value">1018</div>
-            <div class="weather-detail-label">hPa</div>
-          </div>
+        <div class="weather-loading" role="status">
+          <div class="weather-icon" aria-hidden="true">Unavailable</div>
+          <div class="weather-condition">Weather is unavailable</div>
+          <div class="weather-location">The external weather service could not be reached.</div>
+          <div class="weather-feels">${errorMsg || 'Try again when the connection is available.'}</div>
         </div>
       </div>
     `
-  }
-}
+  }}

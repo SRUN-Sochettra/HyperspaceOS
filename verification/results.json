@@ -1,0 +1,4744 @@
+{
+  "browser": "Google Chrome",
+  "version": "151.0.7922.170",
+  "console_messages": [
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 12, old: 5}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: terminal, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: terminal",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: sysmon, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: sysmon",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: music, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: music",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: notes, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: notes",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: weather, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: weather",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: files, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: files",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: calculator, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: calculator",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: settings, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: settings",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: editor, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: editor",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: taskman, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: taskman",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: whiteboard, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: whiteboard",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: ai, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: ai",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 25, old: 12}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[SnapController] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/SnapController.js",
+        "lineNumber": 38,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[WindowManager] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/WindowManager.js",
+        "lineNumber": 59,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 35, old: 25}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 50, old: 35}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Spotlight] Initialized (Ctrl+Space to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Spotlight.js",
+        "lineNumber": 31,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ClipboardManager] Initialized (Ctrl+Shift+V to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/ClipboardManager.js",
+        "lineNumber": 46,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[DragDrop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/DragDropController.js",
+        "lineNumber": 22,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Workspaces] Initialized (Ctrl+1-4 to switch)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/Workspaces.js",
+        "lineNumber": 55,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 62, old: 50}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 131,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Sounds] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Sounds.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 72, old: 62}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Background] Three.js initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Background.js",
+        "lineNumber": 64,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Particles] Spawned 18 particles",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Particles.js",
+        "lineNumber": 54,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Grid] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Grid.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 85, old: 72}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Desktop/Welcome.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Desktop/Notes.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Desktop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Desktop.js",
+        "lineNumber": 47,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 35,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 92, old: 85}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 100, old: 92}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.booted {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:complete ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Boot complete ready color: #28c840; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js",
+        "lineNumber": 147,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: HyperSpace, body: System ready. Welcome back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: terminal, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 1, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Onboarding] Reset. Reload to see tour again.",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Onboarding.js",
+        "lineNumber": 184,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 1, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: Info, title: Tip, body: Press Ctrl+Space for Spotlight Search anytime!}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: terminal, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 2, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: files, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 3, appId: files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: editor, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 4, appId: editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: notes, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 5, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: sysmon, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 6, appId: sysmon}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: taskman, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 7, appId: taskman}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: weather, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 8, appId: weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: music, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 9, appId: music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: calculator, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 10, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: settings, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 11, appId: settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: whiteboard, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 12, appId: whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: ai, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 13, appId: ai}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Task Manager}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: System Monitor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Code Editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Command Assistant}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: mkdir, path: /home/root/Documents/Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Project-Ideas.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Getting-Started.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:tiled ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Getting-Started.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 2, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 3, appId: files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 4, appId: editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 5, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 6, appId: sysmon}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 7, appId: taskman}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 8, appId: weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 9, appId: music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 10, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 11, appId: settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 12, appId: whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 13, appId: ai}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: terminal, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 14, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: <svg class=\"hs-icon hs-icon-settings\" aria-hidden=\u2026h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>, title: Desktop 2, body: 0 windows, duration: 1500}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: calculator, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 15, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 14}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: <svg class=\"hs-icon hs-icon-settings\" aria-hidden=\u2026h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2\"/></svg>, title: Desktop 1, body: 1 window, duration: 1500}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 14, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 15, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: files, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 16, appId: files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: editor, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 17, appId: editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:tiled ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Code Editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/runtime-check.js}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] editor:openFile {path: /home/root/runtime-check.js}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[FileSystem] Restored from storage",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/FileSystem.js",
+        "lineNumber": 21,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 12, old: 5}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: terminal, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: terminal",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: sysmon, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: sysmon",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: music, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: music",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: notes, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: notes",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: weather, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: weather",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: files, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: files",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: calculator, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: calculator",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: settings, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: settings",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: editor, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: editor",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: taskman, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: taskman",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: whiteboard, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: whiteboard",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: ai, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: ai",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 25, old: 12}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[SnapController] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/SnapController.js",
+        "lineNumber": 38,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[WindowManager] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/WindowManager.js",
+        "lineNumber": 59,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 35, old: 25}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 50, old: 35}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Spotlight] Initialized (Ctrl+Space to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Spotlight.js",
+        "lineNumber": 31,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ClipboardManager] Initialized (Ctrl+Shift+V to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/ClipboardManager.js",
+        "lineNumber": 46,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[DragDrop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/DragDropController.js",
+        "lineNumber": 22,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Workspaces] Initialized (Ctrl+1-4 to switch)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/Workspaces.js",
+        "lineNumber": 55,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 62, old: 50}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 131,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Sounds] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Sounds.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 72, old: 62}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Background] Three.js initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Background.js",
+        "lineNumber": 64,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Particles] Spawned 18 particles",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Particles.js",
+        "lineNumber": 54,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Grid] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Grid.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 85, old: 72}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Desktop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Desktop.js",
+        "lineNumber": 47,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 35,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 92, old: 85}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 100, old: 92}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.booted {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:complete ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Boot complete ready color: #28c840; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js",
+        "lineNumber": 147,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: HyperSpace, body: System ready. Welcome back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Restoring saved state...",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 103,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings {value: Object, old: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: files, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 1, appId: files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: editor, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 2, appId: editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Code Editor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: Export, title: Session Restored, body: Your previous workspace is back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 1, appId: files}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307377778",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[FileSystem] Restored from storage",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/FileSystem.js",
+        "lineNumber": 21,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 12, old: 5}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: terminal, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: terminal",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: sysmon, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: sysmon",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: music, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: music",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: notes, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: notes",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: weather, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: weather",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: files, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: files",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: calculator, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: calculator",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: settings, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: settings",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: editor, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: editor",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: taskman, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: taskman",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: whiteboard, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: whiteboard",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: ai, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: ai",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 25, old: 12}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[SnapController] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/SnapController.js",
+        "lineNumber": 38,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[WindowManager] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/WindowManager.js",
+        "lineNumber": 59,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 35, old: 25}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 50, old: 35}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Spotlight] Initialized (Ctrl+Space to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Spotlight.js",
+        "lineNumber": 31,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ClipboardManager] Initialized (Ctrl+Shift+V to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/ClipboardManager.js",
+        "lineNumber": 46,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[DragDrop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/DragDropController.js",
+        "lineNumber": 22,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Workspaces] Initialized (Ctrl+1-4 to switch)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/Workspaces.js",
+        "lineNumber": 55,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 62, old: 50}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 131,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Sounds] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Sounds.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 72, old: 62}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Background] Three.js initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Background.js",
+        "lineNumber": 64,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Particles] Spawned 18 particles",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Particles.js",
+        "lineNumber": 54,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Grid] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Grid.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 85, old: 72}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Desktop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Desktop.js",
+        "lineNumber": 47,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 35,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 92, old: 85}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 100, old: 92}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307378921",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307379044",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[FileSystem] Restored from storage",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/FileSystem.js",
+        "lineNumber": 21,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 12, old: 5}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: terminal, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: terminal",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: sysmon, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: sysmon",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: music, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: music",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: notes, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: notes",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: weather, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: weather",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: files, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: files",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: calculator, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: calculator",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: settings, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: settings",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: editor, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: editor",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: taskman, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: taskman",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: whiteboard, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: whiteboard",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: ai, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: ai",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 25, old: 12}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[SnapController] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/SnapController.js",
+        "lineNumber": 38,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[WindowManager] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/WindowManager.js",
+        "lineNumber": 59,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 35, old: 25}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 50, old: 35}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Spotlight] Initialized (Ctrl+Space to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Spotlight.js",
+        "lineNumber": 31,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ClipboardManager] Initialized (Ctrl+Shift+V to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/ClipboardManager.js",
+        "lineNumber": 46,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[DragDrop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/DragDropController.js",
+        "lineNumber": 22,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Workspaces] Initialized (Ctrl+1-4 to switch)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/Workspaces.js",
+        "lineNumber": 55,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 62, old: 50}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: terminal, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 1, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 131,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Sounds] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Sounds.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 72, old: 62}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Background] Three.js initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Background.js",
+        "lineNumber": 64,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Particles] Spawned 18 particles",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Particles.js",
+        "lineNumber": 54,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Grid] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Grid.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 85, old: 72}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Desktop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Desktop.js",
+        "lineNumber": 47,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 35,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 92, old: 85}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: mkdir, path: /home/root/runtime-check}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 100, old: 92}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/runtime-check/a.txt}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/runtime-check/a.txt}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.booted {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:complete ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Boot complete ready color: #28c840; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307379044",
+        "lineNumber": 147,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: HyperSpace, body: System ready. Welcome back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 1, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Restoring saved state...",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 103,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings {value: Object, old: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: terminal, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 2, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 2, appId: terminal}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: notes, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 3, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 3}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Note-1787307383617.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Note-1787307383617.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 3}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connecting...",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 494,
+        "columnNumber": 8
+      }
+    },
+    {
+      "type": "debug",
+      "text": "[vite] connected.",
+      "location": {
+        "url": "http://127.0.0.1:5173/@vite/client",
+        "lineNumber": 617,
+        "columnNumber": 14
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Booting... color: #00f5ff; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307379044",
+        "lineNumber": 23,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:start ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 5, old: 0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[FileSystem] Restored from storage",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/FileSystem.js",
+        "lineNumber": 21,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 12, old: 5}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: terminal, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: terminal",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: sysmon, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: sysmon",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: music, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: music",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: notes, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: notes",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: weather, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: weather",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: files, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: files",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: calculator, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: calculator",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: settings, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: settings",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: editor, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: editor",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: taskman, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: taskman",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: whiteboard, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: whiteboard",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] registry:registered {id: ai, app: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Registry] Registered app: ai",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Registry.js",
+        "lineNumber": 75,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 25, old: 12}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[SnapController] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/SnapController.js",
+        "lineNumber": 38,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[WindowManager] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/WindowManager.js",
+        "lineNumber": 59,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 35, old: 25}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 50, old: 35}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Spotlight] Initialized (Ctrl+Space to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Spotlight.js",
+        "lineNumber": 31,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ClipboardManager] Initialized (Ctrl+Shift+V to open)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/ClipboardManager.js",
+        "lineNumber": 46,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[DragDrop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/DragDropController.js",
+        "lineNumber": 22,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Workspaces] Initialized (Ctrl+1-4 to switch)",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/wm/Workspaces.js",
+        "lineNumber": 55,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 62, old: 50}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 131,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Sounds] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Sounds.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 72, old: 62}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Background] Three.js initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Background.js",
+        "lineNumber": 64,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Particles] Spawned 18 particles",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Particles.js",
+        "lineNumber": 54,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Grid] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/canvas/Grid.js",
+        "lineNumber": 36,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 85, old: 72}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Desktop] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/ui/Desktop.js",
+        "lineNumber": 47,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Initialized",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 35,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 92, old: 85}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.bootProgress {value: 100, old: 92}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:os.booted {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] os:boot:complete ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/system.log}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "%c[HyperSpace] Boot complete ready color: #28c840; font-weight: bold",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/OS.js?t=1787307379044",
+        "lineNumber": 147,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: HyperSpace, body: System ready. Welcome back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] Restoring saved state...",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 103,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings {value: Object, old: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: notes, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 1, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Note-1787307383617.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: Export, title: Session Restored, body: Your previous workspace is back.}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 1, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: notes, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 2, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Documents/Notes/Note-1787307383617.md}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 2, appId: notes}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: settings, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 3, appId: settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 3}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.theme {value: aurora, old: neon-cyan}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.accentColor {value: #00f5a0, old: #00f5ff}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] theme:changed {theme: aurora}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Applied theme: aurora",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 164,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: Theme Changed, body: Aurora}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.animationsEnabled {value: false, old: true}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.animationsEnabled {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 3}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.theme {value: midnight, old: aurora}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:settings.accentColor {value: #00f5ff, old: #00f5a0}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] theme:changed {theme: midnight}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[ThemeEngine] Applied theme: midnight",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/ThemeEngine.js",
+        "lineNumber": 164,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] notification:show {icon: , title: Theme Changed, body: Midnight}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 3, appId: settings}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: ai, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 4, appId: ai}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Command Assistant}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: calculator, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 5, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] fs:change {type: write, path: /home/root/Desktop/assistant-check.txt}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:tile ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:tiled ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 4, appId: ai}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 5, appId: calculator}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: weather, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 6, appId: weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "https://wttr.in/?format=j1",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "[Weather] https://wttr.in/?format=j1 failed: Failed to fetch",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/apps/weather/Weather.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_FAILED",
+      "location": {
+        "url": "https://wttr.in/London?format=j1",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "warning",
+      "text": "[Weather] https://wttr.in/London?format=j1 failed: Failed to fetch",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/apps/weather/Weather.js",
+        "lineNumber": 52,
+        "columnNumber": 16
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 6, appId: weather}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: music, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 7, appId: music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 7}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:music.playing {value: true, old: false}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 7}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 7}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 7}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 7}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] store:music.playing {value: false, old: true}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 7, appId: music}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: whiteboard, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 8, appId: whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "warning",
+      "text": "Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/apps/whiteboard/Whiteboard.js",
+        "lineNumber": 118,
+        "columnNumber": 0
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 8}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 8}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:focus {id: 8}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 8, appId: whiteboard}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: sysmon, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 9, appId: sysmon}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] app:launch {id: taskman, options: Object}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:opened {id: 10, appId: taskman}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: System Monitor}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] statusbar:app {name: Task Manager}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 9, appId: sysmon}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:none-active ",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[EventBus] window:closed {id: 10, appId: taskman}",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/EventBus.js",
+        "lineNumber": 64,
+        "columnNumber": 20
+      }
+    },
+    {
+      "type": "log",
+      "text": "[Persistence] State saved",
+      "location": {
+        "url": "http://127.0.0.1:5173/src/core/Persistence.js",
+        "lineNumber": 61,
+        "columnNumber": 24
+      }
+    }
+  ],
+  "page_errors": [],
+  "checks": {
+    "1_boot_onboarding": {
+      "pass": true,
+      "details": "Boot branding, local SVG mark, progress animation, onboarding tour and reset verified."
+    },
+    "2_shell": {
+      "pass": true,
+      "details": "StatusBar, Desktop icons, Dock grouping, ContextMenu, Spotlight, and Clipboard history verified."
+    },
+    "3_launch_every_app": {
+      "pass": true,
+      "details": "All 12 apps launched, focus, move, resize, min/max/restore/tile/close verified."
+    },
+    "4_workspaces": {
+      "pass": true,
+      "details": "Virtual desktops 1-4 switching, window isolation and restoration verified."
+    },
+    "5_files_editor": {
+      "pass": true,
+      "details": "File create, open in CodeMirror, edit, save, and reload persistence verified."
+    },
+    "6_terminal": {
+      "pass": true,
+      "details": "Commands (help, ls, mkdir, touch, echo, cat, ps, neofetch), Tab autocomplete and history verified."
+    },
+    "7_notes": {
+      "pass": true,
+      "details": "Notes create, markdown preview, debounced autosave, and reload persistence verified."
+    },
+    "8_settings": {
+      "pass": true,
+      "details": "Theme switcher, animations toggle, particles toggle, sound settings verified."
+    },
+    "9_command_assistant": {
+      "pass": true,
+      "details": "App launch, file creation, tile, search and non-LLM copy verified."
+    },
+    "10_weather": {
+      "pass": true,
+      "details": "Offline network block tested; truthful unavailable state rendered without fake data."
+    },
+    "11_music": {
+      "pass": true,
+      "details": "Play/pause, tracks, volume, visualizer modes, and window close audio/RAF cleanup verified."
+    },
+    "12_whiteboard": {
+      "pass": true,
+      "details": "Pencil/shapes, brush size/color, undo, clear, export trigger and resize verified."
+    },
+    "13_system_tools": {
+      "pass": true,
+      "details": "Browser-derived telemetry labels verified without false native CPU/GPU claims."
+    },
+    "14_accessibility": {
+      "pass": true,
+      "details": "Keyboard nav, Escape dismiss, focusable controls, reduced-motion emulation verified."
+    },
+    "15_responsive": {
+      "pass": true,
+      "details": "Viewports 1024x768, 768x1024, and 390x844 tested with controls reachable."
+    },
+    "16_cleanup": {
+      "pass": true,
+      "details": "0 uncaught page errors, proper app destruction and event unsubscription verified."
+    }
+  }
+}

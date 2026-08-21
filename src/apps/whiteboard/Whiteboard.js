@@ -16,11 +16,11 @@ export default class Whiteboard extends BaseApp {
         this.container.innerHTML = `
       <div class="wb-container">
         <div class="wb-toolbar">
-          <button class="wb-tool active" data-tool="pencil" title="Pencil">✏️</button>
+          <button class="wb-tool active" data-tool="pencil" title="Pencil">Pencil</button>
           <button class="wb-tool" data-tool="line" title="Line">╱</button>
           <button class="wb-tool" data-tool="rect" title="Rectangle">▭</button>
           <button class="wb-tool" data-tool="circle" title="Circle">○</button>
-          <button class="wb-tool" data-tool="eraser" title="Eraser">🧽</button>
+          <button class="wb-tool" data-tool="eraser" title="Eraser">Eraser</button>
           <div class="wb-sep"></div>
           <input type="color" class="wb-color-input" id="wb-color-${this.windowId}" value="${this.color}" title="Color">
           <div class="wb-size-group">
@@ -29,8 +29,8 @@ export default class Whiteboard extends BaseApp {
           </div>
           <div style="flex:1"></div>
           <button class="wb-action" id="wb-undo-${this.windowId}" title="Undo">↩</button>
-          <button class="wb-action" id="wb-clear-${this.windowId}" title="Clear">🗑️</button>
-          <button class="wb-action primary" id="wb-export-${this.windowId}" title="Export PNG">💾</button>
+          <button class="wb-action" id="wb-clear-${this.windowId}" title="Clear">Delete</button>
+          <button class="wb-action primary" id="wb-export-${this.windowId}" title="Export PNG">Export</button>
         </div>
         <div class="wb-canvas-wrapper">
           <canvas id="wb-canvas-${this.windowId}"></canvas>
@@ -198,7 +198,7 @@ export default class Whiteboard extends BaseApp {
         link.href = this.canvas.toDataURL('image/png')
         link.click()
 
-        this.notify('💾', 'Exported', 'Drawing saved as PNG')
+        this.notify('Export', 'Exported', 'Drawing saved as PNG')
     }
 
     onDestroy() {

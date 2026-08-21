@@ -15,7 +15,7 @@ const Onboarding = (() => {
 
     const STEPS = [
         {
-            title: 'Welcome to HyperSpace OS! 🚀',
+            title: 'Welcome to HyperSpace',
             body: 'A fully functional web-based operating system. Let me show you around.',
             position: 'center',
         },
@@ -63,7 +63,7 @@ const Onboarding = (() => {
             position: 'center',
         },
         {
-            title: 'You\'re Ready! 🎉',
+            title: 'You\'re ready',
             body: 'Explore, customize, and make it yours. Open Settings to change themes, or type "help" in the terminal.',
             position: 'center',
         },
@@ -168,7 +168,7 @@ const Onboarding = (() => {
         localStorage.setItem(STORAGE_KEY, 'true')
 
         EventBus.emit('notification:show', {
-            icon: '💡',
+            icon: 'Info',
             title: 'Tip',
             body: 'Press Ctrl+Space for Spotlight Search anytime!',
         })

@@ -41,7 +41,7 @@ const DragDropController = (() => {
         ghost = document.createElement('div')
         ghost.className = 'drag-ghost'
         ghost.innerHTML = `
-      <span>${item.querySelector('.fm-item-icon')?.textContent || '📄'}</span>
+      <span>${item.querySelector('.fm-item-icon')?.textContent || 'file'}</span>
       <span>${name}</span>
     `
         document.body.appendChild(ghost)
@@ -100,7 +100,7 @@ const DragDropController = (() => {
 
             if (FileSystem.exists(destPath)) {
                 EventBus.emit('notification:show', {
-                    icon: '⚠️',
+                    icon: 'Warning',
                     title: 'Cannot Move',
                     body: `"${dragData.name}" already exists in destination`,
                 })
@@ -108,13 +108,13 @@ const DragDropController = (() => {
                 const result = FileSystem.mv(dragData.path, destPath)
                 if (result.error) {
                     EventBus.emit('notification:show', {
-                        icon: '❌',
+                        icon: 'Error',
                         title: 'Move Failed',
                         body: result.error,
                     })
                 } else {
                     EventBus.emit('notification:show', {
-                        icon: '📦',
+                        icon: 'archive',
                         title: 'Moved',
                         body: `${dragData.name} → ${FileSystem.basename(dropTarget)}/`,
                     })

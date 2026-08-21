@@ -117,7 +117,7 @@ export const appCommands = {
                 Store.set('settings.accentColor', themes[name])
             })
             terminal.writeLine('success', `Theme → ${name}`)
-            EventBus.emit('notification:show', { icon: '🎨', title: 'Theme', body: `Accent → ${name}` })
+            EventBus.emit('notification:show', { icon: '', title: 'Theme', body: `Accent → ${name}` })
         }
     },
 }

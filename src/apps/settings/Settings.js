@@ -16,7 +16,6 @@ export default class Settings extends BaseApp {
 
     this.container.innerHTML = `
       <div class="settings-container">
-        <h2 class="settings-title">⚙️ Settings</h2>
 
         <div class="settings-section">
           <div class="section-label">Theme</div>
@@ -98,9 +97,9 @@ export default class Settings extends BaseApp {
           <div class="glass-card settings-about">
             <div class="settings-about-logo">⬡</div>
             <div class="settings-about-info">
-              <div class="settings-about-name">HyperSpace OS</div>
+              <div class="settings-about-name">HyperSpace</div>
               <div class="settings-about-detail">Version ${Store.get('os.version')}</div>
-              <div class="settings-about-detail">FPS: <span id="set-fps">${Store.get('system.fps')}</span></div>
+              <div class="settings-about-detail">Browser frame rate: <span id="set-fps">${Store.get('system.fps')}</span></div>
               <div class="settings-about-detail">Windows: <span id="set-wins">${Store.get('windows.all')?.length || 0}</span></div>
             </div>
           </div>
@@ -130,7 +129,7 @@ export default class Settings extends BaseApp {
         ThemeEngine.apply(opt.dataset.theme)
         this.$$('.settings-theme-option').forEach(o => o.classList.remove('active'))
         opt.classList.add('active')
-        this.notify('🎨', 'Theme Changed', ThemeEngine.getTheme(opt.dataset.theme)?.name)
+        this.notify('', 'Theme Changed', ThemeEngine.getTheme(opt.dataset.theme)?.name)
       })
     })
 
@@ -153,7 +152,7 @@ export default class Settings extends BaseApp {
     this.$('#set-fs-reset')?.addEventListener('click', () => {
       if (confirm('Reset file system to defaults?')) {
         FileSystem.reset()
-        this.notify('🔄', 'Reset', 'File system restored to defaults')
+        this.notify('Reset', 'Reset', 'File system restored to defaults')
       }
     })
 

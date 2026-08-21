@@ -22,7 +22,7 @@ export default class AI extends BaseApp {
         this.chatEl = this.$(`#ai-chat-${this.windowId}`)
         this.inputEl = this.$(`#ai-input-${this.windowId}`)
 
-        this.append('bot', "Hello! I'm the HyperSpace AI. I can actually control this OS. Try asking me to:")
+        this.append('bot', "Hello! I'm the HyperSpace Command Assistant. I can actually control this OS. Try asking me to:")
         this.append('bot', "• Open an app\n• Create a file\n• Change the theme\n• Tile windows\n• Show system info\n• Search for files\n• Tell you a joke")
 
         this.inputEl.addEventListener('keydown', (e) => {
@@ -56,9 +56,27 @@ export default class AI extends BaseApp {
     process(input) {
         const q = input.toLowerCase()
 
+        // ---- CREATE FILE (Check before open apps) ----
+        if (q.includes('create') && (q.includes('file') || q.includes('document'))) {
+            const nameMatch = input.match(/(?:called|named)\s+["']?([^"'\s]+)["']?/) || input.match(/(?:file|document)\s+["']?([^"'\s]+)["']?/)
+            const name = nameMatch?.[1] || `note-${Date.now()}.txt`
+            const path = FileSystem.join('/home/root/Desktop', name)
+            FileSystem.writeFile(path, `Created by Command Assistant at ${new Date().toLocaleString()}\n`)
+            return `Created **${name}** on your Desktop!`
+        }
+
+        // ---- CREATE FOLDER ----
+        if (q.includes('create') && (q.includes('folder') || q.includes('directory'))) {
+            const nameMatch = input.match(/(?:called|named)\s+["']?([^"'\s]+)["']?/) || input.match(/(?:folder|directory)\s+["']?([^"'\s]+)["']?/)
+            const name = nameMatch?.[1] || `folder-${Date.now()}`
+            const path = FileSystem.join('/home/root/Desktop', name)
+            FileSystem.mkdir(path)
+            return `Created folder **${name}** on your Desktop!`
+        }
+
         // ---- OPEN APPS ----
         const openMatch = q.match(/open\s+(\w+)/)
-        if (openMatch || q.includes('launch') || q.includes('start')) {
+        if (openMatch || /\b(launch|start)\b/.test(q)) {
             const appName = openMatch?.[1] || q.split(/\s+/).pop()
             const apps = Registry.all()
             const match = apps.find(a =>
@@ -67,27 +85,9 @@ export default class AI extends BaseApp {
             )
             if (match) {
                 Registry.launch(match.id)
-                return `Opened **${match.title}** for you! ${match.icon}`
+                return `Opened **${match.title}** for you!`
             }
             return `I couldn't find an app called "${appName}". Available apps: ${apps.map(a => a.title).join(', ')}`
-        }
-
-        // ---- CREATE FILE ----
-        if (q.includes('create') && (q.includes('file') || q.includes('document'))) {
-            const nameMatch = input.match(/(?:called|named|file)\s+["']?([^"'\s]+)["']?/)
-            const name = nameMatch?.[1] || `note-${Date.now()}.txt`
-            const path = FileSystem.join('/home/root/Desktop', name)
-            FileSystem.writeFile(path, `Created by AI Assistant at ${new Date().toLocaleString()}\n`)
-            return `Created **${name}** on your Desktop! 📄`
-        }
-
-        // ---- CREATE FOLDER ----
-        if (q.includes('create') && (q.includes('folder') || q.includes('directory'))) {
-            const nameMatch = input.match(/(?:called|named|folder|directory)\s+["']?([^"'\s]+)["']?/)
-            const name = nameMatch?.[1] || `folder-${Date.now()}`
-            const path = FileSystem.join('/home/root/Desktop', name)
-            FileSystem.mkdir(path)
-            return `Created folder **${name}** on your Desktop! 📁`
         }
 
         // ---- CHANGE THEME ----
@@ -100,19 +100,19 @@ export default class AI extends BaseApp {
             const match = Object.keys(themes).find(t => q.includes(t))
             if (match) {
                 import('../../core/ThemeEngine.js').then(({ default: TE }) => TE.apply(match))
-                return `Theme changed to **${match}**! 🎨`
+                return `Theme changed to **${match}**!`
             }
             if (q.includes('dark') || q.includes('night')) {
                 import('../../core/ThemeEngine.js').then(({ default: TE }) => TE.apply('midnight'))
-                return "Set to Midnight theme! 🌙"
+                return "Set to Midnight theme!"
             }
             if (q.includes('green') || q.includes('matrix')) {
                 import('../../core/ThemeEngine.js').then(({ default: TE }) => TE.apply('terminal'))
-                return "Terminal theme activated! 💻"
+                return "Terminal theme activated!"
             }
             if (q.includes('pink') || q.includes('rose')) {
                 import('../../core/ThemeEngine.js').then(({ default: TE }) => TE.apply('sakura'))
-                return "Sakura theme activated! 🌸"
+                return "Sakura theme activated!"
             }
             return `Available themes: ${Object.keys(themes).join(', ')}. Just say "change theme to ember" for example.`
         }
@@ -120,7 +120,7 @@ export default class AI extends BaseApp {
         // ---- TILE WINDOWS ----
         if (q.includes('tile') || q.includes('arrange') || q.includes('organize')) {
             EventBus.emit('window:tile')
-            return "I've tiled all your windows! ⊞"
+            return "I've tiled all your windows!"
         }
 
         // ---- CLOSE WINDOWS ----
@@ -134,7 +134,7 @@ export default class AI extends BaseApp {
                     closed++
                 }
             }
-            return `Closed ${closed} window${closed !== 1 ? 's' : ''}. I kept myself alive though. 😏`
+            return `Closed ${closed} window${closed !== 1 ? 's' : ''}. I kept myself alive though.`
         }
 
         // ---- SYSTEM INFO ----
@@ -147,7 +147,7 @@ export default class AI extends BaseApp {
 
         // ---- TIME ----
         if (q.includes('time') || q.includes('date') || q.includes('clock')) {
-            return `It's **${new Date().toLocaleString()}** 🕐`
+            return `It's **${new Date().toLocaleString()}**`
         }
 
         // ---- SEARCH FILES ----
@@ -163,7 +163,7 @@ export default class AI extends BaseApp {
         // ---- LIST FILES ----
         if (q.includes('list') || q.includes('what files') || q.includes('show files')) {
             const entries = FileSystem.readdir('/home/root') || []
-            return `Files in home:\n${entries.map(e => `• ${e.type === 'dir' ? '📁' : '📄'} ${e.name}`).join('\n')}`
+            return `Files in home:\n${entries.map(e => `• ${e.type === 'dir' ? 'folder' : 'file'} ${e.name}`).join('\n')}`
         }
 
         // ---- READ FILE ----
@@ -192,7 +192,7 @@ export default class AI extends BaseApp {
                 const name = writeMatch[2]
                 const path = FileSystem.join('/home/root/Desktop', name)
                 FileSystem.writeFile(path, content + '\n')
-                return `Wrote to **${name}** on your Desktop! ✅`
+                return `Wrote to **${name}** on your Desktop!`
             }
             return 'Use format: write "your text here" to filename.txt'
         }
@@ -200,12 +200,12 @@ export default class AI extends BaseApp {
         // ---- JOKES ----
         if (q.includes('joke') || q.includes('funny') || q.includes('laugh')) {
             const jokes = [
-                "Why do programmers prefer dark mode? Because light attracts bugs. 🐛",
-                "I told my compiler a joke. It didn't laugh — it threw an exception. 💥",
+                "Why do programmers prefer dark mode? Because light attracts bugs.",
+                "I told my compiler a joke. It didn't laugh — it threw an exception.",
                 "There are only 10 types of people: those who understand binary... and those who expected this joke to have three options.",
                 "A SQL query walks into a bar, approaches two tables, and asks: 'Can I JOIN you?'",
-                "My code works perfectly on my machine. We're shipping my machine. 🖥️📦",
-                "Debugging is like being the detective in a crime movie where you are also the murderer. 🔍",
+                "My code works perfectly on my machine. We're shipping my machine.",
+                "Debugging is like being the detective in a crime movie where you are also the murderer.",
             ]
             return jokes[Math.floor(Math.random() * jokes.length)]
         }
@@ -217,14 +217,14 @@ export default class AI extends BaseApp {
 
         // ---- WHO ARE YOU ----
         if (q.includes('who are you') || q.includes('what are you')) {
-            return "I'm the HyperSpace AI — an integrated assistant that can actually control this OS. I can open apps, manage files, change themes, and more. Everything I do has real effects. Try me! 🤖"
+            return "I'm the HyperSpace Command Assistant — an integrated assistant that can actually control this OS. I can open apps, manage files, change themes, and more. Everything I do has real effects. Try me!"
         }
 
         // ---- GREETING ----
         if (q.match(/^(hi|hello|hey|sup|yo)\b/)) {
             const greetings = [
-                "Hey there! How can I help? 👋",
-                "Hello! Ready to help you navigate HyperSpace. 🚀",
+                "Hey there! How can I help?",
+                "Hello! Ready to help you navigate HyperSpace.",
                 "Hi! What shall we do today?",
             ]
             return greetings[Math.floor(Math.random() * greetings.length)]
@@ -232,7 +232,7 @@ export default class AI extends BaseApp {
 
         // ---- THANK YOU ----
         if (q.includes('thank') || q.includes('thanks')) {
-            return "You're welcome! Let me know if you need anything else. 😊"
+            return "You're welcome! Let me know if you need anything else."
         }
 
         // ---- FALLBACK ----

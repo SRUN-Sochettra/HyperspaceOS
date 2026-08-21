@@ -1,9 +1,10 @@
+import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 
 export default function registerAI() {
     Registry.register('ai', {
-        title: 'AI Assistant',
-        icon: '🤖',
+        title: 'Command Assistant',
+        icon: icon('assistant'),
         width: 420,
         height: 480,
         singleton: true,

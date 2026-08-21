@@ -21,3 +21,4 @@ import './apps/ai/ai.css'
 // Boot
 import { boot } from './core/OS.js'
 boot()
+import './styles/redesign.css'

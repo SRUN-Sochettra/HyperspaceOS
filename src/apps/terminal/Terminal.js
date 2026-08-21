@@ -32,7 +32,7 @@ export default class Terminal extends BaseApp {
         if (motd) {
             motd.split('\n').forEach(line => this.writeLine('info', line))
         } else {
-            this.writeLine('info', '🚀 HyperSpace OS Terminal v2.0')
+            this.writeLine('info', ' HyperSpace Terminal v2.0')
             this.writeLine('info', 'Type "help" for available commands')
         }
         this.writeLine('output', '')

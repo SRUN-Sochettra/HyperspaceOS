@@ -5,7 +5,7 @@
 //
 //  Usage:
 //    EventBus.emit('notification:show', {
-//      icon: '🚀',
+//      icon: '',
 //      title: 'HyperSpace OS',
 //      body: 'System ready.',
 //      duration: 4000         ← optional, default 4000ms
@@ -27,7 +27,7 @@ const Notification = (() => {
         EventBus.on('notification:show', show)
     }
 
-    function show({ icon = '💬', title = '', body = '', duration = 4000 }) {
+    function show({ icon = '', title = '', body = '', duration = 4000 }) {
         // Remove oldest if at limit
         if (active.length >= MAX_VISIBLE) {
             dismiss(active[0])

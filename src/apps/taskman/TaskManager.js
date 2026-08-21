@@ -70,7 +70,7 @@ export default class TaskManager extends BaseApp {
                 <div class="taskman-row ${isActive ? 'active' : ''}" data-id="${win.id}">
                   <span style="flex:0.4;font-family:var(--font-mono);font-size:var(--fs-xs)">${win.id}</span>
                   <span style="flex:1;display:flex;align-items:center;gap:6px">
-                    <span style="font-size:14px">${app?.icon || '📄'}</span>
+                    <span style="font-size:14px">${app?.icon || 'file'}</span>
                     ${app?.title || win.appId}
                   </span>
                   <span style="flex:0.7">
@@ -78,7 +78,7 @@ export default class TaskManager extends BaseApp {
                   </span>
                   <span style="flex:0.6;font-family:var(--font-mono);font-size:var(--fs-xs)">${win.width}×${win.height}</span>
                   <span style="flex:0.4;display:flex;gap:4px">
-                    <button class="taskman-action-btn focus-btn" data-id="${win.id}" title="Focus">👁</button>
+                    <button class="taskman-action-btn focus-btn" data-id="${win.id}" title="Focus">View</button>
                     <button class="taskman-action-btn kill-btn" data-id="${win.id}" title="Kill">✕</button>
                   </span>
                 </div>
@@ -139,7 +139,7 @@ export default class TaskManager extends BaseApp {
           <div class="taskman-perf-value" style="color:var(--neon-green)">${fps}</div>
         </div>
         <div class="taskman-perf-row">
-          <div class="taskman-perf-label">CPU</div>
+          <div class="taskman-perf-label">Loop load</div>
           <div class="taskman-perf-bar-track">
             <div class="taskman-perf-bar" style="width:${cpu}%;background:var(--neon-cyan)"></div>
           </div>
@@ -153,7 +153,7 @@ export default class TaskManager extends BaseApp {
           <div class="taskman-perf-value" style="color:var(--neon-magenta)">${Math.round(mem)}%</div>
         </div>
         <div class="taskman-perf-row">
-          <div class="taskman-perf-label">GPU</div>
+          <div class="taskman-perf-label">Frame budget</div>
           <div class="taskman-perf-bar-track">
             <div class="taskman-perf-bar" style="width:${gpu}%;background:var(--neon-green)"></div>
           </div>
@@ -192,9 +192,9 @@ export default class TaskManager extends BaseApp {
         <div class="taskman-system-row"><span>Screen</span><span>${screen.width}×${screen.height} @${window.devicePixelRatio}x</span></div>
         <div class="taskman-system-row"><span>Viewport</span><span>${window.innerWidth}×${window.innerHeight}</span></div>
         <div class="taskman-system-row"><span>Color Depth</span><span>${screen.colorDepth}-bit</span></div>
-        <div class="taskman-system-row"><span>Online</span><span>${navigator.onLine ? '✅ Yes' : '❌ No'}</span></div>
-        <div class="taskman-system-row"><span>Cookies</span><span>${navigator.cookieEnabled ? '✅' : '❌'}</span></div>
-        <div class="taskman-system-row"><span>Touch</span><span>${'ontouchstart' in window ? '✅' : '❌'}</span></div>
+        <div class="taskman-system-row"><span>Online</span><span>${navigator.onLine ? 'Done Yes' : 'Error No'}</span></div>
+        <div class="taskman-system-row"><span>Cookies</span><span>${navigator.cookieEnabled ? 'Done' : 'Error'}</span></div>
+        <div class="taskman-system-row"><span>Touch</span><span>${'ontouchstart' in window ? 'Done' : 'Error'}</span></div>
       </div>
     `
 

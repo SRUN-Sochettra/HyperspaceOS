@@ -1,3 +1,4 @@
+import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 import EventBus from '../../core/EventBus.js'
 
@@ -18,7 +19,7 @@ export function getPendingFiles() {
 export default function registerEditor() {
     Registry.register('editor', {
         title: 'Code Editor',
-        icon: '💻',
+        icon: icon('editor'),
         width: 620,
         height: 480,
         singleton: true,
