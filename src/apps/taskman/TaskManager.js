@@ -2,9 +2,9 @@ import BaseApp from '../BaseApp.js'
 import Store from '../../core/Store.js'
 import EventBus from '../../core/EventBus.js'
 import Registry from '../../core/Registry.js'
+import { icon } from '../../ui/Icons.js'
 
 export default class TaskManager extends BaseApp {
-
     async setup() {
         this.container.innerHTML = `
       <div class="taskman-container">
@@ -31,6 +31,9 @@ export default class TaskManager extends BaseApp {
             })
         })
 
+        this.subscribe('windows.all', () => this.update())
+        this.subscribe('windows.active', () => this.update())
+
         this.update()
         this.addInterval(() => this.update(), 1500)
     }
@@ -54,14 +57,14 @@ export default class TaskManager extends BaseApp {
         body.innerHTML = `
       <div class="taskman-list">
         <div class="taskman-list-header">
-          <span style="flex:0.4">PID</span>
-          <span style="flex:1">App</span>
-          <span style="flex:0.7">Status</span>
+          <span style="flex:0.4">ID</span>
+          <span style="flex:1">Application</span>
+          <span style="flex:0.7">State</span>
           <span style="flex:0.6">Size</span>
-          <span style="flex:0.4"></span>
+          <span style="flex:0.4">Action</span>
         </div>
         ${windows.length === 0
-                ? '<div class="taskman-empty">No windows open</div>'
+                ? '<div class="taskman-empty">No windows currently open</div>'
                 : windows.map(win => {
                     const app = Registry.get(win.appId)
                     const isActive = win.id === activeId
@@ -70,7 +73,7 @@ export default class TaskManager extends BaseApp {
                 <div class="taskman-row ${isActive ? 'active' : ''}" data-id="${win.id}">
                   <span style="flex:0.4;font-family:var(--font-mono);font-size:var(--fs-xs)">${win.id}</span>
                   <span style="flex:1;display:flex;align-items:center;gap:6px">
-                    <span style="font-size:14px">${app?.icon || 'file'}</span>
+                    <span style="font-size:14px">${app?.icon || icon('file')}</span>
                     ${app?.title || win.appId}
                   </span>
                   <span style="flex:0.7">
@@ -90,92 +93,73 @@ export default class TaskManager extends BaseApp {
 
         footer.innerHTML = `
       <span>${windows.length} window${windows.length !== 1 ? 's' : ''}</span>
-      <span>FPS: ${Store.get('system.fps') || '—'}</span>
+      <span>Browser frame rate: ${Store.get('system.fps') || '—'}</span>
     `
 
-        // Bind actions
         body.querySelectorAll('.focus-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation()
-                EventBus.emit('window:focus', { id: parseInt(btn.dataset.id) })
+                const winId = btn.dataset.id
+                import('../../wm/WindowManager.js').then(m => m.default.focus(winId))
             })
         })
 
         body.querySelectorAll('.kill-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation()
-                EventBus.emit('window:close', { id: parseInt(btn.dataset.id) })
+                const winId = btn.dataset.id
+                import('../../wm/WindowManager.js').then(m => m.default.close(winId))
             })
         })
 
-        // Click row to focus
         body.querySelectorAll('.taskman-row').forEach(row => {
-            row.addEventListener('dblclick', () => {
-                EventBus.emit('window:focus', { id: parseInt(row.dataset.id) })
+            row.addEventListener('click', () => {
+                const winId = row.dataset.id
+                if (winId) import('../../wm/WindowManager.js').then(m => m.default.focus(winId))
             })
         })
     }
 
     renderPerformance(body, footer) {
+        const metrics = Store.get('sysmon.metrics') || {}
         const fps = Store.get('system.fps') || 0
-        const cpu = Store.get('system.cpu') || 0
-        const mem = Store.get('system.memory') || Store.get('system.mem') || 0
-        const gpu = Store.get('system.gpu') || 0
+        const cpuSim = Store.get('system.cpu') || 0
+        const memSim = Store.get('system.mem') || 0
 
-        const heapMB = performance.memory
-            ? (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1)
-            : '—'
-        const heapLimit = performance.memory
-            ? (performance.memory.jsHeapSizeLimit / 1024 / 1024).toFixed(0)
-            : '—'
+        let heapMB = '--'
+        if (performance.memory) {
+            heapMB = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(1)
+        }
+
+        const domCount = document.querySelectorAll('*').length
 
         body.innerHTML = `
       <div class="taskman-perf">
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">FPS</div>
-          <div class="taskman-perf-bar-track">
-            <div class="taskman-perf-bar" style="width:${Math.min(100, fps / 60 * 100)}%;background:var(--neon-green)"></div>
-          </div>
-          <div class="taskman-perf-value" style="color:var(--neon-green)">${fps}</div>
+        <div class="taskman-metric-card">
+          <div class="metric-title">Event Loop Load</div>
+          <div class="metric-val" style="color:#00f5ff">${cpuSim}%</div>
+          <div class="metric-bar"><div class="metric-bar-fill" style="width:${cpuSim}%;background:#00f5ff"></div></div>
         </div>
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">Loop load</div>
-          <div class="taskman-perf-bar-track">
-            <div class="taskman-perf-bar" style="width:${cpu}%;background:var(--neon-cyan)"></div>
-          </div>
-          <div class="taskman-perf-value" style="color:var(--neon-cyan)">${Math.round(cpu)}%</div>
+        <div class="taskman-metric-card">
+          <div class="metric-title">JS Memory Pressure</div>
+          <div class="metric-val" style="color:#ff00e5">${memSim}%</div>
+          <div class="metric-bar"><div class="metric-bar-fill" style="width:${memSim}%;background:#ff00e5"></div></div>
         </div>
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">Memory</div>
-          <div class="taskman-perf-bar-track">
-            <div class="taskman-perf-bar" style="width:${mem}%;background:var(--neon-magenta)"></div>
-          </div>
-          <div class="taskman-perf-value" style="color:var(--neon-magenta)">${Math.round(mem)}%</div>
+        <div class="taskman-metric-card">
+          <div class="metric-title">Frame Rate</div>
+          <div class="metric-val" style="color:#28c840">${fps} fps</div>
+          <div class="metric-bar"><div class="metric-bar-fill" style="width:${Math.min(100, (fps / 144) * 100)}%;background:#28c840"></div></div>
         </div>
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">Frame budget</div>
-          <div class="taskman-perf-bar-track">
-            <div class="taskman-perf-bar" style="width:${gpu}%;background:var(--neon-green)"></div>
-          </div>
-          <div class="taskman-perf-value" style="color:var(--neon-green)">${Math.round(gpu)}%</div>
-        </div>
-        <div class="divider"></div>
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">JS Heap</div>
-          <div class="taskman-perf-bar-track">
-            <div class="taskman-perf-bar" style="width:${performance.memory ? (performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit * 100) : 0}%;background:var(--neon-orange)"></div>
-          </div>
-          <div class="taskman-perf-value">${heapMB} / ${heapLimit} MB</div>
-        </div>
-        <div class="taskman-perf-row">
-          <div class="taskman-perf-label">DOM Nodes</div>
-          <div class="taskman-perf-value" style="flex:1;text-align:right">${document.querySelectorAll('*').length}</div>
+        <div class="taskman-metric-card">
+          <div class="metric-title">DOM Elements</div>
+          <div class="metric-val" style="color:#b400ff">${domCount}</div>
+          <div class="metric-bar"><div class="metric-bar-fill" style="width:${Math.min(100, (domCount / 3000) * 100)}%;background:#b400ff"></div></div>
         </div>
       </div>
     `
 
         footer.innerHTML = `
-      <span>Updated every 1.5s</span>
+      <span>DOM: ${domCount} nodes</span>
       <span>Heap: ${heapMB} MB</span>
     `
     }
@@ -192,9 +176,9 @@ export default class TaskManager extends BaseApp {
         <div class="taskman-system-row"><span>Screen</span><span>${screen.width}×${screen.height} @${window.devicePixelRatio}x</span></div>
         <div class="taskman-system-row"><span>Viewport</span><span>${window.innerWidth}×${window.innerHeight}</span></div>
         <div class="taskman-system-row"><span>Color Depth</span><span>${screen.colorDepth}-bit</span></div>
-        <div class="taskman-system-row"><span>Online</span><span>${navigator.onLine ? 'Done Yes' : 'Error No'}</span></div>
-        <div class="taskman-system-row"><span>Cookies</span><span>${navigator.cookieEnabled ? 'Done' : 'Error'}</span></div>
-        <div class="taskman-system-row"><span>Touch</span><span>${'ontouchstart' in window ? 'Done' : 'Error'}</span></div>
+        <div class="taskman-system-row"><span>Online</span><span>${navigator.onLine ? 'Yes' : 'No'}</span></div>
+        <div class="taskman-system-row"><span>Cookies</span><span>${navigator.cookieEnabled ? 'Enabled' : 'Disabled'}</span></div>
+        <div class="taskman-system-row"><span>Touch</span><span>${'ontouchstart' in window ? 'Supported' : 'Not supported'}</span></div>
       </div>
     `
 

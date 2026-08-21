@@ -164,4 +164,5 @@ export default class Weather extends BaseApp {
         </div>
       </div>
     `
-  }}
+  }
+}

@@ -4,7 +4,6 @@ import Store from '../../core/Store.js'
 import { icon } from '../../ui/Icons.js'
 
 export default class SysMonitor extends BaseApp {
-
     async setup() {
         this.metrics = [
             { key: 'fps', label: 'Frame Rate', color: '#28c840', unit: ' fps', icon: icon('sysmon') },
@@ -19,7 +18,9 @@ export default class SysMonitor extends BaseApp {
         this.container.innerHTML = `
       <div class="sysmon">
         <div class="sysmon-grid">
-          ${this.metrics.map(m => `
+          ${this.metrics
+                .map(
+                    (m) => `
             <div class="sysmon-card" id="smc-${m.key}-${this.windowId}">
               <div class="sysmon-card-top">
                 <div class="sysmon-card-icon">${m.icon}</div>
@@ -33,7 +34,9 @@ export default class SysMonitor extends BaseApp {
                 <div class="sysmon-card-bar-fill" id="smb-${m.key}-${this.windowId}" style="background:${m.color}"></div>
               </div>
             </div>
-          `).join('')}
+          `,
+                )
+                .join('')}
         </div>
         <div class="sysmon-footer">
           <div class="sysmon-footer-item">
@@ -101,7 +104,10 @@ export default class SysMonitor extends BaseApp {
         let heapPct = 0
         if (performance.memory) {
             heapMB = performance.memory.usedJSHeapSize / 1024 / 1024
-            heapPct = (performance.memory.usedJSHeapSize / performance.memory.jsHeapSizeLimit) * 100
+            heapPct =
+                (performance.memory.usedJSHeapSize /
+                    performance.memory.jsHeapSizeLimit) *
+                100
         }
 
         const domCount = document.querySelectorAll('*').length
@@ -110,7 +116,10 @@ export default class SysMonitor extends BaseApp {
         const data = {
             fps: { display: fps, barPct: Math.min(100, (fps / 144) * 100) },
             heap: { display: heapMB.toFixed(1), barPct: Math.min(100, heapPct) },
-            dom: { display: domCount, barPct: Math.min(100, (domCount / 3000) * 100) },
+            dom: {
+                display: domCount,
+                barPct: Math.min(100, (domCount / 3000) * 100),
+            },
             lag: { display: lag.toFixed(1), barPct: Math.min(100, lag * 3) },
         }
 

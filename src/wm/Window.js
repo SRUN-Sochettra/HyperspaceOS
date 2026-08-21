@@ -35,8 +35,6 @@ export default class Window {
         }
     }
 
-    // ... keep render(), loadApp(), applyPosition(), setPosition(), 
-    // setSize(), setZIndex(), focus(), blur() exactly as before ...
 
     render() {
         const def = Registry.get(this.appId)

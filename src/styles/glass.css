@@ -3,221 +3,230 @@
    ============================================================ */
 
 .hyper-window {
-    position: absolute;
-    min-width: 300px;
-    min-height: 200px;
-    border-radius: var(--r-xl);
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
-    box-shadow: var(--shadow-window);
-    pointer-events: auto;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition:
-        box-shadow var(--t-base) ease,
-        border-color var(--t-base) ease,
-        border-radius var(--t-base) ease;
-    transform: translateZ(0);
-    will-change: transform;
+  position: absolute;
+  min-width: 300px;
+  min-height: 200px;
+  border-radius: var(--r-xl);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  -webkit-backdrop-filter: blur(var(--glass-blur))
+    saturate(var(--glass-saturate));
+  box-shadow: var(--shadow-window);
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition:
+    box-shadow var(--t-base) ease,
+    border-color var(--t-base) ease,
+    border-radius var(--t-base) ease;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Top edge highlight */
 .hyper-window::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 16px;
-    right: 16px;
-    height: 1px;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.06) 20%,
-            rgba(255, 255, 255, 0.08) 50%,
-            rgba(255, 255, 255, 0.06) 80%,
-            transparent);
-    z-index: 10;
-    pointer-events: none;
-    border-radius: var(--r-xl);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16px;
+  right: 16px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.06) 80%,
+    transparent
+  );
+  z-index: 10;
+  pointer-events: none;
+  border-radius: var(--r-xl);
 }
 
 /* Focused */
 .hyper-window.active {
-    box-shadow: var(--shadow-window-active);
-    border-color: var(--glass-border-light);
+  box-shadow: var(--shadow-window-active);
+  border-color: var(--glass-border-light);
 }
 
 .hyper-window.active::before {
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.08) 15%,
-            rgba(255, 255, 255, 0.12) 50%,
-            rgba(255, 255, 255, 0.08) 85%,
-            transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08) 15%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 85%,
+    transparent
+  );
 }
-
 
 /* ---- TITLEBAR ---- */
 .window-titlebar {
-    height: var(--titlebar-h);
-    display: flex;
-    align-items: center;
-    padding: 0 12px;
-    cursor: grab;
-    flex-shrink: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.025);
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, transparent 100%);
+  height: var(--titlebar-h);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  cursor: grab;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.025);
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.015) 0%,
+    transparent 100%
+  );
 }
 
 .window-titlebar:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 /* Traffic lights */
 .window-traffic {
-    display: flex;
-    gap: 6px;
-    margin-right: 8px;
+  display: flex;
+  gap: 6px;
+  margin-right: 8px;
 }
 
 .traffic-btn {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    position: relative;
-    transition: filter var(--t-fast) ease, transform var(--t-fast) ease;
-    /* Subtle inner shadow for depth */
-    box-shadow: inset 0 -0.5px 0.5px rgba(0, 0, 0, 0.15);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition:
+    filter var(--t-fast) ease,
+    transform var(--t-fast) ease;
+  /* Subtle inner shadow for depth */
+  box-shadow: inset 0 -0.5px 0.5px rgba(0, 0, 0, 0.15);
 }
 
 .traffic-btn:hover {
-    filter: brightness(1.25);
-    transform: scale(1.18);
+  filter: brightness(1.25);
+  transform: scale(1.18);
 }
 
 .traffic-btn:active {
-    transform: scale(0.82);
-    transition-duration: var(--t-instant);
+  transform: scale(0.82);
+  transition-duration: var(--t-instant);
 }
 
 .traffic-btn.close {
-    background: #ff5f57;
+  background: #ff5f57;
 }
 
 .traffic-btn.minimize {
-    background: #febc2e;
+  background: #febc2e;
 }
 
 .traffic-btn.maximize {
-    background: #28c840;
+  background: #28c840;
 }
 
 /* Show symbols on hover */
 .traffic-btn::after {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.45);
-    opacity: 0;
-    transition: opacity var(--t-fast) ease;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity var(--t-fast) ease;
 }
 
 .window-traffic:hover .traffic-btn::after {
-    opacity: 1;
+  opacity: 1;
 }
 
 .traffic-btn.close::after {
-    content: '×';
-    font-size: 9px;
+  content: "×";
+  font-size: 9px;
 }
 
 .traffic-btn.minimize::after {
-    content: '−';
-    font-size: 9px;
+  content: "−";
+  font-size: 9px;
 }
 
 .traffic-btn.maximize::after {
-    content: '+';
-    font-size: 9px;
+  content: "+";
+  font-size: 9px;
 }
 
 /* Window title */
 .window-title {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
-    color: var(--text-secondary);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    pointer-events: none;
-    letter-spacing: var(--ls-wide);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  letter-spacing: var(--ls-wide);
 }
 
 .window-title-icon {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .window-titlebar-spacer {
-    width: 56px;
-    flex-shrink: 0;
+  width: 56px;
+  flex-shrink: 0;
 }
 
 /* ---- BODY ---- */
 .window-body {
-    flex: 1;
-    overflow: auto;
-    position: relative;
-    z-index: 1;
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* ---- RESIZE HANDLE ---- */
 .window-resize-handle {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 18px;
-    height: 18px;
-    cursor: nwse-resize;
-    z-index: 3;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  z-index: 3;
 }
 
 .window-resize-handle::after {
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    right: 4px;
-    width: 5px;
-    height: 5px;
-    border-right: 1.5px solid transparent;
-    border-bottom: 1.5px solid transparent;
-    transition: border-color var(--t-base) ease;
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid transparent;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color var(--t-base) ease;
 }
 
 .hyper-window:hover .window-resize-handle::after {
-    border-right-color: rgba(255, 255, 255, 0.08);
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+  border-right-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 .window-resize-handle:hover::after {
-    border-right-color: rgba(255, 255, 255, 0.2) !important;
-    border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  border-right-color: rgba(255, 255, 255, 0.2) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
 }
-
 
 /* ============================================================
    SHARED UI COMPONENTS
@@ -225,142 +234,142 @@
 
 /* Glass button */
 .glass-btn {
-    padding: 5px 12px;
-    border-radius: var(--r-sm);
-    background: var(--surface-hover);
-    border: 1px solid var(--glass-border);
-    color: var(--text-primary);
-    font-size: var(--fs-sm);
-    font-weight: var(--fw-medium);
-    cursor: pointer;
-    transition: all var(--t-fast) ease;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--sp-2);
+  padding: 5px 12px;
+  border-radius: var(--r-sm);
+  background: var(--surface-hover);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--t-fast) ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
 }
 
 .glass-btn:hover {
-    background: var(--surface-active);
-    border-color: var(--glass-border-light);
+  background: var(--surface-active);
+  border-color: var(--glass-border-light);
 }
 
 .glass-btn:active {
-    background: var(--surface-pressed);
-    transform: scale(0.97);
+  background: var(--surface-pressed);
+  transform: scale(0.97);
 }
 
 .glass-btn.primary {
-    background: var(--neon-cyan-dim);
-    border-color: rgba(var(--neon-cyan-rgb), 0.2);
-    color: var(--neon-cyan);
+  background: var(--neon-cyan-dim);
+  border-color: rgba(var(--neon-cyan-rgb), 0.2);
+  color: var(--neon-cyan);
 }
 
 .glass-btn.primary:hover {
-    background: rgba(var(--neon-cyan-rgb), 0.18);
+  background: rgba(var(--neon-cyan-rgb), 0.18);
 }
 
 /* Glass card */
 .glass-card {
-    background: rgba(255, 255, 255, 0.012);
-    border-radius: var(--r-lg);
-    padding: var(--sp-4);
-    border: 1px solid rgba(255, 255, 255, 0.025);
-    transition: border-color var(--t-base) ease;
+  background: rgba(255, 255, 255, 0.012);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4);
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  transition: border-color var(--t-base) ease;
 }
 
 .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Section label */
 .section-label {
-    font-size: var(--fs-2xs);
-    text-transform: uppercase;
-    letter-spacing: var(--ls-widest);
-    color: var(--text-tertiary);
-    font-weight: var(--fw-semibold);
-    margin-bottom: var(--sp-2);
+  font-size: var(--fs-2xs);
+  text-transform: uppercase;
+  letter-spacing: var(--ls-widest);
+  color: var(--text-tertiary);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--sp-2);
 }
 
 /* Badge */
 .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 1px 6px;
-    border-radius: var(--r-full);
-    font-size: var(--fs-2xs);
-    font-weight: var(--fw-semibold);
-    letter-spacing: var(--ls-wide);
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-2xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
 }
 
 .badge.cyan {
-    background: var(--neon-cyan-dim);
-    color: var(--neon-cyan);
+  background: var(--neon-cyan-dim);
+  color: var(--neon-cyan);
 }
 
 .badge.green {
-    background: rgba(40, 200, 64, 0.12);
-    color: var(--neon-green);
+  background: rgba(40, 200, 64, 0.12);
+  color: var(--neon-green);
 }
 
 .badge.red {
-    background: rgba(255, 95, 87, 0.12);
-    color: var(--neon-red);
+  background: rgba(255, 95, 87, 0.12);
+  color: var(--neon-red);
 }
 
 .badge.yellow {
-    background: rgba(254, 188, 46, 0.12);
-    color: var(--neon-yellow);
+  background: rgba(254, 188, 46, 0.12);
+  color: var(--neon-yellow);
 }
 
 /* Toggle */
 .toggle {
-    position: relative;
-    width: 36px;
-    height: 20px;
-    cursor: pointer;
-    display: inline-block;
+  position: relative;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .toggle input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
 }
 
 .toggle-track {
-    position: absolute;
-    inset: 0;
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: var(--r-full);
-    transition: background var(--t-base) ease;
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-full);
+  transition: background var(--t-base) ease;
 }
 
 .toggle-track::before {
-    content: '';
-    position: absolute;
-    height: 14px;
-    width: 14px;
-    left: 3px;
-    bottom: 3px;
-    background: white;
-    border-radius: 50%;
-    transition: transform var(--t-base) var(--ease-spring);
-    box-shadow: var(--shadow-xs);
+  content: "";
+  position: absolute;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--t-base) var(--ease-spring);
+  box-shadow: var(--shadow-xs);
 }
 
-.toggle input:checked+.toggle-track {
-    background: var(--neon-cyan);
+.toggle input:checked + .toggle-track {
+  background: var(--neon-cyan);
 }
 
-.toggle input:checked+.toggle-track::before {
-    transform: translateX(16px);
+.toggle input:checked + .toggle-track::before {
+  transform: translateX(16px);
 }
 
 /* Divider */
 .divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.03);
-    margin: var(--sp-2) 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.03);
+  margin: var(--sp-2) 0;
 }

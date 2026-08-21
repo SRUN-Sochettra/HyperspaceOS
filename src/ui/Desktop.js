@@ -1,5 +1,11 @@
-import FileSystem from '../core/FileSystem.js'
+// ============================================================
+//  Desktop.js — Desktop icons layer
+//  Shows files/folders on the desktop canvas.
+//  Double click to open, drag to move, right click for menu.
+// ============================================================
+
 import EventBus from '../core/EventBus.js'
+import FileSystem from '../core/FileSystem.js'
 import Registry from '../core/Registry.js'
 import { icon } from './Icons.js'
 
@@ -8,7 +14,6 @@ const Desktop = (() => {
     let container = null
 
     function init() {
-        // Create our own container — don't use environment-layer
         container = document.createElement('div')
         container.id = 'desktop-icons-layer'
         container.className = 'desktop-icons-layer'
@@ -79,12 +84,17 @@ const Desktop = (() => {
                     // Open Files app
                     Registry.launch('files')
                 } else {
-                    // Open in editor
+                    const ext = name.split('.').pop()?.toLowerCase()
                     const content = FileSystem.readFile(path)
                     if (content !== null) {
-                        EventBus.emit('editor:queueFile', { path, content })
-                        EventBus.emit('editor:openFile', { path, content })
-                        Registry.launch('editor')
+                        if (ext === 'md' && Registry.has('markdown')) {
+                            EventBus.emit('markdown:queueFile', { path, content })
+                            Registry.launch('markdown')
+                        } else {
+                            EventBus.emit('editor:queueFile', { path, content })
+                            EventBus.emit('editor:openFile', { path, content })
+                            Registry.launch('editor')
+                        }
                     }
                 }
             })
@@ -127,10 +137,16 @@ const Desktop = (() => {
                     if (type === 'dir') {
                         Registry.launch('files')
                     } else {
+                        const ext = name.split('.').pop()?.toLowerCase()
                         const content = FileSystem.readFile(path)
-                        EventBus.emit('editor:queueFile', { path, content })
-                        EventBus.emit('editor:openFile', { path, content })
-                        Registry.launch('editor')
+                        if (ext === 'md' && Registry.has('markdown')) {
+                            EventBus.emit('markdown:queueFile', { path, content })
+                            Registry.launch('markdown')
+                        } else {
+                            EventBus.emit('editor:queueFile', { path, content })
+                            EventBus.emit('editor:openFile', { path, content })
+                            Registry.launch('editor')
+                        }
                     }
                 }
             },
@@ -230,7 +246,9 @@ const Desktop = (() => {
         const map = {
             md: 'notes', txt: 'file', js: 'editor', json: 'files', css: 'files',
             html: 'files', log: 'sysmon', py: 'editor', sh: 'terminal',
+            jpg: 'photos', png: 'photos', mp4: 'video', mp3: 'music',
         }
+        return icon(map[ext] || 'file')
     }
 
     return { init }

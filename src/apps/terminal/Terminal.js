@@ -143,6 +143,7 @@ export default class Terminal extends BaseApp {
         if (this.historyIndex < 0) { this.historyIndex = 0; return }
         if (this.historyIndex >= this.history.length) { this.historyIndex = this.history.length; this.inputEl.value = ''; return }
         this.inputEl.value = this.history[this.historyIndex]
+        this.inputEl.dispatchEvent(new Event('input', { bubbles: true }))
     }
 
     autocomplete() {
@@ -152,7 +153,10 @@ export default class Terminal extends BaseApp {
         if (parts.length <= 1) {
             // Command autocomplete
             const matches = Object.keys(COMMANDS).filter(c => c.startsWith(input.toLowerCase()))
-            if (matches.length === 1) this.inputEl.value = matches[0] + ' '
+            if (matches.length === 1) {
+                this.inputEl.value = matches[0] + ' '
+                this.inputEl.dispatchEvent(new Event('input', { bubbles: true }))
+            }
             else if (matches.length > 1) this.writeLine('output', matches.join('  '))
             return
         }
@@ -170,6 +174,7 @@ export default class Terminal extends BaseApp {
             const match = matches[0]
             parts[parts.length - 1] = (partial.includes('/') ? FileSystem.parentPath(partial) + '/' : '') + match.name + (match.type === 'dir' ? '/' : '')
             this.inputEl.value = parts.join(' ')
+            this.inputEl.dispatchEvent(new Event('input', { bubbles: true }))
         } else if (matches.length > 1) {
             this.writeLine('output', matches.map(m => m.name).join('  '))
         }
