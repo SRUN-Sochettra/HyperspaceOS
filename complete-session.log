@@ -28,6 +28,6 @@ reason: correct stale evidence provenance and regenerate complete delivery artif
 files changed in finalization: verification/results.json, REPAIR_REPORT.md, complete-session.log; regenerated hyperspace-repaired-verified.zip and repomix-repaired-final.xml
 commands executed: starting Git-state capture; evidence inspection; python JSON validation; tracked diff checks; evidence-only commit; ZIP and Repomix regeneration; final artifact and consistency validation
 runtime tests rerun: no; historical runtime evidence remains tied to bcbcc0b65ddc590b554281fc6b211801fd5cbeb6
-final artifact validation: pending artifact regeneration and validation
-resulting final evidence commit: pending
-UTC finish: pending
+final artifact validation: ZIP generated with 133 entries, including all non-diagnostic tracked files and required binary assets; Repomix generated with 134 packed text files including package-lock.json, verification/results.json, REPAIR_REPORT.md, and complete-session.log; screenshot binaries intentionally excluded from ZIP and Repomix text packing
+resulting final evidence commit: 6f90ca75e0209e9c3a97c5407341b78331276941
+UTC finish: pending final artifact regeneration from the final evidence commit
