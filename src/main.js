@@ -58,11 +58,6 @@ import './apps/mail/mail.css'
 import './styles/redesign.css'
 
 // Boot
-<<<<<<< HEAD
 import { boot } from './core/OS.js'
 boot()
 import './styles/redesign.css'
-=======
-import { boot } from "./core/OS.js";
-boot();
->>>>>>> origin/main

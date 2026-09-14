@@ -1,11 +1,7 @@
-import Registry from "../../core/Registry.js";
 import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 
 export default function registerCalendar() {
-  Registry.register("calendar", {
-    title: "Calendar",
-    icon: "📅",
   Registry.register('calendar', {
     title: 'Calendar',
     icon: icon('calendar'),
@@ -14,9 +10,6 @@ export default function registerCalendar() {
     minWidth: 350,
     minHeight: 400,
     singleton: true,
-    category: "productivity",
-    component: () => import("./Calendar.js"),
-  });
     category: 'productivity',
     component: () => import('./Calendar.js'),
   })

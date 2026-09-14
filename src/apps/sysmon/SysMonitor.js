@@ -1,48 +1,9 @@
-<<<<<<< HEAD
 import BaseApp from '../BaseApp.js'
 import Sparkline from './Sparkline.js'
 import Store from '../../core/Store.js'
 import { icon } from '../../ui/Icons.js'
-=======
-import BaseApp from "../BaseApp.js";
-import Sparkline from "./Sparkline.js";
-import Store from "../../core/Store.js";
->>>>>>> origin/main
 
 export default class SysMonitor extends BaseApp {
-  async setup() {
-    this.metrics = [
-      {
-        key: "fps",
-        label: "Frame Rate",
-        color: "#28c840",
-        unit: " fps",
-        icon: "🎯",
-      },
-      {
-        key: "heap",
-        label: "JS Heap",
-        color: "#ff00e5",
-        unit: " MB",
-        icon: "🧠",
-      },
-      {
-        key: "dom",
-        label: "DOM Nodes",
-        color: "#00f5ff",
-        unit: "",
-        icon: "🌐",
-      },
-      {
-        key: "lag",
-        label: "Event Loop Lag",
-        color: "#b400ff",
-        unit: " ms",
-        icon: "⚡",
-      },
-    ];
-
-<<<<<<< HEAD
     async setup() {
         this.metrics = [
             { key: 'fps', label: 'Frame Rate', color: '#28c840', unit: ' fps', icon: icon('sysmon') },
@@ -50,12 +11,7 @@ export default class SysMonitor extends BaseApp {
             { key: 'dom', label: 'DOM Nodes', color: '#00f5ff', unit: '', icon: icon('files') },
             { key: 'lag', label: 'Event Loop Lag', color: '#b400ff', unit: ' ms', icon: icon('settings') },
         ]
-=======
-    this.loopLag = 0;
-    this.lagTimeout = null;
->>>>>>> origin/main
 
-    this.container.innerHTML = `
         this.loopLag = 0
         this.lagTimeout = null
 
@@ -63,8 +19,6 @@ export default class SysMonitor extends BaseApp {
       <div class="sysmon">
         <div class="sysmon-grid">
           ${this.metrics
-            .map(
-              (m) => `
                 .map(
                     (m) => `
             <div class="sysmon-card" id="smc-${m.key}-${this.windowId}">
@@ -81,8 +35,6 @@ export default class SysMonitor extends BaseApp {
               </div>
             </div>
           `,
-            )
-            .join("")}
                 )
                 .join('')}
         </div>
@@ -93,12 +45,10 @@ export default class SysMonitor extends BaseApp {
           </div>
           <div class="sysmon-footer-item">
             <span class="sysmon-footer-label">Cores</span>
-            <span class="sysmon-footer-value">${navigator.hardwareConcurrency || "—"}</span>
             <span class="sysmon-footer-value">${navigator.hardwareConcurrency || '—'}</span>
           </div>
           <div class="sysmon-footer-item">
             <span class="sysmon-footer-label">Memory</span>
-            <span class="sysmon-footer-value">${navigator.deviceMemory ? navigator.deviceMemory + " GB" : "—"}</span>
             <span class="sysmon-footer-value">${navigator.deviceMemory ? navigator.deviceMemory + ' GB' : '—'}</span>
           </div>
           <div class="sysmon-footer-item">
@@ -107,21 +57,8 @@ export default class SysMonitor extends BaseApp {
           </div>
         </div>
       </div>
-    `;
     `
 
-    // Create sparklines after DOM is ready
-    this.sparklines = {};
-    this.addTimeout(() => {
-      for (const m of this.metrics) {
-        const chartContainer = this.$(`#smc-chart-${m.key}-${this.windowId}`);
-        if (chartContainer) {
-          const canvas = document.createElement("canvas");
-          chartContainer.appendChild(canvas);
-          this.sparklines[m.key] = new Sparkline(canvas, m.color);
-        }
-      }
-    }, 50);
         // Create sparklines after DOM is ready
         this.sparklines = {}
         this.addTimeout(() => {
@@ -135,35 +72,16 @@ export default class SysMonitor extends BaseApp {
             }
         }, 50)
 
-    // Start lag tracking
-    this.trackLoopLag();
         // Start lag tracking
         this.trackLoopLag()
 
-    // Update every second
-    this.addInterval(() => this.update(), 1000);
         // Update every second
         this.addInterval(() => this.update(), 1000)
 
-    // Initial update
-    this.addTimeout(() => this.update(), 100);
-  }
         // Initial update
         this.addTimeout(() => this.update(), 100)
     }
 
-  trackLoopLag() {
-    const measure = () => {
-      if (this.destroyed) return;
-      const start = performance.now();
-      this.lagTimeout = setTimeout(() => {
-        if (this.destroyed) return;
-        this.loopLag = Math.max(0, performance.now() - start - 100);
-        measure();
-      }, 100);
-    };
-    measure();
-  }
     trackLoopLag() {
         const measure = () => {
             if (this.destroyed) return
@@ -177,23 +95,11 @@ export default class SysMonitor extends BaseApp {
         measure()
     }
 
-  update() {
-    if (this.destroyed) return;
     update() {
         if (this.destroyed) return
 
-    const fps = Store.get("system.fps") || 0;
         const fps = Store.get('system.fps') || 0
 
-    let heapMB = 0;
-    let heapPct = 0;
-    if (performance.memory) {
-      heapMB = performance.memory.usedJSHeapSize / 1024 / 1024;
-      heapPct =
-        (performance.memory.usedJSHeapSize /
-          performance.memory.jsHeapSizeLimit) *
-        100;
-    }
         let heapMB = 0
         let heapPct = 0
         if (performance.memory) {
@@ -204,20 +110,9 @@ export default class SysMonitor extends BaseApp {
                 100
         }
 
-    const domCount = document.querySelectorAll("*").length;
-    const lag = this.loopLag;
         const domCount = document.querySelectorAll('*').length
         const lag = this.loopLag
 
-    const data = {
-      fps: { display: fps, barPct: Math.min(100, (fps / 144) * 100) },
-      heap: { display: heapMB.toFixed(1), barPct: Math.min(100, heapPct) },
-      dom: {
-        display: domCount,
-        barPct: Math.min(100, (domCount / 3000) * 100),
-      },
-      lag: { display: lag.toFixed(1), barPct: Math.min(100, lag * 3) },
-    };
         const data = {
             fps: { display: fps, barPct: Math.min(100, (fps / 144) * 100) },
             heap: { display: heapMB.toFixed(1), barPct: Math.min(100, heapPct) },
@@ -228,27 +123,16 @@ export default class SysMonitor extends BaseApp {
             lag: { display: lag.toFixed(1), barPct: Math.min(100, lag * 3) },
         }
 
-    for (const m of this.metrics) {
-      const d = data[m.key];
-      if (!d) continue;
         for (const m of this.metrics) {
             const d = data[m.key]
             if (!d) continue
 
-      const valEl = this.$(`#smv-${m.key}-${this.windowId}`);
-      const barEl = this.$(`#smb-${m.key}-${this.windowId}`);
             const valEl = this.$(`#smv-${m.key}-${this.windowId}`)
             const barEl = this.$(`#smb-${m.key}-${this.windowId}`)
 
-      if (valEl) valEl.textContent = `${d.display}${m.unit}`;
-      if (barEl) barEl.style.width = `${d.barPct}%`;
             if (valEl) valEl.textContent = `${d.display}${m.unit}`
             if (barEl) barEl.style.width = `${d.barPct}%`
 
-      if (this.sparklines[m.key]) {
-        this.sparklines[m.key].push(d.barPct);
-        this.sparklines[m.key].draw();
-      }
             if (this.sparklines[m.key]) {
                 this.sparklines[m.key].push(d.barPct)
                 this.sparklines[m.key].draw()
@@ -260,15 +144,6 @@ export default class SysMonitor extends BaseApp {
         Store.set('system.gpu', Math.round(data.fps.barPct))
     }
 
-    Store.set("system.cpu", Math.round(data.lag.barPct));
-    Store.set("system.mem", Math.round(data.heap.barPct));
-    Store.set("system.gpu", Math.round(data.fps.barPct));
-  }
-
-  onDestroy() {
-    if (this.lagTimeout) clearTimeout(this.lagTimeout);
-    this.sparklines = {};
-  }
     onDestroy() {
         if (this.lagTimeout) clearTimeout(this.lagTimeout)
         this.sparklines = {}

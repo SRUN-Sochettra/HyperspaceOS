@@ -106,24 +106,31 @@ const WindowManager = (() => {
         const win = windows.get(id)
         if (!win) return
 
-        await win.close()
-        windows.delete(id)
+        let closeError = null
+        try {
+            await win.close()
+        } catch (error) {
+            closeError = error
+        } finally {
+            windows.delete(id)
 
-        // If we closed the active window, focus the topmost remaining
-        const activeId = Store.get('windows.active')
-        if (activeId === id) {
-            const topmost = getTopmost()
-            if (topmost) {
-                focus(topmost.id)
-            } else {
-                Store.set('windows.active', null)
-                EventBus.emit('window:none-active')
+            // If we closed the active window, focus the topmost remaining
+            const activeId = Store.get('windows.active')
+            if (activeId === id) {
+                const topmost = getTopmost()
+                if (topmost) {
+                    focus(topmost.id)
+                } else {
+                    Store.set('windows.active', null)
+                    EventBus.emit('window:none-active')
+                }
             }
+
+            syncStore()
+            EventBus.emit('window:closed', { id, appId: win.appId })
         }
 
-        syncStore()
-
-        EventBus.emit('window:closed', { id, appId: win.appId })
+        if (closeError) throw closeError
     }
 
     // ---- MINIMIZE ----
@@ -226,11 +233,24 @@ const WindowManager = (() => {
 
     // ---- CLOSE ALL ----
     async function closeAll() {
-        const ids = [...windows.keys()]
-        await Promise.all(ids.map(id => close(id)))
+        const snapshot = [...windows.entries()]
+        const failures = []
+
+        for (const [id] of snapshot) {
+            try {
+                await close(id)
+            } catch (error) {
+                failures.push(error)
+            }
+        }
+
         windows.clear()
         if (container) {
-            container.innerHTML = ''
+            container.replaceChildren()
+        }
+
+        if (failures.length > 0) {
+            throw new AggregateError(failures, 'One or more windows failed during close')
         }
     }
 

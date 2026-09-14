@@ -1,17 +1,7 @@
-import BaseApp from "../BaseApp.js";
 import BaseApp from '../BaseApp.js'
 
 export default class Whiteboard extends BaseApp {
-  async setup() {
-    this.tool = "pencil";
-    this.color = "#00f5ff";
-    this.lineWidth = 3;
-    this.drawing = false;
-    this.startX = 0;
-    this.startY = 0;
 
-    // Save canvas state for shape preview (undo during drag)
-    this.savedImageData = null;
     async setup() {
         this.tool = 'pencil'
         this.color = '#00f5ff'
@@ -20,7 +10,6 @@ export default class Whiteboard extends BaseApp {
         this.startX = 0
         this.startY = 0
 
-    this.container.innerHTML = `
         // Save canvas state for shape preview (undo during drag)
         this.savedImageData = null
 
@@ -47,32 +36,18 @@ export default class Whiteboard extends BaseApp {
           <canvas id="wb-canvas-${this.windowId}"></canvas>
         </div>
       </div>
-    `;
     `
 
-    this.canvas = this.$(`#wb-canvas-${this.windowId}`);
-    this.ctx = this.canvas.getContext("2d");
         this.canvas = this.$(`#wb-canvas-${this.windowId}`)
         this.ctx = this.canvas.getContext('2d')
 
-    // Undo history
-    this.undoStack = [];
         // Undo history
         this.undoStack = []
 
-    this.resizeCanvas();
-    this.bindEvents();
-  }
         this.resizeCanvas()
         this.bindEvents()
     }
 
-  resizeCanvas() {
-    const wrapper = this.container.querySelector(".wb-canvas-wrapper");
-    if (!wrapper) return;
-    const rect = wrapper.getBoundingClientRect();
-    this.canvas.width = rect.width;
-    this.canvas.height = rect.height;
     resizeCanvas() {
         const wrapper = this.container.querySelector('.wb-canvas-wrapper')
         if (!wrapper) return
@@ -80,30 +55,14 @@ export default class Whiteboard extends BaseApp {
         this.canvas.width = rect.width
         this.canvas.height = rect.height
 
-    // Fill with dark background
-    this.ctx.fillStyle = "#0a0a1a";
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
         // Fill with dark background
         this.ctx.fillStyle = '#0a0a1a'
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
     }
 
-  bindEvents() {
-    const wid = this.windowId;
     bindEvents() {
         const wid = this.windowId
 
-    // Tool selection
-    this.$$(".wb-tool").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        this.$$(".wb-tool").forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        this.tool = btn.dataset.tool;
-        this.canvas.style.cursor =
-          this.tool === "eraser" ? "cell" : "crosshair";
-      });
-    });
         // Tool selection
         this.$$('.wb-tool').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -114,32 +73,17 @@ export default class Whiteboard extends BaseApp {
             })
         })
 
-    // Color
-    this.$(`#wb-color-${wid}`).addEventListener("input", (e) => {
-      this.color = e.target.value;
-    });
         // Color
         this.$(`#wb-color-${wid}`).addEventListener('input', (e) => {
             this.color = e.target.value
         })
 
-    // Size
-    this.$(`#wb-size-${wid}`).addEventListener("input", (e) => {
-      this.lineWidth = parseInt(e.target.value);
-      this.$(`#wb-size-label-${wid}`).textContent = this.lineWidth + "px";
-    });
         // Size
         this.$(`#wb-size-${wid}`).addEventListener('input', (e) => {
             this.lineWidth = parseInt(e.target.value)
             this.$(`#wb-size-label-${wid}`).textContent = this.lineWidth + 'px'
         })
 
-    // Canvas drawing
-    this.canvas.addEventListener("mousedown", (e) => this.onMouseDown(e));
-    this.moveHandler = (e) => this.onMouseMove(e);
-    this.upHandler = () => this.onMouseUp();
-    window.addEventListener("mousemove", this.moveHandler);
-    window.addEventListener("mouseup", this.upHandler);
         // Canvas drawing
         this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e))
         this.moveHandler = (e) => this.onMouseMove(e)
@@ -147,109 +91,33 @@ export default class Whiteboard extends BaseApp {
         window.addEventListener('mousemove', this.moveHandler)
         window.addEventListener('mouseup', this.upHandler)
 
-    // Buttons
-    this.$(`#wb-undo-${wid}`)?.addEventListener("click", () => this.undo());
-    this.$(`#wb-clear-${wid}`)?.addEventListener("click", () =>
-      this.clearCanvas(),
-    );
-    this.$(`#wb-export-${wid}`)?.addEventListener("click", () =>
-      this.exportPNG(),
-    );
-  }
-
-  getCanvasPos(e) {
-    const rect = this.canvas.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }
-
-  saveState() {
-    this.undoStack.push(
-      this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height),
-    );
-    if (this.undoStack.length > 30) this.undoStack.shift();
-  }
-
-  onMouseDown(e) {
-    this.drawing = true;
-    const pos = this.getCanvasPos(e);
-    this.startX = pos.x;
-    this.startY = pos.y;
-
-    this.saveState();
-
-    // Save current canvas for shape preview
-    this.savedImageData = this.ctx.getImageData(
-      0,
-      0,
-      this.canvas.width,
-      this.canvas.height,
-    );
-
-    if (this.tool === "pencil" || this.tool === "eraser") {
-      this.ctx.beginPath();
-      this.ctx.moveTo(pos.x, pos.y);
-      this.ctx.strokeStyle = this.color;
-      this.ctx.lineWidth =
-        this.tool === "eraser" ? this.lineWidth * 3 : this.lineWidth;
-      this.ctx.lineCap = "round";
-      this.ctx.lineJoin = "round";
-      this.ctx.globalCompositeOperation =
-        this.tool === "eraser" ? "destination-out" : "source-over";
         // Buttons
         this.$(`#wb-undo-${wid}`)?.addEventListener('click', () => this.undo())
         this.$(`#wb-clear-${wid}`)?.addEventListener('click', () => this.clearCanvas())
         this.$(`#wb-export-${wid}`)?.addEventListener('click', () => this.exportPNG())
     }
-  }
 
-  onMouseMove(e) {
-    if (!this.drawing) return;
-
-    const pos = this.getCanvasPos(e);
-
-    if (this.tool === "pencil" || this.tool === "eraser") {
-      this.ctx.lineTo(pos.x, pos.y);
-      this.ctx.stroke();
-      return;
     getCanvasPos(e) {
         const rect = this.canvas.getBoundingClientRect()
         return { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
 
-    // For shapes — restore saved state and draw preview
-    if (this.savedImageData) {
-      this.ctx.putImageData(this.savedImageData, 0, 0);
     saveState() {
         this.undoStack.push(this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height))
         if (this.undoStack.length > 30) this.undoStack.shift()
     }
 
-    this.ctx.globalCompositeOperation = "source-over";
-    this.ctx.strokeStyle = this.color;
-    this.ctx.lineWidth = this.lineWidth;
-    this.ctx.lineCap = "round";
     onMouseDown(e) {
         this.drawing = true
         const pos = this.getCanvasPos(e)
         this.startX = pos.x
         this.startY = pos.y
 
-    const dx = pos.x - this.startX;
-    const dy = pos.y - this.startY;
         this.saveState()
 
-    if (this.tool === "line") {
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.startX, this.startY);
-      this.ctx.lineTo(pos.x, pos.y);
-      this.ctx.stroke();
-    }
         // Save current canvas for shape preview
         this.savedImageData = this.ctx.getImageData(0, 0, this.canvas.width, this.canvas.height)
 
-    if (this.tool === "rect") {
-      this.ctx.beginPath();
-      this.ctx.strokeRect(this.startX, this.startY, dx, dy);
         if (this.tool === 'pencil' || this.tool === 'eraser') {
             this.ctx.beginPath()
             this.ctx.moveTo(pos.x, pos.y)
@@ -261,45 +129,9 @@ export default class Whiteboard extends BaseApp {
         }
     }
 
-    if (this.tool === "circle") {
-      const radius = Math.sqrt(dx * dx + dy * dy);
-      this.ctx.beginPath();
-      this.ctx.arc(this.startX, this.startY, radius, 0, Math.PI * 2);
-      this.ctx.stroke();
-    }
-  }
     onMouseMove(e) {
         if (!this.drawing) return
 
-  onMouseUp() {
-    if (!this.drawing) return;
-    this.drawing = false;
-    this.ctx.globalCompositeOperation = "source-over";
-    this.savedImageData = null;
-  }
-
-  undo() {
-    if (this.undoStack.length === 0) return;
-    const imageData = this.undoStack.pop();
-    this.ctx.putImageData(imageData, 0, 0);
-  }
-
-  clearCanvas() {
-    this.saveState();
-    this.ctx.fillStyle = "#0a0a1a";
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  exportPNG() {
-    const link = document.createElement("a");
-    link.download = `whiteboard-${Date.now()}.png`;
-    link.href = this.canvas.toDataURL("image/png");
-    link.click();
-
-    this.notify("💾", "Exported", "Drawing saved as PNG");
-  }
-
-<<<<<<< HEAD
         const pos = this.getCanvasPos(e)
 
         if (this.tool === 'pencil' || this.tool === 'eraser') {
@@ -375,11 +207,3 @@ export default class Whiteboard extends BaseApp {
         this.undoStack = []
     }
 }
-=======
-  onDestroy() {
-    window.removeEventListener("mousemove", this.moveHandler);
-    window.removeEventListener("mouseup", this.upHandler);
-    this.undoStack = [];
-  }
-}
->>>>>>> origin/main
