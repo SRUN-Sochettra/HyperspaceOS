@@ -5,6 +5,7 @@
 // ============================================================
 
 import Registry from '../core/Registry.js'
+import { escapeHtml } from '../utils/safeDom.js'
 import FileSystem from '../core/FileSystem.js'
 import EventBus from '../core/EventBus.js'
 import { icon } from './Icons.js'
@@ -230,7 +231,7 @@ const Spotlight = (() => {
 
         results.innerHTML = currentResults.map((item, i) => {
             if (item.type === 'divider') {
-                return `<div class="spotlight-divider">${item.label}</div>`
+                return `<div class="spotlight-divider">${escapeHtml(item.label)}</div>`
             }
 
             const isSelected = i === selectedIndex
@@ -241,8 +242,8 @@ const Spotlight = (() => {
              data-index="${i}">
           <span class="spotlight-result-icon">${item.icon}</span>
           <div class="spotlight-result-text">
-            <div class="spotlight-result-title">${item.title}</div>
-            <div class="spotlight-result-subtitle">${item.subtitle || ''}</div>
+            <div class="spotlight-result-title">${escapeHtml(item.title)}</div>
+            <div class="spotlight-result-subtitle">${escapeHtml(item.subtitle || '')}</div>
           </div>
           ${item.type === 'app' ? '<span class="spotlight-result-badge">App</span>' : ''}
           ${item.type === 'file' ? '<span class="spotlight-result-badge file">File</span>' : ''}

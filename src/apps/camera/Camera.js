@@ -24,15 +24,18 @@ export default class Camera extends BaseApp {
 
     this.captureBtn.addEventListener("click", () => this.captureImage());
 
-    this.startCamera();
+    void this.startCamera();
   }
 
   async startCamera() {
     try {
-      this.stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
-      this.videoElement.srcObject = this.stream;
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+      if (this.destroyed) { stream.getTracks().forEach(track => track.stop()); return; }
+      this.stream = stream;
+      this.videoElement.srcObject = stream;
     } catch (err) {
-      console.error("Error accessing camera: ", err);
+      if (this.destroyed) return;
+      console.warn("[Camera] Camera unavailable:", err);
       this.container.innerHTML = `
         <div class="camera-container" style="justify-content: center; align-items: center;">
           <div style="font-size: 3rem; margin-bottom: 10px;">📸</div>
@@ -84,6 +87,8 @@ export default class Camera extends BaseApp {
   onDestroy() {
     if (this.stream) {
       this.stream.getTracks().forEach(track => track.stop());
+      this.stream = null;
     }
+    if (this.videoElement) { this.videoElement.pause(); this.videoElement.srcObject = null; }
   }
 }

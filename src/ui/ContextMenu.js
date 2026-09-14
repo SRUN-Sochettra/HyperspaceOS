@@ -5,6 +5,7 @@
 // ============================================================
 
 import EventBus from '../core/EventBus.js'
+import { escapeHtml } from '../utils/safeDom.js'
 import Registry from '../core/Registry.js'
 import { icon } from './Icons.js'
 
@@ -97,8 +98,8 @@ const ContextMenu = (() => {
             return `
         <div class="ctx-item" data-action-id="${Math.random()}">
           <span class="ctx-item-icon">${item.icon}</span>
-          <span class="ctx-item-label">${item.label}</span>
-          ${item.shortcut ? `<span class="ctx-item-shortcut">${item.shortcut}</span>` : ''}
+          <span class="ctx-item-label">${escapeHtml(item.label)}</span>
+          ${item.shortcut ? `<span class="ctx-item-shortcut">${escapeHtml(item.shortcut)}</span>` : ''}
         </div>
       `
         }).join('')

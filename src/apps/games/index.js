@@ -1,7 +1,11 @@
+import Registry from "../../core/Registry.js";
 import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 
 export default function registerGames() {
+  Registry.register("games", {
+    title: "Games",
+    icon: "🎮",
   Registry.register('games', {
     title: 'Games',
     icon: icon('games'),
@@ -10,6 +14,9 @@ export default function registerGames() {
     minWidth: 400,
     minHeight: 440,
     singleton: true,
+    category: "media",
+    component: () => import("./Games.js"),
+  });
     category: 'media',
     component: () => import('./Games.js'),
   })

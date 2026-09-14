@@ -35,6 +35,7 @@ const paths = {
 export function icon(name, label = '') {
   const path = paths[name] || paths.file
   const aria = label ? `role="img" aria-label="${label.replace(/"/g, '&quot;')}"` : 'aria-hidden="true"'
+  const aria = label ? `role="img" aria-label="${label.replace(/"/g, '"')}"` : 'aria-hidden="true"'
   return `<svg class="hs-icon hs-icon-${name}" ${aria} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">${path}</svg>`
 }
 export default icon

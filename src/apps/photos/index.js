@@ -1,7 +1,11 @@
+import Registry from "../../core/Registry.js";
 import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 
 export default function registerPhotos() {
+  Registry.register("photos", {
+    title: "Photos",
+    icon: "🖼️",
   Registry.register('photos', {
     title: 'Photos',
     icon: icon('photos'),
@@ -10,6 +14,9 @@ export default function registerPhotos() {
     minWidth: 400,
     minHeight: 300,
     singleton: true,
+    category: "media",
+    component: () => import("./Photos.js"),
+  });
     category: 'media',
     component: () => import('./Photos.js'),
   })

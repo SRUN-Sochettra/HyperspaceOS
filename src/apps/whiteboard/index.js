@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { icon } from '../../ui/Icons.js'
 import Registry from '../../core/Registry.js'
 
@@ -11,3 +12,17 @@ export default function registerWhiteboard() {
         component: () => import('./Whiteboard.js'),
     })
 }
+=======
+import Registry from "../../core/Registry.js";
+
+export default function registerWhiteboard() {
+  Registry.register("whiteboard", {
+    title: "Whiteboard",
+    icon: "🎨",
+    width: 700,
+    height: 500,
+    category: "productivity",
+    component: () => import("./Whiteboard.js"),
+  });
+}
+>>>>>>> origin/main

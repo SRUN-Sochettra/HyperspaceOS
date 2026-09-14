@@ -32,8 +32,14 @@ First off, thank you for considering contributing to HyperSpace! It's people lik
 ## Technical Guidelines
 
 ### Architecture
+<<<<<<< HEAD
 
 HyperSpace is built with a modular architecture:
+=======
+
+HyperSpace OS is built with a modular architecture:
+
+>>>>>>> origin/main
 - **Core**: Kernel, FileSystem, and EventBus are the backbone. Avoid heavy modifications here unless necessary.
 - **Apps**: New applications should be placed in `src/apps/[app-name]`.
 - **UI**: Shared components belong in `src/ui`.
@@ -50,14 +56,22 @@ HyperSpace is built with a modular architecture:
 
 ---
 
+<<<<<<< HEAD
 ## Code of Conduct
+=======
+## 📜 Code of Conduct
 
+>>>>>>> origin/main
 We are committed to providing a friendly, safe, and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
 
 ---
 
+<<<<<<< HEAD
 ## License
+=======
+## ⚖️ License
 
+>>>>>>> origin/main
 By contributing, you agree that your contributions will be licensed under its **MIT License**.
 
 Happy Coding!

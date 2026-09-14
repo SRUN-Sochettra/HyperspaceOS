@@ -1,7 +1,12 @@
 node_modules/
+<<<<<<< HEAD
 dist/
 graft/
 .vite/
 *.log
 .DS_Store
 Thumbs.db
+=======
+node_modules/
+dist
+>>>>>>> origin/main

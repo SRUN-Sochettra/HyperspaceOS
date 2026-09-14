@@ -36,13 +36,20 @@ const Notification = (() => {
         const el = document.createElement('div')
         el.className = 'notification'
 
-        el.innerHTML = `
-      <span class="notif-icon">${icon}</span>
-      <div class="notif-content">
-        <div class="notif-title">${title}</div>
-        <div class="notif-body">${body}</div>
-      </div>
-    `
+        const iconEl = document.createElement('span')
+        iconEl.className = 'notif-icon'
+        // Icons are trusted local application markup. Notification text is never HTML.
+        iconEl.innerHTML = String(icon)
+        const contentEl = document.createElement('div')
+        contentEl.className = 'notif-content'
+        const titleEl = document.createElement('div')
+        titleEl.className = 'notif-title'
+        titleEl.textContent = String(title)
+        const bodyEl = document.createElement('div')
+        bodyEl.className = 'notif-body'
+        bodyEl.textContent = String(body)
+        contentEl.append(titleEl, bodyEl)
+        el.append(iconEl, contentEl)
 
         // Position — stack below existing notifications
         const offset = active.length * 68
