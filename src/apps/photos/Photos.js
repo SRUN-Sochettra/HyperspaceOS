@@ -1,5 +1,6 @@
 import BaseApp from "../BaseApp.js";
 import FileSystem from "../../core/FileSystem.js";
+import { safeMediaUrl } from "../../utils/safeDom.js";
 
 export default class Photos extends BaseApp {
   async setup() {
@@ -36,60 +37,28 @@ export default class Photos extends BaseApp {
       this.closeLightbox(),
     );
 
-    // Ensure Pictures directory exists
-    if (!FileSystem.isDir("/home/root/Pictures")) {
-      FileSystem.mkdir("/home/root/Pictures");
-      // Let's seed a sample base64 image if it's empty
-      const sampleImage =
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="; // Just a tiny red pixel for now
-      FileSystem.writeFile("/home/root/Pictures/sample.png", sampleImage);
-    }
-
+    if (!FileSystem.isDir("/home/root/Pictures")) FileSystem.mkdir("/home/root/Pictures");
     this.loadPhotos();
   }
 
   loadPhotos() {
     const items = FileSystem.readdir("/home/root/Pictures") || [];
-    const imageFiles = items.filter((item) => {
-      if (item.type !== "file") return false;
-      const ext = item.name.split(".").pop()?.toLowerCase();
-      return ["jpg", "jpeg", "png", "gif", "webp", "svg"].includes(ext);
-    });
-
-    if (imageFiles.length === 0) {
-      this.grid.innerHTML = `
-                <div class="empty-state">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">🖼️</div>
-                    <div>No photos found in /home/root/Pictures</div>
-                </div>
-            `;
-      return;
+    this.grid.replaceChildren();
+    let count = 0;
+    for (const file of items) {
+      if (file.type !== "file") continue;
+      const src = safeMediaUrl(FileSystem.readFile(file.path), "image");
+      if (!src) continue;
+      count += 1;
+      const button = this.createElement("button", "photo-item");
+      button.type = "button";
+      button.setAttribute("aria-label", `Open ${file.name}`);
+      const image = document.createElement("img"); image.src = src; image.alt = file.name;
+      button.append(image, this.createElement("span", "photo-label", file.name));
+      this.listenTo(button, "click", () => this.openLightbox(src));
+      this.grid.append(button);
     }
-
-    this.grid.innerHTML = imageFiles
-      .map((file) => {
-        const content = FileSystem.readFile(file.path);
-        // If it's not a data URL, we might need a fallback, but for this OS simulator,
-        // we assume image files store base64 data URLs as their content.
-        const src =
-          content && content.startsWith("data:image")
-            ? content
-            : "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==";
-
-        return `
-                <div class="photo-item" data-src="${src}" data-name="${file.name}">
-                    <img src="${src}" alt="${file.name}" />
-                    <div class="photo-label">${file.name}</div>
-                </div>
-            `;
-      })
-      .join("");
-
-    this.$$(".photo-item").forEach((item) => {
-      item.addEventListener("click", () => {
-        this.openLightbox(item.dataset.src);
-      });
-    });
+    if (!count) this.grid.append(this.createElement("div", "photos-empty-state", "No photos are stored in /home/root/Pictures."));
   }
 
   openLightbox(src) {
@@ -99,8 +68,9 @@ export default class Photos extends BaseApp {
 
   closeLightbox() {
     this.lightbox.classList.remove("active");
-    setTimeout(() => {
-      this.lightboxImg.src = "";
+    this.addTimeout(() => {
+      this.lightboxImg.removeAttribute("src");
     }, 300);
   }
+  onDestroy() { this.lightboxImg?.removeAttribute("src"); }
 }

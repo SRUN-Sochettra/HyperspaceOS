@@ -3,6 +3,7 @@ import Store from '../../core/Store.js'
 import Registry from '../../core/Registry.js'
 import EventBus from '../../core/EventBus.js'
 import FileSystem from '../../core/FileSystem.js'
+import { renderSafeMarkdown } from '../../utils/safeDom.js'
 
 export default class AI extends BaseApp {
     async setup() {
@@ -252,16 +253,7 @@ export default class AI extends BaseApp {
     append(who, text) {
         const el = document.createElement('div')
         el.className = `ai-msg ${who}`
-
-        // Simple markdown-like rendering
-        let html = text
-            .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/```\n?([\s\S]*?)```/g, '<pre>$1</pre>')
-            .replace(/\n/g, '<br>')
-            .replace(/• /g, '<span style="color:var(--neon-cyan)">•</span> ')
-
-        el.innerHTML = html
+        el.innerHTML = renderSafeMarkdown(text)
         this.chatEl.appendChild(el)
         this.chatEl.scrollTop = this.chatEl.scrollHeight
     }

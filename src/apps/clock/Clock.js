@@ -22,10 +22,10 @@ export default class Clock extends BaseApp {
 
     this.container.innerHTML = `
       <div class="clock-app">
-        <div class="clock-tabs">
-          <div class="clock-tab active" data-tab="world" id="tab-world-${this.windowId}">World Clock</div>
-          <div class="clock-tab" data-tab="stopwatch" id="tab-stopwatch-${this.windowId}">Stopwatch</div>
-          <div class="clock-tab" data-tab="timer" id="tab-timer-${this.windowId}">Timer</div>
+        <div class="clock-tabs" role="tablist" aria-label="Clock modes">
+          <button type="button" role="tab" aria-selected="true" class="clock-tab active" data-tab="world" id="tab-world-${this.windowId}">World Clock</button>
+          <button type="button" role="tab" aria-selected="false" class="clock-tab" data-tab="stopwatch" id="tab-stopwatch-${this.windowId}">Stopwatch</button>
+          <button type="button" role="tab" aria-selected="false" class="clock-tab" data-tab="timer" id="tab-timer-${this.windowId}">Timer</button>
         </div>
 
         <div class="clock-content">
@@ -51,17 +51,17 @@ export default class Clock extends BaseApp {
             <div id="tm-setup-${this.windowId}">
               <div class="timer-input">
                 <div class="timer-field">
-                  <input type="number" id="tm-input-h-${this.windowId}" min="0" max="99" value="0">
+                  <input type="number" aria-label="Hours" id="tm-input-h-${this.windowId}" min="0" max="99" value="0">
                   <label>Hours</label>
                 </div>
                 <div class="timer-colon">:</div>
                 <div class="timer-field">
-                  <input type="number" id="tm-input-m-${this.windowId}" min="0" max="59" value="5">
+                  <input type="number" aria-label="Minutes" id="tm-input-m-${this.windowId}" min="0" max="59" value="5">
                   <label>Minutes</label>
                 </div>
                 <div class="timer-colon">:</div>
                 <div class="timer-field">
-                  <input type="number" id="tm-input-s-${this.windowId}" min="0" max="59" value="0">
+                  <input type="number" aria-label="Seconds" id="tm-input-s-${this.windowId}" min="0" max="59" value="0">
                   <label>Seconds</label>
                 </div>
               </div>
@@ -141,6 +141,8 @@ export default class Clock extends BaseApp {
 
     this.$$(".clock-tab").forEach((tab) => {
       tab.classList.toggle("active", tab.dataset.tab === tabName);
+      tab.setAttribute("aria-selected", String(tab.dataset.tab === tabName));
+      tab.tabIndex = tab.dataset.tab === tabName ? 0 : -1;
     });
 
     this.$$(".clock-pane").forEach((pane) => {
@@ -183,7 +185,7 @@ export default class Clock extends BaseApp {
     };
 
     updateTime();
-    this.clockInterval = setInterval(updateTime, 1000);
+    this.clockInterval = this.addInterval(updateTime, 1000);
   }
 
   // --- Stopwatch ---
@@ -216,7 +218,7 @@ export default class Clock extends BaseApp {
     const leftBtn = this.$(`#sw-btn-left-${this.windowId}`);
     leftBtn.textContent = "Lap";
 
-    this.swInterval = setInterval(() => {
+    this.swInterval = this.addInterval(() => {
       this.swElapsedTime = Date.now() - this.swStartTime;
       this.updateStopwatchDisplay();
     }, 10);
@@ -371,14 +373,7 @@ export default class Clock extends BaseApp {
 
   timerComplete() {
     this.resetTimer();
-    // Play a sound or show notification
-    if (window.HyperOS && window.HyperOS.EventBus) {
-      window.HyperOS.EventBus.emit("notification:show", {
-        icon: "⏰",
-        title: "Timer Complete",
-        body: "Your timer has finished.",
-      });
-    }
+    this.notify("", "Timer complete", "Your timer has finished.");
   }
 
   onDestroy() {

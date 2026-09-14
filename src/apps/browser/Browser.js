@@ -47,7 +47,7 @@ export default class Browser extends BaseApp {
 
   bindEvents() {
     // Address bar enter
-    this.urlInput.addEventListener("keydown", (e) => {
+    this.listenTo(this.urlInput, "keydown", (e) => {
       if (e.key === "Enter") {
         let url = this.urlInput.value.trim();
         if (!url) return;
@@ -68,12 +68,12 @@ export default class Browser extends BaseApp {
     });
 
     // Select all text on click
-    this.urlInput.addEventListener("click", () => {
+    this.listenTo(this.urlInput, "click", () => {
       this.urlInput.select();
     });
 
     // Navigation buttons
-    this.backBtn.addEventListener("click", () => {
+    this.listenTo(this.backBtn, "click", () => {
       if (this.historyIndex > 0) {
         this.historyIndex--;
         const url = this.history[this.historyIndex];
@@ -82,7 +82,7 @@ export default class Browser extends BaseApp {
       }
     });
 
-    this.forwardBtn.addEventListener("click", () => {
+    this.listenTo(this.forwardBtn, "click", () => {
       if (this.historyIndex < this.history.length - 1) {
         this.historyIndex++;
         const url = this.history[this.historyIndex];
@@ -91,19 +91,19 @@ export default class Browser extends BaseApp {
       }
     });
 
-    this.refreshBtn.addEventListener("click", () => {
+    this.listenTo(this.refreshBtn, "click", () => {
       const url = this.history[this.historyIndex];
       if (url) {
         // Force refresh iframe by resetting src
         this.iframe.src = "about:blank";
-        setTimeout(() => {
+        this.addTimeout(() => {
           this.iframe.src = url;
         }, 10);
       }
     });
 
     // Iframe load event to sync URL bar (Note: Cross-origin restriction often prevents accessing contentWindow.location)
-    this.iframe.addEventListener("load", () => {
+    this.listenTo(this.iframe, "load", () => {
       try {
         // This will fail for cross-origin iframes
         const currentUrl = this.iframe.contentWindow.location.href;
@@ -126,7 +126,13 @@ export default class Browser extends BaseApp {
     });
   }
 
+  normalizeUrl(url) {
+    try { const parsed = new URL(url); return ["http:", "https:"].includes(parsed.protocol) ? parsed.href : null; } catch { return null; }
+  }
+
   navigateTo(url, initial = false) {
+    url = this.normalizeUrl(url);
+    if (!url) { this.notify("", "Navigation blocked", "Only valid HTTP and HTTPS addresses are supported."); return; }
     if (!initial && this.history[this.historyIndex] === url) return;
 
     this.updateIframe(url);
@@ -134,8 +140,10 @@ export default class Browser extends BaseApp {
   }
 
   updateIframe(url) {
-    this.urlInput.value = url;
-    this.iframe.src = url;
+    const safe = this.normalizeUrl(url);
+    if (!safe) return;
+    this.urlInput.value = safe;
+    this.iframe.src = safe;
   }
 
   addToHistory(url) {

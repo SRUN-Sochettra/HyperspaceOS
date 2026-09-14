@@ -1,12 +1,10 @@
 import BaseApp from "../BaseApp.js";
 import FileSystem from "../../core/FileSystem.js";
-import { marked } from "marked";
+import { renderSafeMarkdown } from "../../utils/safeDom.js";
 import { getPendingFiles } from "./index.js";
 
 export default class MarkdownViewer extends BaseApp {
   async setup() {
-    marked.setOptions({ breaks: true, gfm: true });
-
     this.container.innerHTML = `
       <div class="markdown-viewer-container">
         <div class="markdown-toolbar">
@@ -65,11 +63,10 @@ export default class MarkdownViewer extends BaseApp {
     this.titleEl.textContent = basename;
 
     try {
-      const html = marked.parse(content);
-      this.contentEl.innerHTML = html;
+      this.contentEl.innerHTML = renderSafeMarkdown(content);
       this.contentEl.classList.remove("markdown-empty-state");
     } catch (e) {
-      this.contentEl.innerHTML = `<div class="markdown-error">Failed to parse markdown: ${e.message}</div>`;
+      this.contentEl.replaceChildren(this.createElement("div", "markdown-error", `Failed to parse markdown: ${e.message}`));
     }
   }
 }

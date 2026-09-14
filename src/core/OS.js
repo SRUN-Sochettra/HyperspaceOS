@@ -47,6 +47,9 @@ async function boot() {
     // File system
     const { default: FileSystem } = await import('./FileSystem.js')
     FileSystem.init()
+    if (typeof window !== 'undefined' && window.HyperOS) {
+      window.HyperOS.FileSystem = FileSystem
+    }
     FileSystem.appendLog('OS booting')
     Store.set('os.bootProgress', 12)
     await delay(80)
@@ -59,6 +62,9 @@ async function boot() {
     // Window Manager
     const { default: WindowManager } = await import('../wm/WindowManager.js')
     WindowManager.init()
+    if (typeof window !== 'undefined' && window.HyperOS) {
+      window.HyperOS.WindowManager = WindowManager
+    }
     Store.set('os.bootProgress', 35)
     await delay(80)
 
@@ -208,6 +214,8 @@ if (typeof window !== 'undefined') {
     EventBus,
     Store,
     Registry,
+    WindowManager: null,
+    FileSystem: null,
     async clearAll() {
       localStorage.clear()
       console.log('All data cleared. Reloading...')

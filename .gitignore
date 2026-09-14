@@ -5,3 +5,11 @@ graft/
 *.log
 .DS_Store
 Thumbs.db
+.env
+.env.*
+hyperspace-repaired-verified.zip
+repomix-output.xml
+repomix-repaired-final.xml
+test-results/
+playwright-report/
+verification/traces/

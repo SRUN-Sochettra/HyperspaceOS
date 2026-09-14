@@ -1,0 +1,37 @@
+HyperSpace repair session raw command log
+UTC updated: 2026-09-14T10:42:00Z
+
+branch: repair/hyperspace-full-pass
+original starting commit: c6b69bce1fe28235846c835c8253501d429e5825
+preserved checkpoint: bcbcc0b65ddc590b554281fc6b211801fd5cbeb6
+
+python -m py_compile scripts/verify_runtime.py: exit 0
+JavaScript node --check scan: exit 0, 85 checked
+focused Camera delayed-permission reproduction: pass
+window lifecycle regressions, reduced motion: pass
+npm ci: exit 0, 33 packages added, 34 audited; npm reported 4 vulnerabilities (1 moderate, 3 high)
+npm test: exit 0, 5 passed, 0 failed
+npm run build: exit 0, Vite 5.4.21, 132 modules transformed; dynamic-import and chunk-size warnings only
+clean runtime verifier first invocation: exit 1, transient keyboard_and_accessible_names failure; all other groups passed
+clean runtime verifier immediate rerun: exit 0, all 8 groups passed
+runtime results: 22 registered/launched apps; five viewports; persistence passed; no page or console errors
+
+artifacts: regenerated after final clean-runtime evidence
+push: no
+completion commit: pending final artifact and Git review
+
+--- Delivery finalization ---
+UTC start: 2026-09-14T11:02:20Z
+branch: repair/hyperspace-full-pass
+starting completion commit: 96324753f55c97db6307e60ea099a2b729a82698
+reason: correct stale evidence provenance and regenerate complete delivery artifacts, including package-lock.json and committed binary assets
+files changed in finalization: verification/results.json, REPAIR_REPORT.md, complete-session.log; regenerated hyperspace-repaired-verified.zip and repomix-repaired-final.xml
+commands executed: starting Git-state capture; evidence inspection; python JSON validation; tracked diff checks; evidence-only commit; ZIP and Repomix regeneration; final artifact and consistency validation
+runtime tests rerun: no; historical runtime evidence remains tied to bcbcc0b65ddc590b554281fc6b211801fd5cbeb6
+final artifact validation: ZIP generated with 133 entries, including all non-diagnostic tracked files and required binary assets; Repomix generated with 134 packed text files including package-lock.json, verification/results.json, REPAIR_REPORT.md, and complete-session.log; screenshot binaries intentionally excluded from ZIP and Repomix text packing
+resulting final evidence commit: 6f90ca75e0209e9c3a97c5407341b78331276941
+UTC finish: 2026-09-14T11:07:15Z
+final audit: evidence JSON valid; 8 runtime groups passed; 22 applications; console_errors=[]; page_errors=[]; ZIP 133 entries and 133 included tracked files with zero SHA-256 mismatches; Repomix 131 packed supported text files with zero missing required files; XML valid
+final artifact hashes before final log commit: hyperspace-repaired-verified.zip bytes=848205 sha256=78325bc984e8c9a64e09c0ed38abe6d442ed77082d7b1a2332a4db1f55ab47ab; repomix-repaired-final.xml bytes=752915 sha256=deea2e54c32e260d7d51f70554c23f3c5e0859bf1204a3dabae6ecaf201fb3b6
+supporting hashes: verification/results.json bytes=5156 sha256=0e51cf74e48920a7d1eeb1934980bdfe1f61fe9afde35933596ac00511e81e35; REPAIR_REPORT.md bytes=7582 sha256=37ea9b6d0e2e86562243b4ffd8b85dc60c58e010fbae60e47870361623573682; complete-session.log bytes=2455 sha256=7931ebdec0db8c6a5492e6fde3a71bdb3b7f28009d012aaac77db73fa1d602dd
+final log commit: this log-closure commit; its resulting full hash is recorded in the final delivery audit

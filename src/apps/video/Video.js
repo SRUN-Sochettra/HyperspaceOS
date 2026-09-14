@@ -1,5 +1,6 @@
 import BaseApp from "../BaseApp.js";
 import FileSystem from "../../core/FileSystem.js";
+import { safeMediaUrl } from "../../utils/safeDom.js";
 
 export default class Video extends BaseApp {
   async setup() {
@@ -37,59 +38,30 @@ export default class Video extends BaseApp {
       this.closePlayer(),
     );
 
-    if (!FileSystem.isDir("/home/root/Videos")) {
-      FileSystem.mkdir("/home/root/Videos");
-      // Add a dummy video if it's empty to show functionality.
-      // In a real scenario this might be a base64 encoded mp4.
-      // But for OS simulation, we can just write an empty dummy file and fallback to a default video url.
-      FileSystem.writeFile("/home/root/Videos/sample.mp4", "https://www.w3schools.com/html/mov_bbb.mp4");
-    }
-
+    if (!FileSystem.isDir("/home/root/Videos")) FileSystem.mkdir("/home/root/Videos");
     this.loadVideos();
   }
 
   loadVideos() {
-    const items = FileSystem.readdir("/home/root/Videos") || [];
-    const videoFiles = items.filter((item) => {
-      if (item.type !== "file") return false;
-      const ext = item.name.split(".").pop()?.toLowerCase();
-      return ["mp4", "webm", "ogg"].includes(ext);
-    });
-
-    if (videoFiles.length === 0) {
-      this.grid.innerHTML = `
-        <div class="empty-state">
-          <div style="font-size: 3rem; margin-bottom: 10px;">🎬</div>
-          <div>No videos found in /home/root/Videos</div>
-        </div>
-      `;
-      return;
+    this.grid.replaceChildren();
+    let count = 0;
+    for (const file of FileSystem.readdir("/home/root/Videos") || []) {
+      if (file.type !== "file") continue;
+      const src = safeMediaUrl(FileSystem.readFile(file.path), "video");
+      if (!src) continue;
+      count += 1;
+      const button = this.createElement("button", "video-item"); button.type = "button";
+      button.setAttribute("aria-label", `Play ${file.name}`);
+      button.append(this.createElement("span", "video-icon", "Play"), this.createElement("span", "video-label", file.name));
+      this.listenTo(button, "click", () => this.openPlayer(src)); this.grid.append(button);
     }
-
-    this.grid.innerHTML = videoFiles
-      .map((file) => {
-        const content = FileSystem.readFile(file.path);
-        // Assuming video content might just be a URL for the simulation, or actual base64
-        const src = content;
-
-        return `
-          <div class="video-item" data-src="${src}" data-name="${file.name}">
-            <div class="video-icon">▶️</div>
-            <div class="video-label">${file.name}</div>
-          </div>
-        `;
-      })
-      .join("");
-
-    this.$$(".video-item").forEach((item) => {
-      item.addEventListener("click", () => {
-        this.openPlayer(item.dataset.src);
-      });
-    });
+    if (!count) this.grid.append(this.createElement("div", "video-empty-state", "No playable local videos are stored in /home/root/Videos."));
   }
 
   openPlayer(src) {
-    this.videoElement.src = src;
+    const safe = safeMediaUrl(src, "video");
+    if (!safe) return;
+    this.videoElement.src = safe;
     this.playerOverlay.classList.add("active");
     this.videoElement.play().catch(e => console.warn("Auto-play prevented", e));
   }
@@ -97,6 +69,8 @@ export default class Video extends BaseApp {
   closePlayer() {
     this.playerOverlay.classList.remove("active");
     this.videoElement.pause();
-    this.videoElement.src = "";
+    this.videoElement.removeAttribute("src");
+    this.videoElement.load();
   }
+  onDestroy() { if (this.videoElement) { this.videoElement.pause(); this.videoElement.removeAttribute("src"); this.videoElement.load(); } }
 }

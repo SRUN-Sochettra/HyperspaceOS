@@ -11,9 +11,9 @@ export default class Contacts extends BaseApp {
         <div class="contacts-header">
           <h2>Contacts</h2>
           <div class="contacts-form">
-            <input type="text" id="contact-name-${this.windowId}" class="contacts-input" placeholder="Name" />
-            <input type="text" id="contact-phone-${this.windowId}" class="contacts-input" placeholder="Phone" />
-            <input type="email" id="contact-email-${this.windowId}" class="contacts-input" placeholder="Email" />
+            <label><span class="sr-only">Name</span><input type="text" id="contact-name-${this.windowId}" class="contacts-input" placeholder="Name" /></label>
+            <label><span class="sr-only">Phone</span><input type="tel" id="contact-phone-${this.windowId}" class="contacts-input" placeholder="Phone" /></label>
+            <label><span class="sr-only">Email</span><input type="email" id="contact-email-${this.windowId}" class="contacts-input" placeholder="Email" /></label>
             <button id="add-contact-${this.windowId}" class="contacts-btn">Add</button>
           </div>
         </div>
@@ -51,8 +51,9 @@ export default class Contacts extends BaseApp {
       email
     };
 
+    const previous = [...this.contacts];
     this.contacts.push(newContact);
-    this.saveContacts();
+    if (!this.saveContacts()) { this.contacts = previous; return; }
     this.renderContacts();
 
     this.nameInput.value = "";
@@ -61,8 +62,9 @@ export default class Contacts extends BaseApp {
   }
 
   deleteContact(id) {
+    const previous = [...this.contacts];
     this.contacts = this.contacts.filter(c => c.id !== id);
-    this.saveContacts();
+    if (!this.saveContacts()) { this.contacts = previous; return; }
     this.renderContacts();
   }
 
@@ -132,9 +134,13 @@ export default class Contacts extends BaseApp {
 
   saveContacts() {
     try {
-      FileSystem.writeFile(this.contactsPath, JSON.stringify(this.contacts, null, 2));
-    } catch (e) {
-      console.error("[Contacts] Failed to save contacts:", e);
+      const result = FileSystem.writeFile(this.contactsPath, JSON.stringify(this.contacts, null, 2));
+      if (!result?.success) throw new Error(result?.error || "Virtual filesystem write failed");
+      return true;
+    } catch (error) {
+      console.error("[Contacts] Failed to save contacts:", error);
+      this.notify("", "Contacts not saved", error.message);
+      return false;
     }
   }
 }

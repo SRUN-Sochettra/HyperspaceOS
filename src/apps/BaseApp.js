@@ -8,6 +8,8 @@ export default class BaseApp {
     this.subscriptions = [];
     this.intervals = [];
     this.timeouts = [];
+    this.animationFrames = [];
+    this.cleanups = [];
     this.destroyed = false;
   }
 
@@ -28,10 +30,10 @@ export default class BaseApp {
     return this.container.querySelectorAll(selector);
   }
 
-  createElement(tag, className = "", innerHTML = "") {
+  createElement(tag, className = "", text = "") {
     const el = document.createElement(tag);
     if (className) el.className = className;
-    if (innerHTML) el.innerHTML = innerHTML;
+    if (text !== "") el.textContent = String(text);
     return el;
   }
 
@@ -45,6 +47,16 @@ export default class BaseApp {
     const unsub = Store.subscribe(key, handler);
     this.subscriptions.push(unsub);
     return unsub;
+  }
+
+  addCleanup(cleanup) {
+    this.cleanups.push(cleanup);
+    return cleanup;
+  }
+
+  listenTo(target, event, handler, options) {
+    target.addEventListener(event, handler, options);
+    return this.addCleanup(() => target.removeEventListener(event, handler, options));
   }
 
   addInterval(fn, ms) {
@@ -63,19 +75,36 @@ export default class BaseApp {
     return id;
   }
 
+  addAnimationFrame(fn) {
+    const id = requestAnimationFrame((time) => {
+      this.animationFrames = this.animationFrames.filter((frame) => frame !== id);
+      if (!this.destroyed) fn(time);
+    });
+    this.animationFrames.push(id);
+    return id;
+  }
+
   notify(icon, title, body) {
     EventBus.emit("notification:show", { icon, title, body });
   }
 
   destroy() {
+    if (this.destroyed) return;
     this.destroyed = true;
-    for (const unsub of this.subscriptions) unsub();
-    this.subscriptions = [];
-    for (const id of this.intervals) clearInterval(id);
-    this.intervals = [];
-    for (const id of this.timeouts) clearTimeout(id);
-    this.timeouts = [];
-    this.onDestroy();
-    if (this.container) this.container.innerHTML = "";
+    let firstError = null;
+    const run = (fn) => {
+      try { fn(); } catch (error) {
+        firstError ||= error;
+        console.error("[BaseApp] Cleanup failed:", error);
+      }
+    };
+    for (const unsub of this.subscriptions.splice(0)) run(unsub);
+    for (const id of this.intervals.splice(0)) clearInterval(id);
+    for (const id of this.timeouts.splice(0)) clearTimeout(id);
+    for (const id of this.animationFrames.splice(0)) cancelAnimationFrame(id);
+    for (const cleanup of this.cleanups.splice(0).reverse()) run(cleanup);
+    run(() => this.onDestroy());
+    if (this.container) this.container.replaceChildren();
+    if (firstError) throw firstError;
   }
 }

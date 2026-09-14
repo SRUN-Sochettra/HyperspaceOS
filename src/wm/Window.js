@@ -89,6 +89,7 @@ export default class Window {
 
         // Spring spawn animation
         requestAnimationFrame(() => {
+            if (this.destroyed || !this.element) return
             this.spring.animate(`spawn-${this.id}`, this.element, {
                 scale: { from: 0.85, to: 1 },
                 opacity: { from: 0, to: 1 },
@@ -99,6 +100,7 @@ export default class Window {
                     el.style.opacity = vals.opacity
                 },
                 onComplete: () => {
+                    if (!this.element || this.destroyed) return
                     this.element.style.transform = ''
                     this.element.style.opacity = ''
                 },
@@ -121,11 +123,17 @@ export default class Window {
 
         try {
             const module = await def.component()
+            if (this.destroyed || !this.bodyElement) return
             const AppClass = module.default
             this.app = new AppClass({ windowId: this.id, container: this.bodyElement })
             if (typeof this.app.mount === 'function') await this.app.mount()
+            if (this.destroyed) {
+                this.app?.destroy?.()
+                return
+            }
             if (typeof def.onOpen === 'function') def.onOpen(this)
         } catch (err) {
+            if (this.destroyed || !this.bodyElement) return
             console.error(`[Window] Failed to load "${this.appId}":`, err)
             this.bodyElement.innerHTML = `
         <div style="padding:20px;color:#ff5f57">
@@ -202,6 +210,7 @@ export default class Window {
                 el.style.opacity = vals.opacity
             },
             onComplete: () => {
+                if (!this.element || this.destroyed) return
                 this.element.style.display = 'none'
                 this.element.style.transform = ''
                 this.element.style.opacity = ''
@@ -225,6 +234,7 @@ export default class Window {
                 el.style.opacity = vals.opacity
             },
             onComplete: () => {
+                if (!this.element || this.destroyed) return
                 this.element.style.transform = ''
                 this.element.style.opacity = ''
             },
@@ -246,6 +256,7 @@ export default class Window {
             }, {
                 ...SpringPhysics.RESIZE,
                 onComplete: () => {
+                    if (this.destroyed || !this.element) return
                     this.x = b.x
                     this.y = b.y
                     this.width = b.width
@@ -283,36 +294,34 @@ export default class Window {
         }
     }
 
-    // ---- CLOSE (spring) ----
+    // ---- CLOSE ----
     async close() {
         if (!this.element || this.destroyed) return
         this.destroyed = true
+        let cleanupError = null
+        const attemptCleanup = (cleanup) => {
+            try {
+                cleanup()
+            } catch (error) {
+                cleanupError ||= error
+                console.error(`[Window] Cleanup failed for "${this.appId}"#${this.id}:`, error)
+            }
+        }
 
-        const def = Registry.get(this.appId)
-        if (def?.onClose) def.onClose(this)
-        if (this.app?.destroy) this.app.destroy()
+        try {
+            const def = Registry.get(this.appId)
+            if (def?.onClose) attemptCleanup(() => def.onClose(this))
+            if (this.app?.destroy) attemptCleanup(() => this.app.destroy())
+        } finally {
+            this.spring.cancel(`spawn-${this.id}`)
+            this.spring.cancel(`close-${this.id}`)
+            if (this.element?.parentNode) this.element.remove()
+            this.element = null
+            this.bodyElement = null
+            this.app = null
+        }
 
-        return new Promise(resolve => {
-            this.spring.animate(`close-${this.id}`, this.element, {
-                scale: { from: 1, to: 0.9 },
-                opacity: { from: 1, to: 0 },
-            }, {
-                stiffness: 400,
-                damping: 35,
-                mass: 0.6,
-                onUpdate: (el, vals) => {
-                    el.style.transform = `scale(${vals.scale}) translateY(${(1 - vals.opacity) * 15}px)`
-                    el.style.opacity = vals.opacity
-                },
-                onComplete: () => {
-                    if (this.element?.parentNode) this.element.remove()
-                    this.element = null
-                    this.bodyElement = null
-                    this.app = null
-                    resolve()
-                },
-            })
-        })
+        if (cleanupError) throw cleanupError
     }
 
     toJSON() {
