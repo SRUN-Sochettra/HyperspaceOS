@@ -1,12 +1,15 @@
 node_modules/
-<<<<<<< HEAD
 dist/
 graft/
 .vite/
 *.log
 .DS_Store
 Thumbs.db
-=======
-node_modules/
-dist
->>>>>>> origin/main
+.env
+.env.*
+hyperspace-repaired-verified.zip
+repomix-output.xml
+repomix-repaired-final.xml
+test-results/
+playwright-report/
+verification/traces/

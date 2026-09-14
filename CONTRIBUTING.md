@@ -1,45 +1,38 @@
 # Contributing to HyperSpace
 
-First off, thank you for considering contributing to HyperSpace! It's people like you that make the open-source community such an amazing place to learn, inspire, and create.
+Thank you for considering contributing to HyperSpace. Contributions that improve the browser-native desktop experience are welcome.
 
 ## How Can I Contribute?
 
 ### Reporting Bugs
 
-- **Check the Issues**: Before creating a new issue, please check if the bug has already been reported.
-- **Provide Detail**: Include as much detail as possible in your report (OS version, browser, steps to reproduce, and screenshots if applicable).
+- Check the existing issues before opening a new report.
+- Include the operating system, browser, steps to reproduce, expected behavior, actual behavior, and screenshots when useful.
+- Separate observed behavior from assumptions and include relevant command output or runtime evidence.
 
 ### Suggesting Enhancements
 
-- **Be Specific**: Explain what the enhancement is and why it would be beneficial for the project.
-- **Mockups**: If it's a UI change, a simple sketch or mockup goes a long way.
+- Explain the problem the enhancement would solve and why it benefits the project.
+- Include a sketch or mockup for UI changes when helpful.
 
 ### Pull Requests
 
-1. **Fork the Repo**: Create your own fork of the project.
-2. **Branching**: Create a branch for your feature or fix (`git checkout -b feature/amazing-feature`).
-3. **Coding Standards**:
-   - Follow the existing project structure.
-   - Use ES6+ features where appropriate.
-   - Use the semantic tokens and restrained HyperSpace visual language.
-4. **Test Your Changes**: Ensure your changes don't break the boot sequence or existing apps.
-5. **Commit**: Keep your commit messages descriptive.
-6. **Push**: Push to your branch (`git push origin feature/amazing-feature`).
-7. **Open a PR**: Submit a Pull Request to the `main` branch.
+1. Fork the repository and create a focused branch for your feature or fix.
+2. Follow the existing project structure and use ES6+ features where appropriate.
+3. Preserve the semantic tokens and restrained HyperSpace visual language.
+4. Keep changes scoped and avoid unrelated formatting or generated files.
+5. Run the relevant tests, build, and verification commands before opening a pull request.
+6. Describe the behavior changed, the commands run, and any known limitations.
+7. Keep commit messages descriptive and submit the pull request against `main`.
 
----
+Do not commit secrets, `.env` files, `node_modules/`, `dist/`, test reports, or other generated dependency/build directories. Do not modify recorded verification evidence to imply that a check ran when it did not.
 
 ## Technical Guidelines
 
 ### Architecture
-<<<<<<< HEAD
 
 HyperSpace is built with a modular architecture:
-=======
 
-HyperSpace OS is built with a modular architecture:
-
->>>>>>> origin/main
 - **Core**: Kernel, FileSystem, and EventBus are the backbone. Avoid heavy modifications here unless necessary.
 - **Apps**: New applications should be placed in `src/apps/[app-name]`.
 - **UI**: Shared components belong in `src/ui`.
@@ -48,30 +41,32 @@ HyperSpace OS is built with a modular architecture:
 
 - Use **CSS Variables** defined in `src/styles/variables.css` for consistency.
 - Maintain the glass effect using `backdrop-filter: blur()` and semi-transparent backgrounds.
-- Ensure all components are responsive.
+- Ensure components remain responsive at the supported viewport sizes.
 
 ### Virtual File System
 
-- If your app needs to save data, use the `FileSystem` API rather than raw `localStorage`. This ensures the data is visible in the Files and Terminal apps.
+- If an app needs to save data, use the `FileSystem` API rather than raw `localStorage`. This keeps data visible in the Files and Terminal apps.
 
----
+## Local Verification
 
-<<<<<<< HEAD
+The commands below are the repository's documented local checks:
+
+```bash
+npm install
+npm test
+npm run build
+npm run dev -- --host 127.0.0.1
+python scripts/verify_runtime.py
+```
+
+Only describe browser verification as passing when the verifier exits successfully. Screenshots are diagnostic artifacts, not proof by themselves. Mail is local-only, and Browser and Weather behavior remains network-dependent.
+
 ## Code of Conduct
-=======
-## 📜 Code of Conduct
 
->>>>>>> origin/main
-We are committed to providing a friendly, safe, and welcoming environment for all, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
+We are committed to providing a friendly, safe, and welcoming environment for everyone, regardless of level of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, or nationality.
 
----
-
-<<<<<<< HEAD
 ## License
-=======
-## ⚖️ License
 
->>>>>>> origin/main
-By contributing, you agree that your contributions will be licensed under its **MIT License**.
+By contributing, you agree that your contributions will be licensed under the **MIT License**.
 
 Happy Coding!
