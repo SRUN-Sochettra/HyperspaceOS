@@ -1,0 +1,33 @@
+HyperSpace repair session raw command log
+UTC updated: 2026-09-14T10:42:00Z
+
+branch: repair/hyperspace-full-pass
+original starting commit: c6b69bce1fe28235846c835c8253501d429e5825
+preserved checkpoint: bcbcc0b65ddc590b554281fc6b211801fd5cbeb6
+
+python -m py_compile scripts/verify_runtime.py: exit 0
+JavaScript node --check scan: exit 0, 85 checked
+focused Camera delayed-permission reproduction: pass
+window lifecycle regressions, reduced motion: pass
+npm ci: exit 0, 33 packages added, 34 audited; npm reported 4 vulnerabilities (1 moderate, 3 high)
+npm test: exit 0, 5 passed, 0 failed
+npm run build: exit 0, Vite 5.4.21, 132 modules transformed; dynamic-import and chunk-size warnings only
+clean runtime verifier first invocation: exit 1, transient keyboard_and_accessible_names failure; all other groups passed
+clean runtime verifier immediate rerun: exit 0, all 8 groups passed
+runtime results: 22 registered/launched apps; five viewports; persistence passed; no page or console errors
+
+artifacts: regenerated after final clean-runtime evidence
+push: no
+completion commit: pending final artifact and Git review
+
+--- Delivery finalization ---
+UTC start: 2026-09-14T11:02:20Z
+branch: repair/hyperspace-full-pass
+starting completion commit: 96324753f55c97db6307e60ea099a2b729a82698
+reason: correct stale evidence provenance and regenerate complete delivery artifacts, including package-lock.json and committed binary assets
+files changed in finalization: verification/results.json, REPAIR_REPORT.md, complete-session.log; regenerated hyperspace-repaired-verified.zip and repomix-repaired-final.xml
+commands executed: starting Git-state capture; evidence inspection; python JSON validation; tracked diff checks; evidence-only commit; ZIP and Repomix regeneration; final artifact and consistency validation
+runtime tests rerun: no; historical runtime evidence remains tied to bcbcc0b65ddc590b554281fc6b211801fd5cbeb6
+final artifact validation: pending artifact regeneration and validation
+resulting final evidence commit: pending
+UTC finish: pending

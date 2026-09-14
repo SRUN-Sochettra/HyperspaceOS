@@ -1,5 +1,15 @@
 {
   "started_at": "2026-09-14T10:40:26.658753+00:00",
+  "provenance": {
+    "tested_source_commit": "bcbcc0b65ddc590b554281fc6b211801fd5cbeb6",
+    "completion_commit": "96324753f55c97db6307e60ea099a2b729a82698",
+    "completion_commit_contains_verified_source": true,
+    "post_verification_changes": "evidence metadata, report finalization, and delivery artifact generation only",
+    "runtime_execution_commit_meaning": "Runtime tests executed while HEAD was bcbcc0b65ddc590b554281fc6b211801fd5cbeb6; the verified source and evidence were committed afterward as 96324753f55c97db6307e60ea099a2b729a82698.",
+    "behavior_change_between_runtime_and_completion": false,
+    "delivery_finalization_scope": "evidence metadata and packaging only",
+    "runtime_rerun_after_completion_commit": false
+  },
   "environment": {
     "os": "Windows-10-10.0.26200-SP0",
     "python": "3.11.9",

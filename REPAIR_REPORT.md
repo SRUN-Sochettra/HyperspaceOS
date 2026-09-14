@@ -4,10 +4,12 @@
 
 This repair continued on branch `repair/hyperspace-full-pass` without resetting or discarding the reconstructed workspace.
 
-- Original starting commit: `c6b69bce1fe28235846c835c8253501d429e5825`.
-- Preserved checkpoint: `bcbcc0b65ddc590b554281fc6b211801fd5cbeb6`.
-- The completion commit is intentionally not recorded until final Git review passes.
-- The application remains a client-side browser desktop demonstration; this report does not claim production readiness, complete security, WCAG conformance, or complete accessibility.
+- Original repository commit: `c6b69bce1fe28235846c835c8253501d429e5825`.
+- Preservation checkpoint: `bcbcc0b65ddc590b554281fc6b211801fd5cbeb6`.
+- Verified repair completion commit: `96324753f55c97db6307e60ea099a2b729a82698`.
+- Runtime suite execution commit: `bcbcc0b65ddc590b554281fc6b211801fd5cbeb6`.
+- The runtime execution commit differs because the tested working state was committed after verification, with no subsequent behavior-changing source edits before completion commit `96324753f55c97db6307e60ea099a2b729a82698`.
+- This report records a client-side browser desktop demonstration; it does not claim production readiness, complete security, WCAG conformance, or complete accessibility.
 
 ## Diagnosis
 
@@ -69,16 +71,23 @@ Existing unit coverage passed for hostile HTML/SVG/event-handler payloads, escap
 
 ## Artifacts and Git gate
 
-`verification/results.json` contains the latest passing verifier result and environment/dependency metadata. Existing final artifact files are present but must be regenerated or validated against the final workspace before the completion commit.
+`verification/results.json` contains the passing runtime evidence, preserves `environment.git_commit` as the commit present when the verifier executed, and records explicit provenance for the verified source and completion commit. The current delivery-finalization work is evidence provenance correction and artifact regeneration only; it does not alter runtime behavior.
 
-Before committing, the remaining gate is:
+The evidence establishes:
 
-1. stop the temporary Vite process;
-2. regenerate/validate the ZIP, Repomix XML, and session log while excluding `node_modules`, `dist`, caches, secrets, traces, screenshots, and prior generated artifacts;
-3. run `git diff --check`, inspect the complete status/diff, and stage only intended source/tests/report/evidence files;
-4. create the completion commit only if every artifact and Git check passes.
+- `npm ci` passed.
+- `npm test` passed with 5 tests.
+- `npm run build` passed with 132 modules transformed.
+- The focused Camera reproduction passed.
+- Lifecycle regression tests passed.
+- All 8 browser runtime groups passed.
+- Exactly 22 registered applications were exercised.
+- The five specified viewports passed the implemented responsive checks.
+- No console or page errors were recorded.
 
-No push is planned.
+The runtime suite has not been rerun during this delivery-finalization session. No field claims that it executed at the final evidence commit.
+
+No push occurred or is planned.
 
 ## Known risks
 
