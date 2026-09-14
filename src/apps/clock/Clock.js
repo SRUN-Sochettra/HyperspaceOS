@@ -23,9 +23,9 @@ export default class Clock extends BaseApp {
     this.container.innerHTML = `
       <div class="clock-app">
         <div class="clock-tabs" role="tablist" aria-label="Clock modes">
-          <button type="button" role="tab" aria-selected="true" class="clock-tab active" data-tab="world" id="tab-world-${this.windowId}">World Clock</button>
-          <button type="button" role="tab" aria-selected="false" class="clock-tab" data-tab="stopwatch" id="tab-stopwatch-${this.windowId}">Stopwatch</button>
-          <button type="button" role="tab" aria-selected="false" class="clock-tab" data-tab="timer" id="tab-timer-${this.windowId}">Timer</button>
+          <button type="button" role="tab" aria-selected="true" tabIndex="0" class="clock-tab active" data-tab="world" id="tab-world-${this.windowId}">World Clock</button>
+          <button type="button" role="tab" aria-selected="false" tabIndex="-1" class="clock-tab" data-tab="stopwatch" id="tab-stopwatch-${this.windowId}">Stopwatch</button>
+          <button type="button" role="tab" aria-selected="false" tabIndex="-1" class="clock-tab" data-tab="timer" id="tab-timer-${this.windowId}">Timer</button>
         </div>
 
         <div class="clock-content">
@@ -88,7 +88,8 @@ export default class Clock extends BaseApp {
   bindEvents() {
     // Tabs
     this.$$(".clock-tab").forEach((tab) => {
-      tab.addEventListener("click", () => this.switchTab(tab.dataset.tab));
+      this.listenTo(tab, "click", () => this.switchTab(tab.dataset.tab));
+      this.listenTo(tab, "keydown", (event) => this.handleTabKeydown(event));
     });
 
     // Stopwatch Controls
@@ -134,6 +135,32 @@ export default class Clock extends BaseApp {
     validateInput(this.$(`#tm-input-h-${this.windowId}`), 99);
     validateInput(this.$(`#tm-input-m-${this.windowId}`), 59);
     validateInput(this.$(`#tm-input-s-${this.windowId}`), 59);
+  }
+
+  handleTabKeydown(event) {
+    if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey) return;
+
+    const tabs = [...this.$$(".clock-tab:not([disabled])")];
+    const currentIndex = tabs.indexOf(event.currentTarget);
+    if (currentIndex === -1) return;
+
+    let nextIndex;
+    if (event.key === "ArrowRight") {
+      nextIndex = (currentIndex + 1) % tabs.length;
+    } else if (event.key === "ArrowLeft") {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = tabs.length - 1;
+    } else {
+      return;
+    }
+
+    event.preventDefault();
+    const nextTab = tabs[nextIndex];
+    this.switchTab(nextTab.dataset.tab);
+    nextTab.focus();
   }
 
   switchTab(tabName) {
